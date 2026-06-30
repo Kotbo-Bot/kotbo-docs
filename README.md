@@ -9,7 +9,7 @@ bun install
 bun dev
 ```
 
-Le site est disponible sur `http://localhost:4321/kotbo-docs/`.
+Le site est disponible sur `http://localhost:4321/`.
 
 ## Production
 
@@ -18,4 +18,4 @@ bun run build
 bun run preview
 ```
 
-Le build statique est généré dans `dist/`. Chaque push sur `main` déclenche le déploiement GitHub Pages.
+Le build statique est généré dans `dist/`. Chaque push sur `main` déclenche le déploiement GitHub Pages sur `https://docs.kotbo.fr/`.
