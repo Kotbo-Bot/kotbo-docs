@@ -1,0 +1,43 @@
+---
+title: Activer ses modules
+description: Choisir et activer les fonctionnalités utiles sur son serveur Kotbo.
+sidebar:
+  order: 3
+---
+
+import DashboardPreview from '../../../components/DashboardPreview.astro';
+
+<p class="doc-lead">Les modules servent à adapter Kotbo à votre communauté. Activez uniquement les fonctions que votre équipe compte réellement utiliser : la navigation restera plus claire.</p>
+
+<DashboardPreview mode="modules" compact />
+<p class="visual-caption">Le catalogue regroupe les fonctionnalités disponibles pour votre serveur.</p>
+
+## Activer un module
+
+<div class="step-list">
+  <div class="step-item"><div><h3>Ouvrez Configuration → Modules</h3><p>Cette page est réservée aux administrateurs du serveur.</p></div></div>
+  <div class="step-item"><div><h3>Repérez la fonctionnalité</h3><p>Chaque carte résume le rôle du module. Activez l’interrupteur associé.</p></div></div>
+  <div class="step-item"><div><h3>Configurez sa nouvelle page</h3><p>Une entrée apparaît dans la barre latérale. Ouvrez-la pour choisir les salons, rôles et comportements du module.</p></div></div>
+  <div class="step-item"><div><h3>Testez sur Discord</h3><p>Effectuez une action simple avec un compte de test avant d’annoncer la fonction à votre communauté.</p></div></div>
+</div>
+
+## Par quoi commencer ?
+
+| Votre besoin | Modules conseillés |
+| --- | --- |
+| Accueillir une communauté | Accueil & Départ, Reaction Roles, Règlement |
+| Organiser la modération | Membres, Sanctions, Modération auto, Logs Discord |
+| Animer le serveur | Leveling & XP, Giveaways, Suggestions |
+| Structurer une équipe | Tickets, Recrutement, Planning, Annuaire |
+
+:::tip[Commencez petit]
+Activez deux ou trois modules, configurez-les complètement, puis ajoutez les suivants. Cela facilite les tests et la prise en main par votre staff.
+:::
+
+## Désactiver un module
+
+Revenez dans **Configuration → Modules** et coupez son interrupteur. La page correspondante disparaît de la barre latérale et les automatismes concernés cessent de fonctionner.
+
+La désactivation ne doit pas être considérée comme une suppression de données. Si vous souhaitez repartir de zéro, vérifiez d’abord les options propres au module ou contactez l’administrateur de votre instance Kotbo.
+
+Vous pouvez maintenant configurer votre premier module avec le guide [Accueil & Départ](../../communaute/accueil-depart/).

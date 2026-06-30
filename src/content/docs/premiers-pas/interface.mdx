@@ -1,0 +1,50 @@
+---
+title: Prendre en main le dashboard
+description: Comprendre la barre latérale, la navigation et la page d’accueil de Kotbo.
+sidebar:
+  order: 2
+---
+
+import DashboardPreview from '../../../components/DashboardPreview.astro';
+
+<p class="doc-lead">Le dashboard est organisé autour d’un serveur actif. Chaque action, statistique ou réglage affiché concerne ce serveur.</p>
+
+<DashboardPreview mode="overview" compact />
+<p class="visual-caption">Vue d’ensemble du dashboard — les données illustrées sont fictives.</p>
+
+## Les quatre zones à connaître
+
+1. **Le serveur actif**, dans la barre du haut. Cliquez dessus pour changer de serveur.
+2. **La barre latérale**, organisée par usage : Général, Modération, Communauté, Staff et Configuration.
+3. **La zone centrale**, qui affiche la page choisie et ses actions.
+4. **Votre profil**, en haut à droite, pour relancer le tutoriel, ouvrir vos paramètres ou vous déconnecter.
+
+## La vue d’ensemble
+
+La page d’accueil regroupe les informations dont votre équipe a besoin en un coup d’œil : membres, activité en ligne, fréquentation des salons vocaux, croissance et événements récents.
+
+Le bouton **Modifier la disposition** permet de déplacer, masquer ou redimensionner les blocs. Votre disposition est personnelle : elle ne change pas celle des autres membres du staff.
+
+:::caution[Modifications non enregistrées]
+Sur les pages de configuration, une barre apparaît en bas de l’écran dès qu’un réglage change. Cliquez sur **Enregistrer** avant de changer de page. Kotbo vous prévient si vous tentez de quitter avec des changements en attente.
+:::
+
+## Navigation rapide
+
+| Raccourci | Action |
+| --- | --- |
+| <span class="kbd">Ctrl</span> + <span class="kbd">G</span> | Changer de serveur |
+| <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">D</span> | Ouvrir la vue d’ensemble |
+| <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">M</span> | Ouvrir les membres |
+| <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">C</span> | Ouvrir les paramètres |
+| <span class="kbd">Ctrl</span> + <span class="kbd">Shift</span> + <span class="kbd">N</span> | Afficher tous les raccourcis |
+
+Les raccourcis ne se déclenchent pas lorsque vous écrivez dans un champ ou une zone de texte.
+
+## Badges et états de pages
+
+- **Bêta** : la fonction est utilisable, mais peut encore évoluer. Vous pouvez signaler un problème depuis la bannière de la page.
+- **WIP** : la fonction n’est pas encore disponible ou nécessite une activation spécifique.
+- **Module désactivé** : la page peut disparaître de la navigation jusqu’à l’activation du module.
+
+Continuez avec [l’activation des modules](../modules/).

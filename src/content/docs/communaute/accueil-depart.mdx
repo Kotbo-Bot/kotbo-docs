@@ -1,0 +1,64 @@
+---
+title: Accueil & Départ
+description: Configurer les messages automatiques envoyés lors de l’arrivée ou du départ d’un membre.
+---
+
+import DashboardPreview from '../../../components/DashboardPreview.astro';
+
+<p class="doc-lead">Souhaitez la bienvenue aux nouveaux membres et informez votre communauté des départs avec des messages automatiquement personnalisés.</p>
+
+<DashboardPreview mode="welcome" compact />
+<p class="visual-caption">La page affiche la configuration et un aperçu du rendu Discord.</p>
+
+## Configurer le message de bienvenue
+
+<div class="step-list">
+  <div class="step-item"><div><h3>Activez « Message de bienvenue »</h3><p>L’interrupteur se trouve en haut à droite du bloc.</p></div></div>
+  <div class="step-item"><div><h3>Choisissez le salon de diffusion</h3><p>Sélectionnez un salon texte visible par les nouveaux membres, par exemple <code>#bienvenue</code>.</p></div></div>
+  <div class="step-item"><div><h3>Rédigez le message</h3><p>Ajoutez les variables ci-dessous pour adapter automatiquement le texte à chaque arrivée.</p></div></div>
+  <div class="step-item"><div><h3>Vérifiez l’aperçu puis enregistrez</h3><p>Le rendu Discord est actualisé dans la page. Cliquez sur <strong>Enregistrer</strong> dans la barre inférieure.</p></div></div>
+</div>
+
+## Variables disponibles
+
+<table class="variable-table">
+  <thead><tr><th>Variable</th><th>Résultat</th></tr></thead>
+  <tbody>
+    <tr><td><code>{'{user}'}</code></td><td>Mentionne le membre, par exemple <strong>@JeanDupont</strong>.</td></tr>
+    <tr><td><code>{'{username}'}</code></td><td>Affiche son nom sans mention.</td></tr>
+    <tr><td><code>{'{server}'}</code></td><td>Affiche le nom de votre serveur.</td></tr>
+    <tr><td><code>{'{memberCount}'}</code></td><td>Affiche le nombre total de membres.</td></tr>
+  </tbody>
+</table>
+
+Exemple :
+
+```text
+Bienvenue {user} sur {server} !
+Tu es notre {memberCount}e membre 🎉
+```
+
+## Ajouter une image de bienvenue
+
+Activez **Image de bienvenue** pour joindre un bandeau avec l’avatar du nouveau membre. Vous pouvez fournir une URL d’image de fond personnalisée ; sans URL, Kotbo utilise son visuel par défaut.
+
+:::tip
+Choisissez une image large, lisible et peu chargée. Testez son rendu en thème clair et sombre si elle contient du texte.
+:::
+
+## Configurer le message de départ
+
+Le bloc de départ fonctionne de la même manière : activez-le, choisissez un salon et rédigez le texte. La variable <code>{'{user}'}</code> peut ne plus produire une mention cliquable après le départ ; utilisez <code>{'{username}'}</code> si vous souhaitez seulement afficher le nom.
+
+## Tester la configuration
+
+L’aperçu vérifie le contenu, mais pas les permissions Discord. Avant la mise en service :
+
+1. vérifiez que Kotbo peut **Voir le salon** et **Envoyer des messages** ;
+2. enregistrez la configuration ;
+3. faites rejoindre un compte de test ;
+4. corrigez le salon ou le message si nécessaire.
+
+:::caution
+Ne testez pas en faisant quitter un vrai membre du staff. Utilisez un compte secondaire ou un serveur de test.
+:::
