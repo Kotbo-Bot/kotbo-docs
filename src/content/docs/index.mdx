@@ -14,10 +14,14 @@ hero:
       icon: open-book
 ---
 
-import DashboardPreview from '../../components/DashboardPreview.astro';
+import DashboardScreenshot from '../../components/DashboardScreenshot.astro';
 
 <div class="hero-preview">
-  <DashboardPreview mode="overview" />
+  <DashboardScreenshot
+    file="dashboard-overview.webp"
+    alt="Vue d’ensemble réelle du dashboard Kotbo"
+    eager
+  />
 </div>
 
 <section class="home-intro">

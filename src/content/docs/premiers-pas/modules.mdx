@@ -5,12 +5,15 @@ sidebar:
   order: 3
 ---
 
-import DashboardPreview from '../../../components/DashboardPreview.astro';
+import DashboardScreenshot from '../../../components/DashboardScreenshot.astro';
 
 <p class="doc-lead">Les modules servent à adapter Kotbo à votre communauté. Activez uniquement les fonctions que votre équipe compte réellement utiliser : la navigation restera plus claire.</p>
 
-<DashboardPreview mode="modules" compact />
-<p class="visual-caption">Le catalogue regroupe les fonctionnalités disponibles pour votre serveur.</p>
+<DashboardScreenshot
+  file="dashboard-modules.webp"
+  alt="Écran réel du catalogue des modules Kotbo"
+  caption="Le catalogue réel des modules, avec ses presets et ses interrupteurs d’activation."
+/>
 
 ## Activer un module
 

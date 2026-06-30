@@ -44,7 +44,7 @@ export default defineConfig({
         {
           label: 'Communauté',
           items: [
-            { label: 'Accueil & départ', slug: 'communaute/accueil-depart' },
+            { label: 'Messages d’accueil & départ', slug: 'communaute/accueil-depart' },
           ],
         },
         {

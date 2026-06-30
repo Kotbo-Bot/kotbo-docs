@@ -5,12 +5,15 @@ sidebar:
   order: 2
 ---
 
-import DashboardPreview from '../../../components/DashboardPreview.astro';
+import DashboardScreenshot from '../../../components/DashboardScreenshot.astro';
 
 <p class="doc-lead">Le dashboard est organisé autour d’un serveur actif. Chaque action, statistique ou réglage affiché concerne ce serveur.</p>
 
-<DashboardPreview mode="overview" compact />
-<p class="visual-caption">Vue d’ensemble du dashboard — les données illustrées sont fictives.</p>
+<DashboardScreenshot
+  file="dashboard-overview.webp"
+  alt="Vue d’ensemble réelle du dashboard Kotbo avec sa barre latérale et ses statistiques"
+  caption="Vue d’ensemble réelle du dashboard — les données affichées sont fictives."
+/>
 
 ## Les quatre zones à connaître
 

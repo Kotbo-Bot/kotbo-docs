@@ -1,19 +1,25 @@
 ---
-title: Accueil & Départ
+title: Messages d’accueil & de départ
 description: Configurer les messages automatiques envoyés lors de l’arrivée ou du départ d’un membre.
 ---
 
-import DashboardPreview from '../../../components/DashboardPreview.astro';
+import DashboardScreenshot from '../../../components/DashboardScreenshot.astro';
 
 <p class="doc-lead">Souhaitez la bienvenue aux nouveaux membres et informez votre communauté des départs avec des messages automatiquement personnalisés.</p>
 
-<DashboardPreview mode="welcome" compact />
-<p class="visual-caption">La page affiche la configuration et un aperçu du rendu Discord.</p>
+Dans la barre latérale, ouvrez **Communauté → Annonces & Auto-Rôle**, puis choisissez l’onglet **Accueil** ou **Départ**.
+
+<DashboardScreenshot
+  file="dashboard-welcome.webp"
+  alt="Écran réel Annonces et Auto-Rôle de Kotbo, onglet Accueil"
+  caption="L’écran Annonces & Auto-Rôle réel, ouvert sur l’onglet Accueil."
+/>
 
 ## Configurer le message de bienvenue
 
 <div class="step-list">
-  <div class="step-item"><div><h3>Activez « Message de bienvenue »</h3><p>L’interrupteur se trouve en haut à droite du bloc.</p></div></div>
+  <div class="step-item"><div><h3>Ouvrez l’onglet « Accueil »</h3><p>Dans <strong>Annonces & Auto-Rôle</strong>, l’onglet se trouve juste sous le titre de la page.</p></div></div>
+  <div class="step-item"><div><h3>Activez « Message de Bienvenue »</h3><p>L’interrupteur se trouve en haut à droite du bloc.</p></div></div>
   <div class="step-item"><div><h3>Choisissez le salon de diffusion</h3><p>Sélectionnez un salon texte visible par les nouveaux membres, par exemple <code>#bienvenue</code>.</p></div></div>
   <div class="step-item"><div><h3>Rédigez le message</h3><p>Ajoutez les variables ci-dessous pour adapter automatiquement le texte à chaque arrivée.</p></div></div>
   <div class="step-item"><div><h3>Vérifiez l’aperçu puis enregistrez</h3><p>Le rendu Discord est actualisé dans la page. Cliquez sur <strong>Enregistrer</strong> dans la barre inférieure.</p></div></div>
@@ -48,7 +54,7 @@ Choisissez une image large, lisible et peu chargée. Testez son rendu en thème 
 
 ## Configurer le message de départ
 
-Le bloc de départ fonctionne de la même manière : activez-le, choisissez un salon et rédigez le texte. La variable <code>{'{user}'}</code> peut ne plus produire une mention cliquable après le départ ; utilisez <code>{'{username}'}</code> si vous souhaitez seulement afficher le nom.
+Ouvrez l’onglet **Départ** en haut de la même page. Le formulaire fonctionne de la même manière : activez le message, choisissez un salon et rédigez le texte. La variable <code>{'{user}'}</code> peut ne plus produire une mention cliquable après le départ ; utilisez <code>{'{username}'}</code> si vous souhaitez seulement afficher le nom.
 
 ## Tester la configuration
 
