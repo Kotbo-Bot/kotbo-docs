@@ -44,12 +44,14 @@ export default defineConfig({
           label: 'Communauté',
           items: [
             { label: 'Messages d’accueil & départ', slug: 'communaute/accueil-depart' },
+            { label: 'Lier des salons', slug: 'communaute/liens-salons' },
           ],
         },
         {
           label: 'Aide',
           items: [
             { label: 'Questions fréquentes', slug: 'aide/questions-frequentes' },
+            { label: 'Configuration MCP (IA)', slug: 'aide/mcp' },
           ],
         },
       ],

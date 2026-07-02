@@ -1,0 +1,122 @@
+---
+title: API MCP (Model Context Protocol)
+description: Connecter des intelligences artificielles (Claude, ChatGPT...) à votre bot pour interroger et administrer votre serveur Discord.
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<p class="doc-lead">Le protocole <strong>MCP (Model Context Protocol)</strong> de Kotbo permet de connecter une intelligence artificielle externe (comme Claude.ai ou ChatGPT) directement à votre serveur Discord. L'IA peut alors lire des données ou exécuter des actions de modération selon des droits strictement définis.</p>
+
+:::caution[Fonctionnalité en Bêta]
+L'intégration MCP est actuellement en phase de test. Les fonctionnalités et l'interface de connexion peuvent encore évoluer.
+:::
+
+---
+
+## Qu'est-ce que le MCP ?
+
+Le MCP est un standard ouvert permettant à un modèle d'IA d'interagir avec des outils et des bases de données externes. Grâce au serveur MCP exposé par Kotbo, votre IA peut devenir un assistant d'administration ou d'animation puissant en disposant d'un contexte en temps réel sur la vie de votre serveur.
+
+---
+
+## Étape 1 : Créer une clé d'accès MCP
+
+Pour connecter une IA, vous devez générer des identifiants dédiés à partir du dashboard de Kotbo.
+
+1. Allez dans **Configuration → API MCP**.
+2. Cliquez sur le bouton **Nouvelle clé** en haut à droite.
+3. Saisissez un **Nom de clé** pour l'identifier facilement (ex: *Claude Web*, *ChatGPT Staff*).
+4. Configurez les permissions de la clé. Cochez uniquement ce qui est nécessaire pour l'usage prévu.
+
+### Permissions de Lecture (READ)
+*   **Stats serveur** : Membres, statistiques de messages et niveau d'activité global.
+*   **Membres** : Profils Discord des utilisateurs, recherche et messages récents.
+*   **Sanctions** : Historique et liste des sanctions appliquées sur le serveur.
+*   **Staff** : Liste des membres de l'équipe et leurs profils.
+*   **Tickets** : Consultation des tickets ouverts.
+*   **Communauté** : Classements d'XP, suggestions, événements, quêtes et réputation.
+*   **Économie** : Profils RPG, inventaires, boutique et classement du Marché.
+*   **Modération** : Configuration d'AutoMod, mots bannis, réponses automatiques.
+*   **Analytics** : Statistiques détaillées par salon, cartes d'activité (Pulse), prédictions.
+
+### Permissions d'Écriture (WRITE)
+:::warning[Permissions sensibles]
+Les permissions d'écriture permettent à l'IA d'effectuer des modifications réelles sur votre serveur. Soyez vigilants.
+:::
+*   **Sanctionner** : Permet à l'IA d'appliquer ou de lever des sanctions (avertissements, bannissements, etc.).
+*   **Envoyer messages** : Permet à l'IA de poster des messages dans un salon Discord au nom du bot.
+*   **Gérer tickets** : Permet à l'IA de répondre aux tickets et de les fermer.
+*   **Gérer communauté** : Permet à l'IA de valider des suggestions et de gérer les cadeaux/événements.
+*   **Gérer membres** : Permet à l'IA d'attribuer des rôles, de modifier les XP ou d'ajouter des notes de modération.
+
+5. Cliquez sur **Générer la clé**.
+6. **IMPORTANT** : Une fenêtre s'affiche avec votre **Client ID** et votre **Client Secret** (qui commence par `mcp_`). Copiez et sauvegardez ces informations immédiatement. **Le Client Secret ne sera plus jamais affiché en clair par la suite.**
+
+---
+
+## Étape 2 : Configurer votre client IA
+
+Sélectionnez votre intelligence artificielle pour afficher les instructions de configuration :
+
+<Tabs>
+  <TabItem label="Claude.ai">
+    Claude de Anthropic prend en charge les serveurs MCP distants sous forme de connecteurs personnalisés (*Custom Connectors*).
+
+    1. Ouvrez [Claude.ai](https://claude.ai) et accédez à vos paramètres en cliquant sur votre profil, puis allez dans **Customize** → **Connectors** (ou cliquez sur le bouton disponible dans l'aide de connexion de Kotbo).
+    2. Cliquez sur le bouton **+** puis choisissez **Add custom connector**.
+    3. Saisissez les informations suivantes :
+       *   **Name** : `Kotbo`
+       *   **URL** : Dans le dashboard Kotbo, dans la ligne de votre clé MCP, cliquez sur **Générer l'URL directe Claude** et copiez-la. Collez cette URL longue signée sur Claude.
+       *   *Note : Laissez les champs optionnels (Client ID, Client Secret, Advanced) vides lorsque vous utilisez l'URL directe.*
+    4. Cliquez sur **Add**. Claude est désormais connecté à Kotbo !
+
+    :::tip[En cas d'échec d'autorisation]
+    Si Claude affiche une erreur *« Authorization failed »* après connexion, utilisez l'**URL directe Claude** générée par le dashboard plutôt que l'URL standard du serveur MCP. Cette URL signée contourne les blocages d'autorisation réseau de Claude.
+    :::
+  </TabItem>
+  <TabItem label="ChatGPT">
+    ChatGPT d'OpenAI permet d'ajouter des serveurs MCP distants en activant le mode développeur.
+
+    1. Ouvrez [ChatGPT](https://chatgpt.com) sur le web.
+    2. Allez dans vos paramètres : **Settings** → **Apps** → **Advanced settings**.
+    3. Cochez l'interrupteur **Developer mode** pour l'activer.
+    4. Cliquez sur **Create app** et sélectionnez l'option pour ajouter un serveur MCP distant.
+    5. Saisissez les paramètres de connexion :
+       *   **App name** : `Kotbo`
+       *   **MCP server URL** : Copiez l'**URL du serveur MCP** (Endpoint URL) affichée en haut de la page API MCP de votre dashboard Kotbo (format `https://api.kotbo.fr/api/mcp/ID_SERVEUR`).
+       *   **Authentication** : Sélectionnez **OAuth** ou **Mixed Authentication**.
+    6. Validez. Lors de votre première discussion avec ChatGPT sollicitant le bot, une fenêtre d'autorisation Kotbo s'ouvrira : saisissez votre clé d'accès MCP pour finaliser l'association.
+  </TabItem>
+</Tabs>
+
+---
+
+## Intégrations personnalisées (API & Gemini)
+
+Si vous développez votre propre client MCP (ex: via les SDK MCP de Google pour Gemini, ou Python/TypeScript) :
+
+L'authentification s'effectue en transmettant la clé d'accès sous forme de Bearer Token dans l'en-tête de vos requêtes HTTP.
+
+Exemple de configuration JSON pour un serveur MCP :
+```json
+{
+  "type": "mcp_server",
+  "name": "Kotbo",
+  "url": "https://api-kotbo-url/api/mcp/VOTRE_ID_SERVEUR",
+  "headers": {
+    "Authorization": "Bearer mcp_VOTRE_CLIENT_SECRET"
+  }
+}
+```
+*(Remplacez `mcp_VOTRE_CLIENT_SECRET` par le Client Secret complet copié à la création).*
+
+---
+
+## Diagnostics et Logs
+
+Si l'IA n'arrive pas à lire les informations ou si des requêtes échouent, vous pouvez consulter les logs en temps réel.
+1. Allez dans **Configuration → API MCP**.
+2. À côté de l'URL de votre Endpoint, cliquez sur le bouton **Logs**.
+3. Vous y verrez toutes les connexions entrantes récentes, les méthodes appelées (ex: `listTools`, `callTool`) ainsi que les erreurs éventuelles retournées par le bot.
