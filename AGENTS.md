@@ -10,12 +10,18 @@ The dashboard source used as the product reference is located at `../Kotbo/apps/
 
 ## Project structure
 
-- `src/content/docs/`: documentation pages written in Markdown or MDX.
-- `src/components/`: reusable Astro components for documentation pages.
-- `src/styles/custom.css`: Kotbo-specific Starlight styling.
-- `public/screenshots/`: anonymized screenshots generated from the real dashboard.
-- `astro.config.mjs`: Starlight navigation and GitHub Pages configuration.
-- `.github/workflows/deploy.yml`: static deployment to GitHub Pages.
+- `src/content/docs/`: pages de documentation écrites en Markdown ou MDX.
+- `src/components/`: composants Astro réutilisables pour les pages de documentation (ex: `DashboardScreenshot.astro`, `DiscordCommand.astro`).
+- `src/styles/`: feuilles de style modulaires :
+  - `css.rooting.css` : Feuille de style principale important les autres fichiers.
+  - `variables.css` : Variables de thèmes, couleurs, polices.
+  - `layout.css` / `typography.css` : Surcharges globales.
+  - `homepage.css` / `components.css` : Styles de la page d'accueil et des guides.
+  - `animations.css` : Animations de transition.
+  - `discord-input.css` : Style du simulateur de commande Discord.
+- `src/assets/screenshots/`: captures d'écran anonymisées issues du vrai dashboard.
+- `astro.config.mjs`: configuration Starlight, navigation et GitHub Pages.
+- `.github/workflows/deploy.yml`: déploiement statique automatique sur GitHub Pages.
 
 ## Content rules
 
@@ -33,10 +39,11 @@ The dashboard source used as the product reference is located at `../Kotbo/apps/
 - Use screenshots of the real dashboard components rather than hand-drawn mockups.
 - Render screenshots with fictitious demonstration data only.
 - Keep the real sidebar, navbar, labels, forms, spacing, and active states visible whenever they help orientation.
-- Store optimized screenshots as WebP files in `public/screenshots/`.
+- Store optimized screenshots as WebP files in `src/assets/screenshots/`.
 - Use `src/components/DashboardScreenshot.astro` to embed dashboard captures.
 - Give every screenshot a useful French `alt` description and a short caption.
 - When the dashboard UI changes, update both the instructions and the affected screenshots in the same change.
+- Pour afficher les commandes slash Discord, utilisez obligatoirement le composant `<DiscordCommand command="/..." />` importé depuis `src/components/DiscordCommand.astro` afin de reproduire fidèlement l'UI de saisie Discord avec bouton de copie.
 
 ## Writing style
 

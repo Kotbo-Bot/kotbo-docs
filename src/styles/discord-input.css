@@ -1,0 +1,130 @@
+/* Discord slash command simulation */
+.discord-input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #313338;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--sl-font-mono);
+  font-size: 0.88rem;
+  color: #dbdee1;
+  margin: 1.2rem 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 6px;
+  user-select: none;
+  width: 100%;
+}
+
+:root[data-theme='light'] .discord-input {
+  background-color: #ebedf0;
+  color: #313338;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.discord-input .plus-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background-color: #4e5058;
+  color: #dbdee1;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+:root[data-theme='light'] .discord-input .plus-icon {
+  background-color: #dbdee1;
+  color: #313338;
+}
+
+.discord-input .slash {
+  color: #00a8fc;
+  font-weight: 800;
+}
+
+:root[data-theme='light'] .discord-input .slash {
+  color: #0066cc;
+}
+
+.discord-input .command-name {
+  color: #edf2f7;
+  font-weight: 700;
+}
+
+:root[data-theme='light'] .discord-input .command-name {
+  color: #060607;
+}
+
+.discord-input .param-group {
+  display: inline-flex;
+  align-items: center;
+  background-color: #2b2d31;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  gap: 4px;
+}
+
+:root[data-theme='light'] .discord-input .param-group {
+  background-color: #dbdee1;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.discord-input .param-name {
+  color: #b5bac1;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+:root[data-theme='light'] .discord-input .param-name {
+  color: #4e5058;
+}
+
+.discord-input .param-value {
+  color: #00a8fc;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+:root[data-theme='light'] .discord-input .param-value {
+  color: #0066cc;
+}
+
+/* Copy button styles */
+.discord-input .copy-btn {
+  background: none;
+  border: none;
+  color: #b5bac1;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.discord-input .copy-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #dbdee1;
+}
+
+:root[data-theme='light'] .discord-input .copy-btn {
+  color: #4e5058;
+}
+
+:root[data-theme='light'] .discord-input .copy-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #313338;
+}
+
+.discord-input .copy-btn.copied {
+  color: #23a55a !important;
+}

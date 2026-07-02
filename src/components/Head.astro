@@ -4,4 +4,58 @@ import Default from '@astrojs/starlight/components/Head.astro';
 
 <Default><slot /></Default>
 <meta name="theme-color" content="#071b2e" />
-<meta property="og:site_name" content="Kotbo Docs" />
+<meta property="og:site_name" content="KotDoc" />
+
+<script is:inline>
+  (function() {
+    const updateKbdState = (event, isPressed) => {
+      const pressedKey = event.key ? event.key.toUpperCase() : '';
+      
+      const kbds = document.querySelectorAll('.kbd');
+      kbds.forEach(el => {
+        const text = el.textContent.trim().toUpperCase();
+        let isMatch = false;
+        
+        if (text === 'CTRL' || text === '⌘' || text === 'CMD' || text === 'CONTROL') {
+          isMatch = (event.key === 'Control' || event.key === 'Meta');
+        } else if (text === 'SHIFT') {
+          isMatch = (event.key === 'Shift');
+        } else if (text === 'ALT' || text === 'OPTION') {
+          isMatch = (event.key === 'Alt');
+        } else if (text.length === 1) {
+          isMatch = (pressedKey === text);
+        }
+        
+        if (isMatch) {
+          if (isPressed) {
+            el.classList.add('pressed');
+          } else {
+            el.classList.remove('pressed');
+          }
+        }
+      });
+    };
+
+    window.addEventListener('keydown', (e) => updateKbdState(e, true));
+    window.addEventListener('keyup', (e) => updateKbdState(e, false));
+    window.addEventListener('blur', () => {
+      document.querySelectorAll('.kbd.pressed').forEach(el => el.classList.remove('pressed'));
+    });
+    
+    // Prevent default browser shortcuts for dashboard combinations to let them light up nicely
+    window.addEventListener('keydown', (e) => {
+      const key = e.key ? e.key.toUpperCase() : '';
+      const isCtrl = e.ctrlKey || e.metaKey;
+      const isShift = e.shiftKey;
+      
+      if (isCtrl) {
+        if (key === 'G') {
+          e.preventDefault();
+        }
+        if (isShift && ['D', 'M', 'C', 'N'].includes(key)) {
+          e.preventDefault();
+        }
+      }
+    });
+  })();
+</script>

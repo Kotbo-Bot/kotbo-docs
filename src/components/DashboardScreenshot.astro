@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   file: string;
   alt: string;
@@ -7,33 +10,60 @@ interface Props {
 }
 
 const { file, alt, caption, eager = false } = Astro.props;
-const basePath = import.meta.env.BASE_URL.endsWith('/')
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
-const src = `${basePath}screenshots/${file}`;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/screenshots/*.{jpeg,jpg,png,gif,webp}');
+const imagePath = `/src/assets/screenshots/${file}`;
+
+if (!images[imagePath]) {
+  throw new Error(`"${imagePath}" does not exist in glob: "/src/assets/screenshots/*.{jpeg,jpg,png,gif,webp}"`);
+}
+
+const imageModule = await images[imagePath]();
+const resolvedImage = imageModule.default;
 ---
 
 <figure class="dashboard-screenshot">
-  <a href={src} target="_blank" rel="noreferrer" aria-label={`${alt} — ouvrir en taille réelle`}>
-    <span class="screen-label"><i></i> Interface réelle · données de démonstration</span>
-    <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
-    <span class="screen-zoom" aria-hidden="true">Agrandir ↗</span>
-  </a>
+  <div class="window-frame">
+    <div class="window-body">
+      <a href={resolvedImage.src} target="_blank" rel="noreferrer" aria-label={`${alt} — ouvrir en taille réelle`}>
+        <span class="screen-label"><i></i> Interface réelle · données de démonstration</span>
+        <Image src={resolvedImage} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+        <span class="screen-zoom" aria-hidden="true">Agrandir ↗</span>
+      </a>
+    </div>
+  </div>
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
 
 <style>
   .dashboard-screenshot { margin: 1.8rem 0 2.5rem; }
-  .dashboard-screenshot > a {
+  
+  .window-frame {
+    border: 1px solid color-mix(in srgb, var(--sl-color-gray-4) 22%, transparent);
+    border-radius: 0.8rem;
+    overflow: hidden;
+    background: #09090b;
+    box-shadow: 0 20px 50px rgba(0, 20, 33, 0.12), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  :root[data-theme='light'] .window-frame {
+    box-shadow: 0 20px 50px rgba(0, 10, 20, 0.08), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  }
+
+  .window-body {
+    position: relative;
+    background: #09090b;
+  }
+
+  .window-body > a {
     position: relative;
     display: block;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--sl-color-gray-4) 55%, transparent);
-    border-radius: 1rem;
-    background: #09090b;
-    box-shadow: 0 24px 65px color-mix(in srgb, #001421 24%, transparent), 0 1px 0 #fff1 inset;
   }
+
   .dashboard-screenshot img { display: block; width: 100%; height: auto; margin: 0; }
+  
   .screen-label {
     position: absolute;
     z-index: 1;
@@ -56,6 +86,7 @@ const src = `${basePath}screenshots/${file}`;
     text-transform: uppercase;
   }
   .screen-label i { width: .38rem; height: .38rem; border-radius: 50%; background: #2bd5a4; box-shadow: 0 0 0 3px #2bd5a41c; }
+  
   .screen-zoom {
     position: absolute;
     right: .75rem;
@@ -70,8 +101,11 @@ const src = `${basePath}screenshots/${file}`;
     transform: translateY(4px);
     transition: .2s ease;
   }
-  .dashboard-screenshot > a:hover .screen-zoom { opacity: 1; transform: none; }
+  
+  .window-body > a:hover .screen-zoom { opacity: 1; transform: none; }
+  
   .dashboard-screenshot figcaption { margin-top: .7rem; text-align: center; color: var(--sl-color-gray-3); font-size: .74rem; }
+  
   @media (max-width: 600px) {
     .dashboard-screenshot { margin-inline: -0.4rem; }
     .screen-label { top: .45rem; font-size: .46rem; }

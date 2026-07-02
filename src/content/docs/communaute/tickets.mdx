@@ -1,0 +1,112 @@
+---
+title: Tickets de support
+description: Configurez et gérez le système de support par tickets pour communiquer en privé avec vos membres.
+---
+
+<p class="doc-lead">Le module <strong>Tickets</strong> permet à vos membres d’ouvrir un espace d'échange privé (salon textuel, fil ou message privé relayé) pour contacter directement votre équipe de staff.</p>
+
+:::note[Disponibilité]
+La gestion et la configuration du système se font depuis la section **Communauté → Tickets** de votre dashboard : [Accéder au module Tickets ↗](https://dash.kotbo.fr/tickets).
+L'accès aux onglets d'administration et de configuration est restreint aux administrateurs ou aux membres possédant les rôles d'accès configurés.
+:::
+
+---
+
+## Fonctionnement général du dashboard
+
+La page est divisée en quatre onglets principaux :
+1. **Tickets** : L'interface opérationnelle pour lire, répondre et gérer les tickets actifs.
+2. **Transcriptions** : L'historique des tickets archivés et fermés.
+3. **Satisfaction** : Le suivi des notes et commentaires laissés par vos membres après la fermeture de leur ticket.
+4. **Configuration** : Les réglages techniques du module.
+
+---
+
+## Gérer les tickets en temps réel (Onglet Tickets)
+
+Cet onglet est un véritable centre de support client intégré.
+
+### 1. Filtrer et sélectionner un ticket
+La liste de gauche regroupe tous les tickets. Vous pouvez les filtrer par statut : **Tous**, **Ouvert**, **Pris en charge** (Claimed) ou **Fermé**. Cliquez sur un ticket pour charger sa discussion au centre.
+
+### 2. Discuter depuis le dashboard
+La zone centrale affiche les messages échangés. Vous pouvez **saisir un message** au bas de l'écran : il sera immédiatement envoyé dans le salon Discord correspondant, au nom du compte staff connecté.
+
+### 3. Actions rapides du staff
+Des boutons d'action sont à votre disposition en haut à droite de la discussion :
+* **Prendre en charge** : Assigne le ticket à votre nom. Le bot met à jour le salon Discord pour notifier que vous vous occupez du membre.
+* **Fermer** : Ferme le ticket. Une fenêtre surgissante vous demande obligatoirement de saisir un **motif de fermeture**.
+* **Renommer** : Modifie le nom du salon Discord associé (ex: de `#ticket-001` à `#bug-resolu`).
+* **Réouvrir** : Pour un ticket fermé qui nécessite de nouveaux échanges.
+* **Restaurer** : Si le salon Discord a été supprimé accidentellement, recrée instantanément le salon avec tout l'historique des messages conservé.
+* **Supprimer** : Efface définitivement le ticket et ses données de la base.
+
+### 4. Accès direct au Dossier Membre
+À côté du nom de l'utilisateur ayant ouvert le ticket, un bouton permet d'ouvrir son **Dossier Membre** dans une fenêtre modale. Sans quitter la page de tickets, vous pouvez consulter ses antécédents et appliquer une sanction immédiate :
+* Avertissement (**WARN**)
+* Exclusion temporaire (**TIMEOUT**)
+* Expulsion (**KICK**)
+* Bannissement (**BAN**)
+
+---
+
+## Historiques des tickets (Onglet Transcriptions)
+
+Lorsqu'un ticket est fermé :
+* Kotbo compile l'ensemble de la discussion sous forme de page HTML propre.
+* Le fichier est stocké de manière sécurisée.
+* Dans l'onglet **Transcriptions**, cliquez sur un ticket archivé pour générer un **lien d'accès temporaire signé**. Ce lien vous permet de lire le script complet dans votre navigateur ou de le partager avec votre équipe.
+
+---
+
+## Suivi de la qualité (Onglet Satisfaction)
+
+À la fermeture d'un ticket, le bot envoie un message privé ou un message dans le salon au membre, lui demandant d'évaluer le support reçu (de 1 à 5 étoiles) et d'ajouter un commentaire facultatif.
+
+Dans l'onglet **Satisfaction**, vous visualisez :
+* Votre note moyenne globale.
+* La répartition des évaluations (Très insatisfait 😡, Insatisfait 😕, Neutre 😐, Satisfait 🙂, Très satisfait 🤩).
+* La liste chronologique des commentaires détaillés laissés par les utilisateurs.
+
+---
+
+## Configurer le module (Onglet Configuration)
+
+Pour que vos membres puissent ouvrir des tickets, vous devez configurer les bases et envoyer le panel d'ouverture sur votre serveur.
+
+### 1. Paramètres réseau et rôles (Accordéon Mode)
+* **Catégorie des tickets** : Sélectionnez la catégorie Discord sous laquelle les salons de tickets seront créés.
+* **Rôle Staff** : Le rôle Discord qui aura l'autorisation de voir et de répondre à tous les tickets créés (par exemple `@Support Staff`).
+* **Salon des logs** : Le salon où Kotbo enverra un récapitulatif à chaque ouverture, prise en charge et fermeture de ticket.
+* **Mode d'échange** :
+  * `CHANNEL` : Crée un salon textuel privé par ticket (Recommandé).
+  * `THREAD` : Crée un fil privé sous le salon du panel.
+  * `DM` : Ouvre une discussion en messages privés avec l'utilisateur et relaie ses messages dans un salon staff dédié.
+
+### 2. Le visuel d'ouverture (Accordéon Embed)
+Configurez le message que les membres verront pour ouvrir un ticket :
+* Saisissez le **Titre**, la **Description**, la **Couleur** et le **Texte du bouton** du panel.
+* **Type de sélecteur** : Choisissez entre des **Boutons** individuels (limité à 5) ou un **Menu déroulant** (Dropdown) si vous proposez de nombreuses catégories de support.
+
+### 3. Les catégories de tickets (Types de tickets)
+Vous pouvez configurer plusieurs choix de support (ex: « Signaler un bug », « Question boutique », « Plaintes ») :
+* Pour chaque type, cliquez sur **Ajouter un type de ticket**.
+* Personnalisez son libellé, sa description, son émoji et son style de bouton (Vert, Bleu, Gris, Rouge).
+* **Personnalisation par catégorie** : Vous pouvez écraser la catégorie et le rôle Staff par défaut pour chaque type (ex: envoyer les tickets « Recrutement » dans une catégorie RH restreinte aux administrateurs).
+* **Anonymat** : Permet de masquer l'identité du membre au staff (le ticket affiche *Utilisateur anonyme*).
+* **Relais Serveur Staff** : Relaye les messages vers un autre serveur Discord si nécessaire.
+
+### 4. Gestion de l'inactivité (Accordéon Relance)
+Activez les **relances d'inactivité** pour fermer ou avertir automatiquement les membres qui ne répondent plus :
+* Définissez le délai en heures (ex : 24 heures).
+* Saisissez le message de relance automatique (ex : *« Bonjour <code>{'{user}'}</code>, votre ticket est inactif... »*).
+
+---
+
+## Mettre en service le panel
+
+Une fois tous vos réglages effectués :
+1. Cliquez sur **Enregistrer** dans la barre inférieure verte pour sauvegarder la configuration.
+2. Dans le bloc de configuration, sélectionnez le **Salon du panel** (ex: `#support-tickets`).
+3. Cliquez sur le bouton **Envoyer le panel** en haut à droite de l'écran de configuration.
+4. Kotbo publie instantanément le message embed avec son bouton ou menu de sélection dans le salon choisi. Les membres peuvent désormais cliquer dessus pour ouvrir un ticket.

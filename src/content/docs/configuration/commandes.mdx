@@ -1,0 +1,71 @@
+---
+title: Accès aux commandes
+description: Contrôlez qui peut exécuter chaque commande du bot, et dans quels salons.
+---
+
+<p class="doc-lead">Le module <strong>Commandes</strong> permet de restreindre l'utilisation des commandes slash de Kotbo sur votre serveur. C'est l'outil indispensable pour s'assurer que vos commandes sensibles ne sont pas utilisées par n'importe qui, n'importe où.</p>
+
+:::note[Disponibilité]
+La gestion des droits d'exécution est disponible sous **Configuration → Commandes** dans le dashboard : [Accéder au module Commandes ↗](https://dash.kotbo.fr/command-access).
+Seuls les membres possédant les droits d'administration ou les rôles autorisés à configurer le bot peuvent modifier ces paramètres.
+:::
+
+---
+
+## Structure de la page
+
+La page est divisée en deux onglets principaux, situés sous le titre :
+* **Documentation** : Liste complète des commandes de Kotbo disponibles sur votre serveur, accompagnée de leur description et de la liste de leurs paramètres (arguments).
+* **Permissions** : L'interface de configuration permettant de définir les règles d'accès.
+
+Vous pouvez utiliser la **barre de recherche** ou le **filtre de catégorie** pour trouver rapidement la commande que vous souhaitez configurer.
+
+---
+
+## Configurer les restrictions d'une commande
+
+Sélectionnez une commande dans la liste de gauche pour charger ses règles d'accès à droite. Par défaut, les commandes héritent de leur niveau d'accès Discord standard (indiqué par un badge : **Admin** en rouge, **Mod** en orange, ou **Tous** en vert).
+
+Vous pouvez restreindre une commande selon trois critères cumulatifs :
+
+### 1. Salons (Channels)
+Détermine dans quels salons la commande est active :
+* **Neutre** *(par défaut)* : La commande est utilisable partout (selon les permissions Discord globales).
+* **Autorisés uniquement** : La commande ne pourra être lancée *que* dans les salons sélectionnés.
+* **Bloqués uniquement** : La commande sera inutilisable dans les salons sélectionnés, mais disponible ailleurs.
+
+### 2. Rôles
+Détermine quels groupes d'utilisateurs peuvent exécuter la commande :
+* **Neutre** : Conserve le comportement par défaut lié au niveau requis (Admin/Mod/Tous).
+* **Autorisés uniquement** : Seuls les membres possédant l'un des rôles sélectionnés pourront utiliser la commande.
+* **Bloqués uniquement** : Les membres possédant l'un des rôles sélectionnés seront bloqués, même s'ils ont les droits Discord par défaut.
+
+### 3. Utilisateurs
+Permet de cibler précisément des membres spécifiques par leur identifiant unique Discord (User ID).
+* **Autorisés uniquement** / **Bloqués uniquement** : Entrez l'ID Discord du membre et validez pour l'ajouter à la règle.
+
+---
+
+## Détection et résolution des conflits
+
+Il arrive parfois qu'une configuration comporte des règles contradictoires (par exemple, si vous ajoutez le rôle `@Moderator` à la fois dans les rôles autorisés et dans les rôles bloqués).
+
+* **Alerte de conflit** : Le dashboard détecte automatiquement ces anomalies et affiche une alerte d'avertissement rouge.
+* **Résoudre les conflits** : Un bouton apparaît dans l'alerte pour nettoyer automatiquement la configuration en supprimant les doublons conflictuels en un clic.
+
+---
+
+## Gestion des sous-commandes
+
+Certaines commandes complexes possèdent des sous-commandes (par exemple, `/staffadd` et `/staffremove` sous la commande racine `/staff`).
+
+* Les commandes contenant des sous-commandes sont affichées avec une icône de flèche déroulante.
+* Cliquez sur le titre pour dérouler l'accordéon et configurer les permissions de chaque sous-commande de manière totalement indépendante.
+
+---
+
+## Sauvegarde
+
+:::caution[Barre de sauvegarde]
+Comme pour toutes les pages de configuration, les restrictions ne sont pas appliquées tant que vous n'avez pas cliqué sur **Enregistrer** dans la barre verte en bas de votre écran.
+:::

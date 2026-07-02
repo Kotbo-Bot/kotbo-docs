@@ -1,0 +1,61 @@
+---
+title: Détection des doubles comptes
+description: Détectez les comptes alternatifs suspects et mettez en place des barrières de vérification Captcha/VPN.
+---
+
+<p class="doc-lead">Le module <strong>Doubles Comptes</strong> est un outil de sécurité essentiel pour protéger votre serveur contre les raids de bots, le contournement de bannissement et les utilisateurs malveillants utilisant plusieurs comptes.</p>
+
+:::note[Permissions requises]
+La gestion de la sécurité se fait depuis la section **Modération → Doubles comptes** de votre dashboard : [Accéder au module Doubles comptes ↗](https://dash.kotbo.fr/double-accounts).
+Seuls les administrateurs et modérateurs habilités ont accès à ces informations sensibles.
+:::
+
+---
+
+## Comment fonctionne le score de suspicion ?
+
+Kotbo n'expulse pas au hasard. Lorsqu'un membre rejoint votre serveur Discord, le bot analyse son profil et lui attribue un **score de suspicion de 0 à 100** basé sur plusieurs critères techniques :
+* **Âge du compte** : Un compte créé il y a moins de 24 heures obtiendra un score de suspicion très élevé.
+* **Ancienneté d'arrivée** : Analyse du comportement d'arrivée par vagues.
+* **Empreinte technique** : Détection des adresses IP partagées, des cookies de navigateur identiques lors de l'accès au site, ou de l'utilisation de VPN/proxies connus pour masquer l'identité.
+* **Historique Discord** : Présence ou non sur d'autres serveurs communs et antécédents de sanctions.
+
+---
+
+## Naviguer dans les onglets de sécurité
+
+La page regroupe quatre onglets pour gérer la sécurité de votre serveur :
+
+### 1. Comptes liés (Links)
+Affiche la liste des comptes officiellement répertoriés comme liés. C'est ici que vous suivez les "alts" déclarés de vos membres ou de votre équipe.
+* Filtrez la liste par statut : **Tous**, **En attente** (Pending), **Validé** (Validated) ou **Rejeté** (Rejected).
+* Si un membre possède une double identité légitime (ex : compte de démonstration pour un développeur), vous pouvez valider sa liaison ici pour éviter qu'il ne déclenche les alertes.
+* Vous pouvez supprimer une liaison à tout moment pour séparer à nouveau les comptes.
+
+### 2. Détections de suspicion (Detections)
+C’est le panneau de contrôle de surveillance active.
+
+* **Lancer un scan manuel** : Saisissez une limite en jours (ex: 3 jours) et cliquez sur **Lancer l'analyse** pour scanner rétroactivement les dernières arrivées sur votre serveur.
+* **Consulter les suspicions actives** : Chaque suspect est affiché avec sa carte d'identité Discord, son score global et son niveau de menace signalé par un code couleur :
+  * <span class="dash-badge kick">Risque élevé (score ≥ 60)</span> : Comptes extrêmement suspects (ex : création minute sous VPN).
+  * <span class="dash-badge warn">Risque moyen (score ≥ 30)</span> : Comportements inhabituels à surveiller.
+  * <span class="dash-badge active">Risque faible (score < 30)</span> : Anomalies mineures.
+* **Consulter les preuves (Evidence)** : Déroulez la carte pour voir précisément pourquoi le compte a été signalé (ex: *« Même adresse IP détectée avec l'utilisateur Jean#1234 »*).
+* **Prendre une décision** :
+  * Cliquez sur **Lier les comptes** si vous confirmez qu'il s'agit d'un double compte avéré.
+  * Cliquez sur **Ignorer la détection** (Dismiss) pour retirer le membre de la liste des menaces suspectées.
+  * Cliquez sur son nom pour ouvrir directement son **Dossier de modération** et lui appliquer une sanction (timeout/ban).
+
+### 3. Vérification (Verification)
+Cet onglet présente le parcours utilisateur imposé aux membres bloqués ou suspectés par le bot :
+* Si un utilisateur est classé comme suspect, le bot restreint ses permissions Discord et lui envoie un message privé contenant un lien de vérification.
+* En cliquant sur ce lien, l'utilisateur est redirigé vers une page web externe sécurisée lui demandant de résoudre un **Captcha de sécurité** (anti-robot) et vérifiant qu'il n'utilise pas un VPN de spam.
+* Une fois validé, Kotbo lui attribue son rôle de membre et l'autorise à écrire sur le serveur.
+
+### 4. Configuration (Config)
+Ajustez la sensibilité du bot et les sanctions automatiques.
+
+* **Détection automatique** : Activez cet interrupteur pour laisser Kotbo scanner en continu chaque nouvelle arrivée.
+* **Rôle de validation** : Sélectionnez le rôle temporaire ou le rôle d'attente à attribuer/retirer au membre pendant qu'il effectue sa vérification Captcha (ex : `@Non-Vérifié`).
+* **Rôle double compte / Rôle de sanction** : Sélectionnez le rôle restrictif à attribuer automatiquement aux membres identifiés comme doubles comptes non autorisés.
+* Cliquez sur **Enregistrer** dans la barre inférieure verte après chaque modification.

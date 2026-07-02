@@ -1,0 +1,7 @@
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3 { letter-spacing: -.035em; }
+.sl-markdown-content h1 { font-weight: 760; }
+.sl-markdown-content h2 { margin-top: 2.8rem; font-size: 1.55rem; }
+.sl-markdown-content p, .sl-markdown-content li { line-height: 1.72; }
+.sl-markdown-content code:not(:where(.not-content *)) { border: 1px solid var(--sl-color-gray-5); border-radius: .38rem; }

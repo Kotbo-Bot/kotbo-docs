@@ -5,10 +5,13 @@ sidebar:
   order: 2
 ---
 
+import DiscordCommand from '../../../components/DiscordCommand.astro';
+
 <p class="doc-lead">Le module <strong>Liens de salons</strong> permet de connecter des salons textuels afin de relayer automatiquement les messages qui y sont envoyés. C'est l'outil idéal pour connecter deux communautés ou créer un canal de discussion partagé entre plusieurs serveurs.</p>
 
 :::note[Disponibilité]
-Cette fonctionnalité est accessible depuis la section **Cross-Serveur → Liens de salons** de votre dashboard. Vous devez être administrateur du serveur pour créer ou modifier ces liens.
+Cette fonctionnalité est accessible depuis la section **Cross-Serveur → Liens de salons** de votre dashboard : [Accéder au module Liens de salons ↗](https://dash.kotbo.fr/channel-links).
+Vous devez être administrateur du serveur pour créer ou modifier ces liens.
 :::
 
 ---
@@ -41,9 +44,7 @@ Vous pouvez lier deux salons distincts au sein de votre propre serveur (par exem
 4. Cliquez sur **Créer le lien**. La liaison est instantanée !
 
 *Alternative Discord :* Vous pouvez également créer cette liaison directement sur Discord avec la commande slash :
-```text
-/link salon salon-source:#salon-A salon-cible:#salon-B direction:Bidirectionnel mode:Webhook
-```
+<DiscordCommand command="/link salon salon-source:#salon-A salon-cible:#salon-B direction:Bidirectionnel mode:Webhook" />
 
 ---
 
@@ -62,9 +63,7 @@ Si vous possédez les droits d'administration sur les deux serveurs, vous pouvez
 6. Ajustez vos options et cliquez sur **Créer le lien**.
 
 *Alternative Discord :* 
-```text
-/link direct salon-source:#salon-local serveur-cible:ID_SERVEUR_CIBLE salon-cible:ID_SALON_CIBLE
-```
+<DiscordCommand command="/link direct salon-source:#salon-local serveur-cible:ID_SERVEUR_CIBLE salon-cible:ID_SALON_CIBLE" />
 
 ### Méthode B : Liaison par invitation (si le serveur cible appartient à un autre propriétaire)
 Si vous souhaitez lier votre salon à celui d'un autre serveur que vous ne gérez pas, vous devez générer un code d'invitation que l'autre administrateur devra valider. Dans ce scénario, le **Serveur A** désigne le serveur depuis lequel vous initiez la configuration et créez l'invitation, et le **Serveur B** désigne le serveur cible qui recevra l'invitation.
@@ -78,15 +77,11 @@ Si vous souhaitez lier votre salon à celui d'un autre serveur que vous ne gére
 6. Une boîte verte s'affiche avec un code de liaison (ex: `A1B2C3D4`) ainsi qu'un lien d'invitation Discord si vous avez coché l'option. **Copiez ce code** et transmettez-le à l'administrateur du serveur distant.
 
 *Alternative Discord :* 
-```text
-/link invite salon:#salon-local direction:Bidirectionnel mode:Webhook invitation-serveur:Vrai
-```
+<DiscordCommand command="/link invite salon:#salon-local direction:Bidirectionnel mode:Webhook invitation-serveur:Vrai" />
 
 #### Étape 2 : Accepter l'invitation (Serveur B — Serveur cible)
 L'administrateur du serveur B doit valider le lien depuis son propre serveur Discord en exécutant la commande slash suivante :
-```text
-/link accept code:CODE_D_INVITATION salon:#salon-local-cible
-```
+<DiscordCommand command="/link accept code:CODE_D_INVITATION salon:#salon-local-cible" />
 Une fois validé, Kotbo crée automatiquement les webhooks nécessaires et connecte les deux salons.
 
 ---
@@ -118,7 +113,5 @@ Pour rompre un lien, retournez dans **Cross-Serveur → Liens de salons**, cliqu
 Si l'option **Mettre à jour la description des salons** était active, le bot supprimera automatiquement les liens d'invitation insérés dans le sujet (topic) des salons Discord concernés.
 
 *Alternative Discord :*
-```text
-/link remove id:ID_DU_LIEN
-```
+<DiscordCommand command="/link remove id:ID_DU_LIEN" />
 *(Utilisez `/link list` pour trouver l'identifiant unique du lien à supprimer)*.

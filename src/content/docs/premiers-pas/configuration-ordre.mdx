@@ -1,0 +1,91 @@
+---
+title: Ordre de configuration conseillé
+description: Découvrez le parcours étape par étape pour configurer votre serveur Kotbo de manière sécurisée et ordonnée.
+sidebar:
+  order: 4
+---
+
+<p class="doc-lead">Configurer un serveur Discord complet peut rapidement devenir impressionnant. Pour éviter de faire des erreurs de permissions ou d’oublier des étapes clés, nous vous recommandons de suivre cet ordre logique.</p>
+
+---
+
+## Pourquoi un ordre précis ?
+
+Si vous commencez par configurer les salons fun ou les messages de bienvenue, vous risquez de laisser des commandes d'administration ouvertes à tous les membres ou de ne pas loguer les premières actions importantes de votre staff. 
+
+Suivre les étapes ci-dessous vous assure un serveur **sécurisé, auditable et prêt à accueillir du public** sans mauvaise surprise.
+
+---
+
+## Étape 1 : Sécuriser les accès et permissions
+Avant toute chose, limitez qui peut interagir avec le bot et qui peut administrer ses réglages.
+
+* **Où aller :** **Configuration → Commandes**
+* **Action :** Vérifiez les droits d'exécution de vos commandes slash. Assurez-vous que les commandes de modération (`/clear`, `/ban`, `/mute`, etc.) et de configuration ne sont accessibles qu'aux rôles adéquats (par exemple `@Administrateur` ou `@Modérateur`).
+* **Pourquoi :** Évite que des membres malveillants profitent d’une commande mal restreinte par défaut pendant que vous configurez le reste.
+
+---
+
+## Étape 2 : Activer le journal d'activité (Logs)
+Il est essentiel de voir ce que fait le bot et d'avoir des traces en cas de dysfonctionnement ou de comportement suspect.
+
+* **Où aller :** **Modération → Logs**
+* **Action :** Créez ou sélectionnez un salon privé réservé à votre équipe de modération (ex: `#logs-mod`), puis activez les filtres de logs souhaités (sanctions, messages supprimés, modifications de rôles, etc.).
+* **Pourquoi :** Toutes les configurations suivantes (sanctions automatiques, tickets créés, détections de doubles comptes) généreront des logs. Si vos salons de logs ne sont pas configurés en premier, vous passerez à côté d'informations cruciales.
+
+---
+
+## Étape 3 : Configurer la sécurité automatique
+Mettez en place les protections qui surveilleront votre serveur H24.
+
+1. **AutoMod (Modération automatique) :**
+   * **Où aller :** **Modération → Modération auto**
+   * **Action :** Activez les filtres anti-spam, de liens interdits, de grossièretés et l'**Anti-Bot**.
+2. **Doubles Comptes :**
+   * **Où aller :** **Modération → Doubles comptes**
+   * **Action :** Activez la détection automatique et configurez le processus de vérification par Captcha pour les nouveaux comptes trop récents.
+
+* **Pourquoi :** Votre serveur est désormais sous surveillance active. Si un spammeur ou un bot malveillant tente de le rejoindre pendant la suite de votre configuration, il sera bloqué immédiatement.
+
+---
+
+## Étape 4 : Préparer l'onboarding et l'accueil
+Configurez l'expérience d'arrivée des futurs membres.
+
+1. **Messages d'accueil :**
+   * **Où aller :** **Communauté → Annonces & Auto-Rôle**
+   * **Action :** Activez l'onglet **Accueil**, sélectionnez un salon comme `#bienvenue` et rédigez votre message personnalisé.
+2. **Acceptation du règlement :**
+   * **Où aller :** **Communauté → Règlement** (si installé)
+   * **Action :** Rédigez vos règles et définissez le rôle de validation à attribuer lorsque l'utilisateur accepte la charte.
+3. **Rôles de réaction :**
+   * **Où aller :** **Communauté → Reaction Roles**
+   * **Action :** Créez des menus de rôles auto-attribués (ex: pour choisir ses jeux, ses plateformes) afin de désengorger vos salons.
+
+---
+
+## Étape 5 : Structurer l'équipe et le support
+Organisez le travail de votre staff et le système de relation avec vos membres.
+
+1. **Tickets de support :**
+   * **Où aller :** **Communauté → Tickets**
+   * **Action :** Configurez la catégorie de support, le rôle staff gérant les tickets, et générez le panel d'ouverture dans `#support`.
+2. **Recrutement :**
+   * **Où aller :** **Staff → Recrutement** (ou via Form Builder)
+   * **Action :** Si vous recrutez des modérateurs ou animateurs, préparez les formulaires de candidature.
+
+---
+
+## Étape 6 : Activer les modules communautaires et d'engagement
+Maintenant que le serveur est sécurisé, structuré et fonctionnel, vous pouvez ajouter les modules optionnels d'animation.
+
+* **Leveling / XP :** pour récompenser l'activité textuelle et vocale.
+* **Suggestions :** pour donner la parole à votre communauté.
+* **Salons Fun :** pour le divertissement (jeux de comptage, nombre mystère).
+* **Daily Algo :** pour stimuler les compétences techniques de vos membres.
+
+---
+
+## Rappels importants
+* **La barre de sauvegarde :** Chaque page modifiée nécessite un clic sur **Enregistrer** (barre verte en bas de page) avant de naviguer ailleurs.
+* **Hiérarchie Discord :** Assurez-vous que le rôle Discord de **Kotbo** est positionné le plus haut possible dans la liste des rôles de votre serveur. S'il est placé sous d'autres rôles, il ne pourra pas modérer ces membres ou leur attribuer des rôles.

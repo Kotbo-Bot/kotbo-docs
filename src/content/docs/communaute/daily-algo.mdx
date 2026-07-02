@@ -1,0 +1,53 @@
+---
+title: Daily Algo
+description: Animez votre communauté de développeurs avec des défis algorithmiques quotidiens.
+---
+
+<p class="doc-lead">Le module <strong>Daily Algo</strong> est une extension unique pour les communautés de développeurs, d’étudiants ou de passionnés de programmation. Il permet de publier chaque jour un défi algorithmique à résoudre directement sur Discord ou depuis le dashboard.</p>
+
+:::note[Disponibilité]
+La gestion du module s'effectue dans l'onglet **Communauté → Daily Algo** de votre dashboard : [Accéder au Daily Algo ↗](https://dash.kotbo.fr/dailyalgo).
+Les langages supportés par l'exécuteur de code sécurisé de Kotbo sont : `JavaScript`, `TypeScript`, `Python`, `C`, `Lua`, et `SQLite`.
+:::
+
+---
+
+## Vue d'ensemble du module
+
+L'interface administrateur et animateur de Daily Algo s'organise autour de cinq onglets :
+
+### 1. Les soumissions du jour (Aujourd'hui)
+Affiche l'exercice en cours de résolution et liste les solutions proposées par vos membres.
+* **Statut de validation** : Suivez les codes soumis classés en **En attente** (Pending), **Approuvé** (Approved) ou **Rejeté** (Rejected).
+* **IDE de notation intégré** : Cliquez sur une soumission pour l'ouvrir dans l'éditeur de code intégré du dashboard.
+  * Visualisez le code du membre avec coloration syntaxique.
+  * Consultez le rapport d'exécution automatique des tests unitaires.
+  * Évaluez la qualité : attribuez manuellement une **note de correction** (sur 10) et une **note de commentaires/style** (sur 10).
+  * Saisissez un **feedback d'évaluation** qui sera envoyé au membre.
+  * Attribuez des **points bonus de rapidité** pour récompenser les premiers à résoudre l'énigme.
+
+### 2. La bibliothèque d'exercices (Bibliothèque)
+C'est ici que vous gérez le catalogue d'exercices algorithmiques du serveur.
+
+* **Recherche rapide** : Utilisez la barre de recherche pour retrouver un exercice par son titre.
+* **Créer ou modifier un exercice** :
+  1. Cliquez sur **Créer un exercice** (ou modifiez-en un existant).
+  2. Renseignez le **Titre**, la **Description** (énoncé de l'exercice), la **Difficulté** (facile, moyen, difficile) et la langue.
+  3. Sélectionnez les **Langages autorisés** pour cet exercice précis.
+  4. Définissez la **Signature de la fonction** : indiquez le nom exact de la fonction que le membre doit écrire (ex: `findShortestPath`) et ajoutez ses arguments typés (ex: `graph: object`, `start: string`).
+  5. Définissez les **Tests unitaires** : pour chaque cas de test, saisissez le nom du test, les valeurs des arguments d'entrée (au format JSON, ex: `[ [1, 2], 3 ]`) et le résultat attendu (ex: `true`). Ces tests servent au bot pour pré-valider automatiquement la justesse du code soumis.
+  6. Enregistrez l'exercice.
+
+### 3. Planifier les défis (Planning)
+Kotbo gère le calendrier de diffusion de manière autonome.
+* Le bot s'assure d'avoir un planning d'exercices prêt pour les **21 prochains jours**. Il sélectionne aléatoirement des exercices de votre bibliothèque pour chaque date.
+* **Remplacement d'urgence (Swap)** : Si vous souhaitez modifier l'exercice d'aujourd'hui en dernière minute, ouvrez l'onglet *Planning* et cliquez sur **Remplacer le problème d'aujourd'hui**. Le bot piochera un nouvel exercice compatible dans votre bibliothèque.
+
+### 4. Historique & Classements (Historique)
+* **Historique des défis** : Consultez les résultats des 7 derniers jours pour voir qui a participé et quelles solutions ont été validées.
+* **Classement général (Leaderboard)** : Suivez le tableau des scores cumulés de vos membres. Chaque exercice réussi rapporte des points de base selon sa difficulté, auxquels s'ajoutent les notes d'évaluation du staff et les bonus de vitesse.
+
+### 5. Clés API (Clés API)
+Permet d'ouvrir le module aux développeurs de votre serveur.
+* Vos membres peuvent générer des **Clés API Kotbo** personnelles.
+* Grâce à ces clés, ils peuvent concevoir des scripts externes ou utiliser des extensions d'IDE (comme VS Code) pour récupérer le sujet du jour et soumettre leur code directement depuis leur environnement de travail local, sans passer par le navigateur.

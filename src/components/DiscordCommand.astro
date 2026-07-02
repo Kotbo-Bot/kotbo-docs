@@ -1,0 +1,100 @@
+---
+interface Props {
+  command: string;
+}
+
+const { command } = Astro.props;
+
+// Parser for the Discord command string:
+// e.g. "/link salon salon-source:#salon-A salon-cible:#salon-B"
+const tokens = command.trim().split(/\s+/);
+const rawCommandName = tokens[0] || '';
+const slash = rawCommandName.startsWith('/') ? '/' : '';
+const commandBase = rawCommandName.startsWith('/') ? rawCommandName.slice(1) : rawCommandName;
+
+let commandName = commandBase;
+let paramsStartIdx = 1;
+
+// If there's a second token and it does not contain a colon, it's a subcommand (e.g. "/link salon")
+if (tokens.length > 1 && !tokens[1].includes(':')) {
+  commandName = `${commandBase} ${tokens[1]}`;
+  paramsStartIdx = 2;
+}
+
+const params = tokens.slice(paramsStartIdx).map(token => {
+  const colonIdx = token.indexOf(':');
+  if (colonIdx === -1) {
+    return { name: '', value: token };
+  }
+  return {
+    name: token.slice(0, colonIdx + 1), // e.g. "salon-source:"
+    value: token.slice(colonIdx + 1)   // e.g. "#salon-A"
+  };
+});
+---
+
+<div class="discord-input">
+  <span class="plus-icon">+</span>
+  <span class="slash">{slash}</span><span class="command-name">{commandName}</span>
+  
+  {params.map(p => (
+    <span class="param-group">
+      {p.name && <span class="param-name">{p.name}</span>}
+      <span class="param-value">{p.value}</span>
+    </span>
+  ))}
+
+  <button class="copy-btn" data-command={command} title="Copier la commande">
+    <!-- Copy Icon (Lucide Copy) -->
+    <svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+    </svg>
+    <!-- Check Icon (Lucide Check) -->
+    <svg class="check-svg" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <path d="M20 6 9 17l-5-5"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  // Script executes in the browser to add copy event handlers
+  function setupCopyButtons() {
+    const buttons = document.querySelectorAll('.discord-input .copy-btn');
+    buttons.forEach(button => {
+      // Prevent double listener attachment
+      if (button.getAttribute('data-has-listener') === 'true') return;
+      button.setAttribute('data-has-listener', 'true');
+
+      button.addEventListener('click', () => {
+        const text = button.getAttribute('data-command');
+        if (text) {
+          navigator.clipboard.writeText(text).then(() => {
+            button.classList.add('copied');
+            const copySvg = button.querySelector('.copy-svg') as HTMLElement;
+            const checkSvg = button.querySelector('.check-svg') as HTMLElement;
+            
+            if (copySvg && checkSvg) {
+              copySvg.style.display = 'none';
+              checkSvg.style.display = 'inline';
+              
+              setTimeout(() => {
+                button.classList.remove('copied');
+                copySvg.style.display = 'inline';
+                checkSvg.style.display = 'none';
+              }, 2000);
+            }
+          }).catch(err => {
+            console.error('Failed to copy text: ', err);
+          });
+        }
+      });
+    });
+  }
+
+  // Run on initial load
+  setupCopyButtons();
+
+  // Run on Astro page navigation if using transition animations (Starlight page swaps)
+  document.addEventListener('astro:after-swap', setupCopyButtons);
+</script>

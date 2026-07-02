@@ -19,6 +19,5 @@
       <circle cx="38" cy="22" r="4"/>
     </g>
   </g>
-  <text x="112" y="61" fill="#35c9d8" font-family="Manrope, sans-serif" font-size="43" font-weight="750" letter-spacing="-2">Kotbo</text>
-  <text x="237" y="61" fill="#29c4d5" font-family="Manrope, sans-serif" font-size="18" font-weight="700" letter-spacing="3">DOCS</text>
+  <text x="112" y="61" fill="#35c9d8" font-family="Manrope, sans-serif" font-size="43" font-weight="750" letter-spacing="-2">KotDocs</text>
 </svg>

@@ -5,8 +5,8 @@ description: Configurez les filtres de sécurité automatiques pour protéger vo
 
 <p class="doc-lead">Le module <strong>Modération automatique (AutoMod)</strong> permet de bloquer instantanément les comportements néfastes et les messages indésirables avant même qu’un modérateur n’ait à intervenir.</p>
 
-:::important[Permissions requises]
-Cette page est accessible depuis le menu **Modération → Modération auto** : [Accéder à l'AutoMod ↗](https://dashboard.kotbo.fr/automod).
+:::note[Permissions requises]
+Cette page est accessible depuis le menu **Modération → Modération auto** : [Accéder à l'AutoMod ↗](https://dash.kotbo.fr/automod).
 Vous devez être administrateur du serveur pour modifier ces réglages. Assurez-vous que le rôle Discord de Kotbo est positionné assez haut dans la hiérarchie des rôles pour pouvoir appliquer les sanctions (comme l'exclusion ou le timeout).
 :::
 
@@ -14,12 +14,13 @@ Vous devez être administrateur du serveur pour modifier ces réglages. Assurez-
 
 ## Fonctionnement général
 
-Chaque filtre de l'AutoMod peut être activé individuellement. Lorsqu'une infraction est détectée, Kotbo applique la sanction configurée pour le filtre. Les sanctions possibles incluent généralement :
-* **BLOCK / DELETE** : Le message est supprimé ou bloqué.
-* **DELETE_AND_WARN** : Le message est supprimé, et l'utilisateur reçoit un avertissement automatique.
-* **TIMEOUT** : L'utilisateur est temporairement exclu (mis en sourdine) du serveur.
-* **KICK** : L'utilisateur est expulsé du serveur.
-* **ALERT** : Kotbo envoie une alerte dans le salon de logs sans modifier le message.
+Chaque filtre de l'AutoMod peut être activé individuellement. Lorsqu'une infraction est détectée, Kotbo applique la sanction configurée. Les sanctions disponibles sur le dashboard correspondent aux statuts de modération suivants :
+
+* <span class="dash-badge active">BLOCK</span> : Le message est supprimé ou bloqué.
+* <span class="dash-badge warn">WARN</span> : Le message est supprimé, et l'utilisateur reçoit un avertissement automatique.
+* <span class="dash-badge timeout">TIMEOUT</span> : L'utilisateur est temporairement exclu (mis en sourdine) du serveur.
+* <span class="dash-badge kick">KICK</span> : L'utilisateur est expulsé du serveur.
+* <span class="dash-badge resolved">ALERT</span> : Le bot envoie une alerte de logs sans modifier le message.
 
 ---
 
@@ -85,7 +86,7 @@ Ce filtre est **uniquement configurable par le propriétaire (owner) du serveur 
 
 Vous pouvez définir des exclusions globales pour éviter que l'AutoMod ne perturbe le travail du staff ou certains salons spécifiques.
 
-* **Rôles ignorés** : Sélectionnez les rôles (ex: `@Administrateur`, `@Modérateur`) qui ne seront jamais affectés par les filtres AutoMod.
+* **Rôles ignorés** : Sélectionnez les rôles (ex: <span class="dash-badge admin">@Administrateur</span>, <span class="dash-badge mod">@Modérateur</span>) qui ne seront jamais affectés par les filtres AutoMod.
 * **Salons ignorés** : Sélectionnez les salons (ex: `#annonces`, `#staff`) dans lesquels Kotbo n'appliquera aucune règle AutoMod.
 
 ---
@@ -96,4 +97,8 @@ Vous pouvez définir des exclusions globales pour éviter que l'AutoMod ne pertu
 L'AutoMod de Kotbo s'appuie en partie sur l'AutoMod natif de Discord pour des performances optimales. Dès qu'une modification est effectuée sur le dashboard :
 1. Cliquez sur le bouton **Enregistrer** dans la barre inférieure pour sauvegarder les réglages.
 2. Le bot synchronise alors automatiquement les règles avec les paramètres de sécurité de votre serveur Discord. Un avertissement s'affichera sur le dashboard si une règle n'a pas pu être synchronisée par manque de permissions Discord.
+:::
+
+:::note[Enregistrement]
+N'oubliez pas de cliquer sur **Enregistrer** en bas du dashboard pour appliquer vos modifications.
 :::

@@ -1,0 +1,71 @@
+---
+title: Suggestions
+description: Consultez et modérez les suggestions de votre communauté avec vote en temps réel.
+---
+
+import DiscordCommand from '../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">Le module <strong>Suggestions</strong> permet à vos membres de soumettre des propositions d'amélioration pour le serveur, d'y voter (pour/contre) directement sur Discord, et de vous laisser y répondre depuis le dashboard.</p>
+
+:::note[Disponibilité]
+Le système de suggestions est configurable depuis la section **Communauté → Suggestions** de votre dashboard : [Accéder au module Suggestions ↗](https://dash.kotbo.fr/suggestions).
+La modération des suggestions nécessite les permissions de modérateur ou d'administrateur.
+:::
+
+---
+
+## Activer et configurer le module
+
+Pour commencer à recevoir des suggestions de vos membres, vous devez activer le système et définir le salon où les suggestions seront publiées sous forme d'encarts interactifs (embeds).
+
+1. Accédez à la page **Communauté → Suggestions** du dashboard.
+2. Activez l'interrupteur **Système de suggestions** (dans le bloc *Configuration*).
+3. Dans le menu déroulant **Salon des suggestions**, choisissez le salon Discord où Kotbo publiera les nouvelles propositions.
+4. Enregistrez les modifications à l'aide de la barre d'action au bas de l'écran.
+
+---
+
+## Soumettre et voter sur Discord
+
+Une fois le module actif, les membres peuvent utiliser la commande de soumission `/suggest` sur Discord :
+
+<DiscordCommand command="/suggest suggestion:Votre idée ou suggestion détaillée" />
+
+Kotbo crée alors un message formaté dans le salon choisi contenant :
+* Le nom de l'auteur.
+* La description de la suggestion.
+* Deux boutons ou réactions de vote (Upvote/Downvote) pour permettre à la communauté de s'exprimer.
+
+---
+
+## Modérer les suggestions depuis le dashboard
+
+Toutes les propositions actives sur votre serveur sont répertoriées sur la page **Communauté → Suggestions**.
+
+### 1. Filtrer la liste
+En haut de la page, des filtres rapides vous permettent de trier les suggestions par statut :
+* **Toutes** : Affiche l'ensemble des suggestions.
+* **En Attente** : Suggestions soumises qui n'ont pas encore reçu de réponse ou de décision du staff.
+* **Approuvée** : Suggestions validées par l'équipe.
+* **Rejetée** : Suggestions refusées.
+* **Implémentée** : Suggestions appliquées et en ligne.
+
+### 2. Répondre et décider
+Pour chaque suggestion affichée, vous pouvez visualiser le nombre de votes positifs et négatifs récoltés sur Discord.
+
+Pour statuer sur une suggestion :
+1. Repérez la suggestion dans la liste.
+2. Dans le champ de texte sous la suggestion, saisissez un **commentaire de réponse**.
+   :::warning[Commentaire obligatoire]
+   Vous devez obligatoirement saisir un commentaire ou une justification avant de pouvoir cliquer sur l'un des boutons de décision.
+   :::
+3. Cliquez sur le bouton correspondant à votre choix :
+   * **Approuver** : Valide l'idée (la suggestion passe au vert).
+   * **Rejeter** : Refuse l'idée (la suggestion passe au rouge).
+   * **Marquer comme implémentée** : Indique que la suggestion est désormais en service (la suggestion passe au bleu).
+
+### 3. Synchronisation en temps réel
+Dès que vous validez une décision sur le dashboard :
+* Le statut de la suggestion est mis à jour sur la page.
+* Kotbo modifie instantanément le message original sur Discord (l'embed change de couleur, affiche votre commentaire de réponse et le nom du modérateur ayant pris la décision).
+* Votre réponse est visible par tous les membres sur Discord.
