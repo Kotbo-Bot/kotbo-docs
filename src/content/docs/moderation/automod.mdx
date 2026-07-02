@@ -1,0 +1,99 @@
+---
+title: Modération automatique (AutoMod)
+description: Configurez les filtres de sécurité automatiques pour protéger votre serveur en temps réel.
+---
+
+<p class="doc-lead">Le module <strong>Modération automatique (AutoMod)</strong> permet de bloquer instantanément les comportements néfastes et les messages indésirables avant même qu’un modérateur n’ait à intervenir.</p>
+
+:::important[Permissions requises]
+Cette page est accessible depuis le menu **Modération → Modération auto** : [Accéder à l'AutoMod ↗](https://dashboard.kotbo.fr/automod).
+Vous devez être administrateur du serveur pour modifier ces réglages. Assurez-vous que le rôle Discord de Kotbo est positionné assez haut dans la hiérarchie des rôles pour pouvoir appliquer les sanctions (comme l'exclusion ou le timeout).
+:::
+
+---
+
+## Fonctionnement général
+
+Chaque filtre de l'AutoMod peut être activé individuellement. Lorsqu'une infraction est détectée, Kotbo applique la sanction configurée pour le filtre. Les sanctions possibles incluent généralement :
+* **BLOCK / DELETE** : Le message est supprimé ou bloqué.
+* **DELETE_AND_WARN** : Le message est supprimé, et l'utilisateur reçoit un avertissement automatique.
+* **TIMEOUT** : L'utilisateur est temporairement exclu (mis en sourdine) du serveur.
+* **KICK** : L'utilisateur est expulsé du serveur.
+* **ALERT** : Kotbo envoie une alerte dans le salon de logs sans modifier le message.
+
+---
+
+## Les filtres disponibles
+
+### 1. Filtre Anti-Spam
+Limite le nombre de messages qu'un utilisateur peut envoyer rapidement.
+* **Nombre max de messages** : Limite autorisée (ex: 5 messages).
+* **Intervalle de temps** : Fenêtre glissante de calcul en secondes (ex: 5 secondes).
+* **Sanction** : Action appliquée si la limite est dépassée (ex: *TIMEOUT*).
+
+### 2. Filtre de Liens
+Empêche le partage d'adresses web non approuvées.
+* **Liste blanche des domaines** : Saisissez les domaines autorisés (un par ligne, ex: `google.com`, `docs.kotbo.fr`). Tout autre domaine déclenchera la sanction.
+
+### 3. Filtre Majuscules (Caps)
+Bloque les messages abusant des majuscules.
+* **Seuil en %** : Pourcentage de lettres majuscules à partir duquel le message est bloqué (ex: 80%).
+* **Longueur minimale du message** : Nombre minimal de caractères pour activer la vérification (ex: 10 caractères, évite de bloquer les mots courts comme « OK »).
+
+### 4. Filtre Émojis
+* **Limite d'émojis** : Nombre maximal d'émojis autorisés dans un seul message.
+
+### 5. Filtre Mentions
+* **Limite de mentions** : Nombre maximal de pings d'utilisateurs autorisés par message (permet de bloquer le spam-ping de masse).
+
+### 6. Filtre Ghost Ping
+Détecte et signale les mentions fantômes (lorsqu'un utilisateur envoie un message mentionnant quelqu'un puis supprime immédiatement son message).
+* **Sanction** : Recommandé sur *ALERT* (signale le ghost ping dans les logs modérateurs).
+
+### 7. Filtre Anti-Everyone
+Bloque les tentatives de mentionner tout le serveur (`@everyone` ou `@here`) par des membres qui n'en ont pas le droit.
+
+### 8. Mots interdits (Custom Words)
+Créez votre propre liste noire de termes ou expressions.
+* **Mots interdits** : Liste des mots à bannir (un par ligne).
+* **Mots autorisés** : Exceptions ou mots contenant la sous-chaîne autorisée.
+* **Durée d'exclusion** : Temps de timeout (exclusion temporaire) infligé à l'infracteur.
+
+### 9. Filtre de Grossièretés (Profanity)
+Utilise les dictionnaires intelligents intégrés de Kotbo.
+* **Catégories activables** : Grossièretés générales, Contenu sexuel, Insultes (Slurs).
+* **Mots autorisés** : Liste d'exceptions à ignorer.
+
+### 10. Filtre d'Invitations
+Bloque le partage d'invitations vers d'autres serveurs Discord.
+* **Serveurs autorisés** : Liste des identifiants (IDs) de serveurs Discord partenaires dont les invitations sont autorisées.
+
+### 11. Anti-Bot
+
+Empêche l'intégration de robots (bots) malveillants ou non autorisés.
+
+:::caution[Restriction propriétaire]
+Ce filtre est **uniquement configurable par le propriétaire (owner) du serveur Discord**. Les autres membres du staff, même s'ils ont accès aux réglages du dashboard, ne peuvent pas modifier cette option.
+:::
+
+* **Membres autorisés à inviter** : Liste des identifiants (IDs) d'utilisateurs du staff ayant le droit d'inviter des bots sur le serveur. Tout bot invité par une autre personne sera immédiatement expulsé (*KICK*).
+
+
+---
+
+## Exceptions globales
+
+Vous pouvez définir des exclusions globales pour éviter que l'AutoMod ne perturbe le travail du staff ou certains salons spécifiques.
+
+* **Rôles ignorés** : Sélectionnez les rôles (ex: `@Administrateur`, `@Modérateur`) qui ne seront jamais affectés par les filtres AutoMod.
+* **Salons ignorés** : Sélectionnez les salons (ex: `#annonces`, `#staff`) dans lesquels Kotbo n'appliquera aucune règle AutoMod.
+
+---
+
+## Enregistrement et synchronisation Discord
+
+:::caution[Synchronisation requise]
+L'AutoMod de Kotbo s'appuie en partie sur l'AutoMod natif de Discord pour des performances optimales. Dès qu'une modification est effectuée sur le dashboard :
+1. Cliquez sur le bouton **Enregistrer** dans la barre inférieure pour sauvegarder les réglages.
+2. Le bot synchronise alors automatiquement les règles avec les paramètres de sécurité de votre serveur Discord. Un avertissement s'affichera sur le dashboard si une règle n'a pas pu être synchronisée par manque de permissions Discord.
+:::
