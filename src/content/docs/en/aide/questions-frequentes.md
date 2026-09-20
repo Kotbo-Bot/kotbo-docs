@@ -33,6 +33,12 @@ Sign out and back in after a role change to refresh your session.
 
 Make sure you clicked **Save** in the bar at the bottom of the screen. If an error appears, do not reload the page straight away: read the message, fix the field it points to, then try again.
 
+## A "Server unreachable" banner shows at the top of the dashboard
+
+Kotbo has lost contact with its service: either your browser is offline, or the server stopped answering, or the database or the bot are unreachable. The banner says which of the three.
+
+In every case, **the data shown may be stale and changes are blocked**: that is deliberate, so a save does not vanish into nothing. The **Retry** button reconnects, and the banner disappears as soon as the service answers again.
+
 ## Why is a channel or a role missing from a list?
 
 The dashboard reflects what the bot can reach. Check in Discord that the Kotbo role sits high enough in the hierarchy and that it can see the channel in question.

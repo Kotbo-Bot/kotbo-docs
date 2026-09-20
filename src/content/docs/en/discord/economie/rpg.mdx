@@ -1,0 +1,150 @@
+---
+title: Playing the RPG on Discord
+description: The /rpg hub, your character, fights, gear, the guild and the weekly raid, from a player's seat.
+---
+
+import DiscordCommand from '../../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">The whole game lives in one command. <strong>/rpg</strong> opens a panel of buttons: your character, your bag, the shop, the fights, the guild. There is nothing else to remember.</p>
+
+<DiscordCommand
+  command="/rpg"
+  embedTitle="RPG hub - Camille"
+  embedDescription="Level **12** · 340/500 XP · **85** energy · **2,480** coins\nClass: **Rôdeur** · 3 stat point(s) to spend"
+  buttons="Character, Inventory, Shop, Fight, More"
+/>
+
+The **membre** option opens the hub on somebody else's profile, read-only.
+
+:::tip[On the dashboard]
+Monsters, items, recipes, the raid and the economy settings are configured from the dashboard: see [Economy & RPG](/en/dashboard/economie/economie/).
+:::
+
+:::caution[Classes and skills keep their French names]
+Class names, passives, skills and skill-tree branches are written in French in both languages, exactly as the bot shows them. They are quoted verbatim below, with a translation.
+:::
+
+---
+
+## Your character's resources
+
+* **Coins**: Buying, crafting, forging, enchanting, switching class.
+* **XP**: Levelling up. Every level grants **3 stat points** and **1 skill point**.
+* **HP**: Running out of health blocks fighting until you rest or drink a potion.
+* **Energy**: Regenerates over time. A fight costs **15** energy, an arena duel **20**, a fishing trip **5**.
+
+The server sets the maximum energy, the recovery rate and the payouts itself: these values differ from one server to the next.
+
+---
+
+## Character, class and skills
+
+The **Character** tab holds the sheet: base stats (ATQ, DÉF, VIT, PV - attack, defence, speed, health), class passive, skills and points left to spend. The **+1** button under each stat spends one point.
+
+### Picking a class
+
+The class is chosen at **level 5** and decides your stats, your passive and your combat skills.
+
+* **Guerrier** (Warrior): passive *Peau de fer*, cutting all damage taken by 15%. Skills: *Frappe Brutale*, a hit at 200% damage, and *Cri de Guerre*, which doubles defence for a turn and restores 10% of HP.
+* **Rôdeur** (Ranger): passive *Œil de lynx*, adding 12% critical chance. Skills: *Tir Précis*, which ignores the enemy's defence, and *Esquive*, which dodges the next attack entirely.
+* **Mage**: passive *Percée arcanique*, whose attacks ignore 30% of the enemy's defence. Skills: *Boule de Feu*, at 230% damage, and *Drain de Vie*, at 150% damage with half returned as HP.
+
+:::caution[Switching class has a price]
+Reclassing costs **2,500 coins**, and the skill tree resets: branches belong to a class. The points you had invested are handed back.
+:::
+
+### The skill tree
+
+It opens along with the class and holds **three branches** per class - *Fureur*, *Rempart* and *Vétéran* for the Warrior, *Précision*, *Ombre* and *Traqueur* for the Ranger, *Arcane*, *Sang* and *Protection* for the Mage.
+
+Every node has a rank, a point cost and sometimes a prerequisite. Kotbo says why a node stays closed: *level N required*, *requires: …*, *N point(s) required*. **Reset everything** hands the invested points back for **1,500 coins**.
+
+---
+
+## Fighting
+
+The **Fight** button draws a monster within your reach, and the duel plays out turn by turn with four buttons: **Attack**, **Defend**, **Potion** and **Flee**. Class skills appear on top of those once off cooldown.
+
+A win pays XP, coins, sometimes loot, and fills in the **bestiary**. A loss only costs you HP.
+
+:::note[What stops a fight]
+Less than 15 energy, HP too low, or the delay between two fights. The bot says which one every time, with the time left.
+:::
+
+The **Boss** button targets a specific creature among those the server marked as bosses. The **Bestiary** keeps the hunting log: creatures discovered out of the total, wins, losses, success rate, and a *already fought* / *never met* filter.
+
+### The arena
+
+Player duels, **asynchronous**: your opponent does not need to be online, their character defends on its own.
+
+* Opens at **level 5**, **20 energy** a duel, and five minutes between two entries.
+* Everyone starts at **1,000 points** of Elo rating, and the arena only offers opponents of a comparable level.
+* The sheet shows your record, the streak in progress, the server ranking and the **duels you recently took** - you see who attacked you, and what it cost or earned you.
+
+---
+
+## Gear and items
+
+The **Inventory** tab lists the bag and is where you **equip** a weapon, an armour or an accessory, or **drink** a potion. An equipped item is tagged as such.
+
+**Accessories** take three slots, unlocked at **levels 1, 12 and 24**.
+
+The rest of the gear is obtained and improved in the hub's workshops:
+
+* **Shop**: Buys what the server put up for sale: weapons, armour, potions, quest items.
+* **Crafting workshop**: Turns combat loot into gear, following the server's recipes. Each recipe asks for a level and a cost.
+* **Forge**: Upgrades **equipped** gear up to **+10**. A failure destroys nothing: only the coins are lost.
+* **Enchanting Altar**: Applies a scroll to equipped gear. The enchantment follows the item, and comes off for **750 coins**.
+* **Sell**: Sells an item back from the bag.
+* **Black market**: A personal selection at cut prices, open now and then: *it will reopen without warning, one day, at an hour nobody knows*.
+
+---
+
+## Earning without fighting
+
+* **Daily**: the daily coin reward, on its own cooldown.
+* **Fish**: 5 energy a cast, with a catch graded from *Common* to *Legendary*.
+* **Travel**: set off for a destination for several minutes and run into events with choices. A trip must end before another can start.
+* **Pay**: hand coins to a member, picked from the Discord selector. Never to yourself, never to a bot, and the server caps both the amount and the delay between two transfers.
+
+---
+
+## The campaign
+
+A storyline in **five chapters**, each split into steps, with a recommended level and rewards per step and per chapter. It advances on its own from what you do: opening the tab can validate several steps at once - *you had already done what was needed*.
+
+---
+
+## Guild, village and war
+
+An **RPG guild** is founded for **500 coins**, or joined by its name. It carries a level, a shared treasury and a member list; depositing coins into it makes it level up.
+
+The **guild village** opens five buildings, to raise and upgrade out of the shared treasury. Each has three levels, asking for a rising guild level and cost:
+
+* **Échoppe** (shop): A discount on the shop, up to -18%.
+* **Forge de guilde** (guild forge): Upgrades that fail less often, up to +12% success.
+* **Taverne** (tavern): Extra combat XP, up to +22%.
+* **Caserne** (barracks): Stats granted to every member, up to +14 ATQ, +14 DÉF and +80 PV.
+* **Chambre forte** (vault): Extra combat coins, up to +25%.
+
+Only the guild leader builds, and each level states its effect and its cost before being paid for.
+
+The **Clan war** tab ranks the teams by what the game brought them, over the **season** or over **this week**, and names the best fighters. It depends on what the server wired up: with the Clans module off, or the RPG bridge cut, Kotbo says so instead of showing an empty ranking.
+
+---
+
+## The weekly raid
+
+Once a week a boss opens for a few hours. **Every team fights its own instance**, whose health follows its head count.
+
+* The announcement carries the **Assault** button and each team's progress bar.
+* Every member gets a limited number of assaults, and each assault costs energy.
+* Rewards are shared: **30% evenly**, the rest in proportion to the damage dealt.
+
+The raid closes at the planned time - or earlier if the clan season ends, so that its points still count.
+
+---
+
+## Quests
+
+The **Quests** tab lists what is open on the server, stating the scope - **personal** or **team** - and the deadline. Rewards are paid automatically as soon as the target is reached: there is nothing to claim.

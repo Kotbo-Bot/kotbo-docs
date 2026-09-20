@@ -60,7 +60,11 @@ Turning a module off turns off the ones that depend on it; turning a dependent b
 
 **Core** modules cannot be disabled: turning off the Modules page or the activity log would make the server unmanageable, or erase the trace of the manoeuvre.
 
-Some modules start **off by default**: those are the ones needing prior configuration (an API key, a channel) that would otherwise fail silently.
+Some modules start **off by default**: those are the ones needing prior configuration (an API key, a channel) that would otherwise fail silently. **Partnerships** is off for another reason: it grants roles and AutoMod exemptions, and nobody wants that without having asked for it.
+
+:::note[Not every module has a page]
+**Bump reminder** has none: it spots bumps on Disboard, Discadia, DS.me or Disforge by itself and pings again as soon as the server can bump. Its state is read on the [Pulse](/en/dashboard/general/pulse/) widget. Enabling the module is all there is to do.
+:::
 
 ---
 

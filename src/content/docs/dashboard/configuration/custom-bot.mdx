@@ -35,6 +35,10 @@ Toutes les fonctionnalités décrites dans cette documentation restent identique
 
 ## Demander l'activation
 
+:::caution[Réservé à l'offre CUSTOM]
+Le Custom Bot n'est ouvert qu'aux serveurs sur l'**offre CUSTOM**. Un serveur sur une autre offre se voit refuser l'enregistrement et le démarrage d'un bot personnalisé, y compris en dehors du dashboard. Seul l'**arrêt** reste possible, pour qu'un serveur qui change d'offre puisse couper un bot déjà lancé.
+:::
+
 En attendant l'ouverture de la configuration en libre-service, la mise en place passe par l'administrateur de votre instance Kotbo :
 
 <div class="step-list">
@@ -45,4 +49,8 @@ En attendant l'ouverture de la configuration en libre-service, la mise en place 
 
 :::danger[Ne partagez jamais votre token]
 Le token de votre application Discord donne un contrôle total sur le bot. Transmettez-le uniquement par le canal indiqué par l'administrateur, et régénérez-le si vous avez le moindre doute.
+:::
+
+:::note[Le secret OAuth n'est jamais réaffiché]
+Le token et le secret OAuth sont chiffrés en base. Le champ du secret n'est pas prérempli : laissé vide, il conserve celui déjà enregistré. Si Kotbo signale un secret illisible, ressaisissez-le.
 :::

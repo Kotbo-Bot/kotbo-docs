@@ -1,5 +1,5 @@
 ---
-title: Déclencheurs (Automatisations)
+title: Déclencheurs
 description: Faites réagir le bot tout seul aux arrivées, aux messages, aux sanctions ou à une heure fixe, sans écrire une ligne de code.
 ---
 
@@ -43,22 +43,85 @@ Appliquer un modèle sur une automatisation existante **remplace tout le graphe 
 
 ## Les déclencheurs
 
-Une automatisation n'a qu'un seul déclencheur.
+Une automatisation n'a qu'un seul déclencheur. La palette en compte quarante-deux, rangés par famille.
+
+### Membres
 
 | Déclencheur | Quand il part |
 | --- | --- |
 | **Arrivée d'un membre** | Un membre rejoint le serveur. |
 | **Départ d'un membre** | Un membre quitte le serveur. |
-| **Rôle attribué** / **Rôle retiré** | Un rôle est ajouté ou retiré à un membre. |
-| **Message envoyé** | À chaque message posté par un humain. |
-| **Réaction ajoutée** | Un membre réagit à un message. |
-| **Arrivée en vocal** / **Départ du vocal** | Un membre rejoint ou quitte un salon vocal. |
-| **Ticket créé** | Un ticket de support est ouvert. |
-| **Sanction appliquée** | Une sanction est prononcée. |
+| **Rôle attribué** / **Rôle retiré** | Un rôle est ajouté ou retiré à un membre, une fois par rôle quand plusieurs bougent en même temps. |
+| **Surnom modifié** | Le surnom d'un membre sur le serveur change, qu'il le fasse lui-même ou non. Un changement de nom global Discord ne compte pas. |
+| **Boost du serveur** | Un membre commence à booster. Discord ne signale pas les boosts suivants d'un membre qui boostait déjà. |
+| **Arrivée par invitation** | Un membre arrive par une invitation que le bot a pu identifier. |
 | **Passage de niveau** | Un membre gagne un niveau. |
-| **Planification** | À heure fixe, selon une planification récurrente. |
+
+:::caution[« Arrivée par invitation » dépend des Logs]
+Ce déclencheur demande le module **Logs** actif - c'est lui qui repère l'invitation utilisée - et la permission Discord **Gérer le serveur**. Les arrivées par l'URL personnalisée ne sont jamais attribuées. Kotbo affiche le rappel directement sur la carte du déclencheur.
+:::
+
+### Messages et vocal
+
+| Déclencheur | Quand il part |
+| --- | --- |
+| **Message envoyé** | À chaque message posté par un humain. |
+| **Message modifié** | Un membre modifie le texte d'un de ses messages. L'ajout d'un aperçu de lien ou l'épinglage ne comptent pas. |
+| **Message supprimé** | Le message d'un membre est supprimé. Les messages de bots et les suppressions en masse ne comptent pas. |
+| **Réaction ajoutée** / **Réaction retirée** | Un membre ajoute ou retire sa réaction. Effacer d'un coup toutes les réactions d'un message ne déclenche rien. |
+| **Arrivée en vocal** / **Départ du vocal** | Un membre rejoint ou quitte un salon vocal. Le départ expose la **durée en minutes**. |
+| **Changement de salon vocal** | Un membre passe d'un vocal à un autre sans quitter le vocal. |
+| **Fil créé** | Un membre crée un fil ou un post de forum. Les fils créés par un bot ne comptent pas. |
+
+### Modération
+
+| Déclencheur | Quand il part |
+| --- | --- |
+| **AutoMod déclenché** | L'AutoMod de Kotbo sanctionne un message : spam, invitation, majuscules, émojis, mentions, everyone. |
+| **Sanction appliquée** | Une sanction est prononcée. |
+| **Sanction levée** | Un membre est débanni, ou son exclusion temporaire est retirée avant son terme. |
+
+:::note[Ce qui reste utilisable après coup]
+Un membre expulsé ou banni a déjà quitté le serveur : seul son pseudo reste exploitable, les actions qui le visent sur le serveur échouent et un message privé est ignoré. La fin naturelle d'une exclusion n'est pas signalée par Discord, et un débannissement moins d'une minute après le bannissement est pris pour un softban et ignoré.
+:::
+
+### Structure du serveur
+
+**Salon créé**, **Salon supprimé**, **Rôle créé**, **Rôle supprimé** : ces quatre déclencheurs partent aussi quand c'est le bot ou une intégration qui agit. Les fils ne comptent pas comme des salons. Après une suppression, l'objet n'existe plus : seul son nom reste utilisable.
+
+### Tickets, formulaires et suggestions
+
+| Déclencheur | Quand il part |
+| --- | --- |
+| **Ticket créé** | Un ticket de support est ouvert. |
+| **Ticket fermé** | Un ticket est fermé, depuis Discord, le dashboard ou l'assistant IA. Supprimer un ticket sans le fermer ne compte pas. |
+| **Avis sur un ticket** | L'auteur d'un ticket fermé donne sa note de 1 à 5. Seule la première note compte, et le commentaire facultatif n'est pas transmis. |
+| **Formulaire envoyé** | Un formulaire personnalisé est envoyé, depuis Discord ou depuis sa page publique. Les réponses arrivent groupées, une ligne *Question : réponse* par champ rempli. |
+| **Suggestion publiée** | Un membre publie une suggestion. |
+| **Suggestion traitée** | Le staff approuve, refuse ou marque une suggestion comme implémentée. |
+
+Pour un ticket en message privé ou relayé sur le serveur staff, le salon est vide : le filtre de salons écarte alors le dossier.
+
+### Animation
+
+| Déclencheur | Quand il part |
+| --- | --- |
+| **Participation à un concours** | Un membre rejoint un giveaway. |
+| **Gagnant d'un concours** | Pour chaque gagnant, une fois son lot acquis. Un tirage en attente de validation ne déclenche rien tant que le staff n'a pas validé. |
+| **Fin d'un concours** | À la clôture d'un giveaway, qu'il ait fait des gagnants ou non. |
+| **Victoire à un mini-jeu** | Un membre trouve le nombre mystère ou résout un rébus emoji. |
 | **Pari tranché** / **Pari annulé** | Un arbitre désigne le camp gagnant, ou les mises sont rendues. |
 | **Dette de clan creusée** / **soldée** | Un membre mise des points qu'il n'a pas, ou finit de rembourser. |
+
+:::caution[« Victoire à un mini-jeu » exige les salons fun]
+Sans module **Salons fun** actif et sans salon configuré pour le jeu concerné, personne ne peut gagner et l'automatisation ne partira jamais. Kotbo le dit sur la carte et propose le lien qui va bien. Une remise à zéro depuis le dashboard ne compte pas comme une victoire.
+:::
+
+### Partenariats
+
+**Partenariat : changement d'étape** part quand un dossier change d'étape, après l'application des avantages - le rôle partenaire est déjà posé. **Partenariat : engagement non tenu** part au constat d'un manquement, et son champ *Périodes manquées* permet de ne réagir qu'à partir de la deuxième ou de la troisième fois. **Partenariat : arrivée attribuée** ne part que pour les arrivées réellement rattachées à l'invitation d'un partenaire.
+
+Voir [Partenariats](/dashboard/cross-serveur/partenariats/).
 
 ### La planification
 
@@ -68,22 +131,43 @@ L'heure est interprétée dans le **fuseau du serveur**, réglé depuis l'[accue
 
 ---
 
+## Restreindre le déclencheur
+
+Plutôt que de filtrer avec une condition, plusieurs déclencheurs se limitent dès la carte du *Quand* :
+
+* **Seulement dans ces salons** : salons textuels, vocaux ou catégories entières. Disponible sur les messages, les réactions, le vocal, les fils, l'AutoMod et les tickets. Sur *Changement de salon vocal*, le filtre porte sur le salon d'arrivée ; sur *Fil créé*, sur le salon ou le forum parent.
+* **Seulement pour ces rôles** : sur *Rôle attribué* et *Rôle retiré*.
+* **Seulement sur ces messages** : sur les réactions, en collant le lien du message (clic droit → **Copier le lien**). Si rien de ce qui est saisi n'est reconnu comme un message, Kotbo prévient qu'aucune réaction ne passera.
+* **Seulement pour ces émojis** : sur les réactions, en collant les émojis ou en saisissant `:nom:` pour un émoji du serveur.
+
+Laissés vides, ces champs acceptent tout le serveur.
+
+:::tip[Limiter un déclencheur fréquent]
+Deux conditions comptent les passages d'un même membre : *le membre a déclenché cette automatisation au plus N fois aujourd'hui* et *… cette heure-ci*, déclenchement en cours compris. C'est la protection à poser avant **Donner des pièces** ou **Donner de l'XP** sur un déclencheur aussi fréquent que *Message envoyé*. Le bloc **Fréquence du membre** expose les deux compteurs dans la vue graphe, et sert aussi de valeur à insérer dans un texte (*« c'est ta 3e victoire aujourd'hui »*). Jour et heure s'entendent dans le fuseau du serveur.
+:::
+
+---
+
 ## Les étapes
 
 Chaque déclencheur expose des valeurs - le membre, le message, le salon - que les étapes suivantes peuvent utiliser.
 
 ### Actions
 
-Poster : **Envoyer un message**, **Envoyer un embed**, **Envoyer un message privé** (sans effet si les MP du membre sont fermés).
+Poster : **Envoyer un message**, **Envoyer un embed**, **Envoyer un message privé** (sans effet si les MP du membre sont fermés), **Répondre à un message** (sans citation si le message a été supprimé entre-temps) et **Écrire dans les logs**, qui échoue tant qu'aucun salon de logs n'est configuré.
 
-Sur un membre : **Ajouter un rôle**, **Retirer un rôle**, **Changer le surnom**, **Exclure temporairement**, **Expulser**, **Bannir** (définitivement ou pour une durée donnée).
+Sur un membre : **Ajouter un rôle**, **Retirer un rôle**, **Donner un rôle temporaire**, **Changer le surnom**, **Exclure temporairement**, **Expulser**, **Bannir** (définitivement ou pour une durée donnée).
 
 Sur un message : **Supprimer un message**, **Réagir à un message**, **Épingler un message**, **Ouvrir un fil**.
 
-Enfin, **Ouvrir un ticket** crée un ticket de support au nom d'un membre.
+Récompenser et suivre : **Donner des pièces**, **Retirer des pièces** (sans descendre sous zéro), **Donner de l'XP** - avec passage de niveau et rôles de récompense - et **Ajouter une note au membre**, qui inscrit une ligne datée dans sa note de modération. Enfin, **Ouvrir un ticket** crée un ticket de support au nom d'un membre.
+
+:::note[Les actions qui dépendent d'un module]
+**Donner des pièces** et **Retirer des pièces** échouent si le module Économie est désactivé, **Donner de l'XP** si le module Leveling l'est, et **Ouvrir un ticket** si le module Tickets l'est. **Donner un rôle temporaire** ne retire à l'échéance que le rôle qu'elle a elle-même posé : un membre qui l'avait déjà le garde.
+:::
 
 :::note[Les sanctions d'une automatisation comptent]
-Une exclusion, une expulsion ou un bannissement prononcé par une automatisation passe par le même service que les sanctions manuelles : le casier du membre, les statistiques, les alertes du staff et les comptes liés en tiennent compte.
+Une exclusion, une expulsion ou un bannissement prononcé par une automatisation passe par le même service que les sanctions manuelles : le casier du membre, les statistiques, les alertes du staff et les comptes liés en tiennent compte. Le module **Sanctions** doit être actif, sans quoi l'action échoue.
 
 Une sanction identique prononcée dans les trente secondes est ignorée. C'est aussi ce qui empêche une automatisation branchée sur *Sanction appliquée* de boucler sur elle-même.
 :::
@@ -95,11 +179,13 @@ Une sanction identique prononcée dans les trente secondes est ignorée. C'est a
 * **Pour chaque** : parcourt une liste et exécute le corps de boucle pour chaque élément.
 * **Attendre** : suspend l'exécution. Elle reprend même après un redémarrage du bot.
 
-Les tests disponibles couvrent **Possède le rôle**, **Salon est**, **Texte contient**, **Texte est égal à**, **Comparer** deux nombres, **ET / OU**, **NON**, ainsi que la longueur d'un texte ou la taille d'une liste.
+Dans la vue Étapes, les conditions sont proposées en phrases, et seules celles que le déclencheur peut renseigner apparaissent : le rôle, l'âge du compte, l'ancienneté sur le serveur, la fréquence du membre, le contenu ou la longueur du message, le salon, l'émoji, le type de sanction, le formulaire et ses réponses, le sort d'une suggestion, la note et le type d'un ticket, le code d'invitation, le mini-jeu gagné ou le nombre de membres du serveur.
+
+Dans la vue Graphe, les mêmes tests s'assemblent à la main : **Possède le rôle**, **Salon est**, **Texte contient**, **Texte est égal à**, **Comparer** deux nombres, **Calcul**, **Concaténer**, **ET / OU**, **NON**, ainsi que la longueur d'un texte ou la taille d'une liste.
 
 ### Valeurs
 
-Les blocs de données fournissent un **Texte**, un **Nombre**, un **Booléen**, un **Texte composé** (dans lequel des valeurs du contexte viennent s'insérer), **Un rôle** ou **Un salon** du serveur, et les propriétés du membre, du message, du salon ou du serveur.
+Les blocs de données fournissent un **Texte**, un **Nombre**, un **Booléen**, un **Texte composé** (dans lequel des valeurs du contexte viennent s'insérer), **Un rôle** ou **Un salon** du serveur, la **Fréquence du membre**, et les propriétés du membre, du message, du salon ou du serveur.
 
 Dans la vue Étapes, salons, rôles et textes se saisissent directement sur la carte, sans créer de bloc de donnée.
 
@@ -121,7 +207,13 @@ La liste filtre par **Toutes**, **Actives** ou **En pause**, et chaque carte aff
 Une automatisation active qui n'a jamais rien produit depuis plus d'un jour l'annonce sur sa carte : **N'a jamais démarré** - *Actif mais aucune exécution : vérifiez le déclencheur et ses conditions.*
 :::
 
-L'onglet **Exécutions** liste les passages avec leur statut - *En cours*, *En attente*, *Terminée*, *Échouée*, *Annulée* - et le nombre de blocs parcourus. Cliquez sur une exécution pour la **rejouer sur le graphe** : le parcours se replay étape par étape, avec les entrées et sorties consignées à chaque bloc.
+L'onglet **Exécutions** liste les passages avec leur statut - *En cours*, *En attente*, *Terminée*, *Échouée*, *Annulée* - et le nombre de blocs parcourus. Deux menus filtrent la liste **par statut** et **par automatisation**, le bouton **Voir les échecs** ne garde que les ratés, et **Charger les exécutions plus anciennes** remonte le temps. Une exécution en attente affiche sa reprise prévue, et une exécution échouée nomme l'étape fautive.
+
+Cliquez sur une exécution pour la **rejouer sur le graphe** : le parcours se replay étape par étape, avec les entrées et sorties consignées à chaque bloc.
+
+:::note[Le journal ne grandit pas indéfiniment]
+Kotbo efface chaque nuit les exécutions terminées de plus de **30 jours**, puis tout ce qui dépasse les **1000 exécutions les plus récentes** de chaque automatisation. Les exécutions en attente ou en cours ne sont jamais touchées, et les compteurs de la carte ne bougent pas.
+:::
 
 ---
 

@@ -1,0 +1,68 @@
+---
+title: Commandes utiles au quotidien
+description: Les commandes Discord que tout membre peut utiliser : aide, rappels, statistiques, invitations et confidentialité.
+---
+
+import DiscordCommand from '../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">Au-delà des modules, Kotbo répond à quelques commandes générales. Elles sont ouvertes à tous les membres, sauf mention contraire.</p>
+
+---
+
+## Se repérer
+
+<DiscordCommand
+  command="/aide"
+  embedTitle="Centre d'aide Kotbo"
+  embedDescription="Choisissez un module dans le menu ci-dessous pour voir ses commandes et leur syntaxe."
+  buttons="Modération, Communauté, Économie & RPG, Staff"
+/>
+
+`/aide` ouvre le centre d'aide interactif : les commandes disponibles, rangées par module, avec leur syntaxe. C'est le réflexe à donner à vos membres plutôt qu'une liste à tenir à jour.
+
+* `/dashboard` renvoie le lien du dashboard du serveur.
+* `/info` donne la version du bot, son état et sa configuration.
+* `/ping` mesure la latence.
+* `/langue` choisit la langue du bot **pour tout le serveur** : elle demande la permission Discord **Gérer le serveur**.
+
+---
+
+## Rappels personnels
+
+* `/reminder create` : Programme un rappel. Le champ **temps** accepte aussi bien `15m` ou `2h` qu'une date complète, `12/07/2026-18:00`. Les options **message** et **salon** complètent, et **planning** rattache le rappel à un élément du planning staff.
+* `/reminder list` : Vos rappels en cours.
+* `/reminder delete` : Supprime un rappel par son identifiant.
+
+---
+
+## Statistiques et invitations
+
+* `/stats` affiche l'activité d'un membre, `/serverstats` celle du serveur entier.
+* `/invites stats` donne les invitations d'un membre, `/invites leaderboard` le classement des meilleurs inviteurs.
+* `/epoch` convertit un timestamp Unix en date lisible, et l'inverse - pratique pour lire un horodatage brut.
+
+---
+
+## Confidentialité
+
+<DiscordCommand
+  command="/privacy"
+  embedTitle="Tes données chez Kotbo"
+  embedDescription="Cette réponse n'est visible que par toi.\n\n**Ce que Kotbo garde** · **Tes droits** · **Demander la suppression** · **Ce qui est conservé, et pourquoi**"
+/>
+
+`/privacy` répond en quatre blocs : **ce que Kotbo garde**, **vos droits**, **comment demander la suppression** et **ce qui est conservé, et pourquoi**, avec les liens vers la politique de confidentialité et le contact.
+
+`/opt-out presence` coupe l'exploitation de votre **présence Discord** - statut en ligne, statut personnalisé, activité - sur le serveur où vous lancez la commande. Le choix appartient à ce serveur : il faut le refaire ailleurs, ou le régler depuis le dashboard.
+
+:::note[Couper la collecte pour tout le serveur]
+C'est le module **Analytics** qui décide si l'activité est enregistrée. L'éteindre arrête tout, pour tout le monde : voir [Analytics](/dashboard/general/analytics/).
+:::
+
+---
+
+## Réservé au staff
+
+* `/ticket` pilote le ticket dans lequel la commande est lancée : `claim`, `close`, `reopen`, `lock`, `archive`, `delete`… L'ouverture, elle, reste ouverte à tous. Voir [Tickets de support](/discord/communaute/tickets/).
+* `/post` publie le contenu interactif du serveur - par exemple le panneau du [Daily Algo](/discord/communaute/daily-algo/).
+* `/event resultat` publie le résultat d'un événement ou d'un quiz. Voir [Événements & quiz](/dashboard/communaute/evenements/).

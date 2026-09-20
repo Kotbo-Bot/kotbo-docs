@@ -1,14 +1,16 @@
 ---
 title: Giveaways
-description: Run prize draws with button entry, pick winners, and control who is allowed to take part.
+description: Run prize draws, filter who may enter, dress up the announcement and reuse your settings from one giveaway to the next.
 ---
 
-<p class="doc-lead">The <strong>Giveaways</strong> module posts a giveaway message on Discord with a "Join" button. Kotbo counts entries, picks winners, and lets you reroll if needed.</p>
+<p class="doc-lead">The <strong>Giveaways</strong> module posts a giveaway message on Discord with a "Join" button. Kotbo counts the entries, draws the winners, applies your entry requirements and lets you draw again if needed.</p>
 
 :::note[Where to find it]
 The **Community → Giveaways** section: [Open giveaways ↗](https://dash.kotbo.fr/giveaways).
-Administrators and members with **Manage messages** have access by default.
+Administrators and members with **Manage Messages** have access by default.
 :::
+
+The page has three tabs: **Giveaways**, **Templates** and **Configuration**.
 
 ---
 
@@ -17,47 +19,146 @@ Administrators and members with **Manage messages** have access by default.
 ### Starting a giveaway
 
 <div class="step-list">
-  <div class="step-item"><div><h3>Click Start a Giveaway</h3><p>The <strong>Start a Giveaway</strong> form opens.</p></div></div>
-  <div class="step-item"><div><h3>Describe the prize</h3><p><strong>Prize / Reward</strong> is required; the <strong>Description</strong> carries conditions or extra details.</p></div></div>
-  <div class="step-item"><div><h3>Set up the draw</h3><p><strong>Number of Winners</strong> and <strong>Giveaway Duration</strong>, in minutes, hours or days. Preset durations are offered.</p></div></div>
-  <div class="step-item"><div><h3>Pick the channel</h3><p>Then click <strong>Send to Discord</strong>.</p></div></div>
+  <div class="step-item"><div><h3>Click Start a Giveaway</h3><p>The form opens, with a preview of the announcement next to the fields.</p></div></div>
+  <div class="step-item"><div><h3>Start from a template, or not</h3><p><strong>Start from a template</strong>, at the top of the form, fills every field at once. Nothing is locked: fix whatever you want before launching.</p></div></div>
+  <div class="step-item"><div><h3>Describe the prize</h3><p><strong>Prize / Reward</strong> is required; the <strong>Description</strong> carries the conditions or any extra detail.</p></div></div>
+  <div class="step-item"><div><h3>Set the draw</h3><p><strong>Number of Winners</strong>, then how it ends: either a <strong>Duration</strong> (minutes, hours or days, with presets) or an <strong>End date</strong> in the future, at most a year away.</p></div></div>
+  <div class="step-item"><div><h3>Pick the channel</h3><p>The server's default channel is offered up front. Then click <strong>Send to Discord</strong>.</p></div></div>
 </div>
+
+The **announcement preview** shows the message as it will go out: your server and your host name, with a fictitious prize, participants and winners. Discord shows the end as a countdown that updates on its own.
+
+### The extra options
+
+Folded under **More options**, rarely needed:
+
+* **Strictly equal draw**: this giveaway ignores the favoured roles and the clan bonus, without changing anything in the server settings.
+* **This giveaway also grants RPG module rewards**: coins, RPG XP or an item, on top of the prize. Most giveaways put up a prize handed over by hand, without touching the server economy.
+* **Require staff validation before handing out the prize**.
+* **Announcement look**: see below.
+
+### A giveaway's look
+
+Every giveaway picks where its look comes from:
+
+| Choice | What it gives |
+| --- | --- |
+| **Plain announcement** | The bot's stock announcement. Nothing from the Configuration tab applies to it. |
+| **Server look** | What the Configuration tab carries. The giveaway follows along when you change it there. |
+| **Its own** | The fields entered leave with the giveaway and never move again, images included. |
 
 ### Following and steering
 
-Every giveaway in the list shows its status (<span class="dash-badge active">Active</span> or <span class="dash-badge">Ended</span>), its participant count, its number of winners and its end date.
+Every giveaway in the list shows its status (<span class="dash-badge active">Active</span> or <span class="dash-badge">Ended</span>), its entry count, its number of winners and its end date. A giveaway with a strictly equal draw says so with a tag.
 
 | Button | Effect |
 | --- | --- |
-| **Pick Winner** | Forces the giveaway to end and draws immediately. |
-| **Reroll** | Runs a new draw. |
-| **Delete from dashboard** | Removes the giveaway from the dashboard. |
+| **Pick Winner** | *End this giveaway now?* The winners are drawn and the prizes handed out right away. The giveaway cannot be reopened. |
+| **Reroll** | *Draw another winner?* One more winner is drawn among the entrants who have not won yet, and receives their prize. Winners already named keep theirs. |
+| **Delete the giveaway** | The giveaway and its Discord announcement are removed for good. |
+
+:::danger[Deleting takes the entries with it]
+The entrants and the winners already drawn are lost along with the giveaway.
+:::
 
 Drawn winners appear under the giveaway. When staff validation is required, they are listed under **Winner(s) awaiting validation**. Clicking a name opens the member's file.
 
 ---
 
+## Templates tab
+
+A template is a launch set aside: the same fields, saved under a name. You write and fix them here; to reuse one, open **Start a Giveaway** and pick it at the top of the form.
+
+Every card shows the prize, the winners, the duration, and tags where they apply: **No channel** (the template will take the server's at launch), **No bonus**, **Own look**, **Server look**, **From a configuration**. The preview button shows the announcement as it will go out.
+
+:::note[Template or configuration?]
+A template carries what changes from one giveaway to the next: prize, duration, winners, rewards, and the look it freezes. The entry rules hold for the whole server and are set in the **Configuration** tab.
+:::
+
+Deleting a template leaves the giveaways already launched from it untouched.
+
+---
+
 ## Configuration tab
+
+The entry rules hold for **all** the giveaways of the server. The look only applies to giveaways started from Discord and to those that ask for it in their form.
 
 ### Manager roles
 
-Defines who can start, end, reroll and delete a giveaway. These roles add to administrators and to members with **Manage messages**, and they gain the `/giveaway` command on Discord.
+Sets who can start, end, reroll and delete a giveaway. These roles add to the administrators and the members with **Manage Messages**, and get the `/giveaway` command on Discord.
+
+It carries three subcommands: `/giveaway start`, which takes the prize, the winners, the duration, a template, the description, the channel, the RPG rewards and the validation flag; `/giveaway end` and `/giveaway reroll`, which ask for the giveaway **id** - the one the announcement's footer carries.
+
+:::note[Discord translates this command]
+`/giveaway` is one of the few localised commands: a client set to French shows `lancer`, `cloturer`, `relancer` and options named `lot`, `gagnants`, `duree`… The English names above are those of an English client.
+:::
+
+### Default channel
+
+Offered up front when a giveaway is started. It stays editable each time, and a template carrying its own channel takes precedence.
 
 ### Participation
 
 * **Required roles**: leave empty to open giveaways to the whole server.
-* **Excluded roles**: these take priority over required roles. An excluded member can never take part.
+* **Excluded roles**: they win over the required roles. An excluded member can never enter.
 
-Remember to click **Save configuration**.
+### Entry requirements
+
+Age and level demanded before the **Join** button can be clicked. `0` demands nothing.
+
+* **Discord account age (days)**: keeps out accounts created for the occasion.
+* **Time on the server (days)**: keeps out members who arrived just for the giveaway.
+* **Minimum level**: uses the level from the [Leveling](/en/dashboard/xp/leveling/) module.
+* **One person, one entry**: accounts recognised as belonging to the same member in the Moderation section enter only once, and count only once in the draw. See [Alt accounts](/en/dashboard/moderation/double-comptes/).
+
+### Extra chances
+
+Roles whose holders count several times in the draw. The most favourable role applies: **roles do not stack**.
+
+**Carry over the winning clan bonus** adds the chances of the clan rewarded by the [Clans](/en/dashboard/xp/clans/) section on top. Every tied clan benefits, and nothing is granted until a season has named a winner. Unchecked, giveaways ignore that bonus even if it stays active in the Clans section.
+
+**Announce the favoured roles** adds the list of roles and their chances to the announcement, where the matching variable sits.
+
+### Announcement look
+
+Four colours depending on the giveaway's state - **Running giveaway**, **Awaiting validation**, **Finished giveaway**, **Validated winners** - then the **Title**, the **Body**, the **Footer** (which carries the giveaway ID, the one the end and reroll commands ask for), the **Thumbnail** and the **Large image**.
+
+:::caution[Image addresses]
+HTTPS only. An invalid address is ignored.
+:::
+
+### Join button
+
+**Label** (80 characters at most), **Emoji** - picked among the server's or from the Unicode catalogue, it also shows on the greyed-out button of a finished giveaway - and **Button colour**: Blue, Grey, Green or Red.
+
+### Giveaway messages and refusal messages
+
+What the bot answers entrants and announces at the close: **Winners announcement**, **No-entrant announcement**, **Join reply** and **Leave reply**, the last two seen by that entrant alone.
+
+The **refusal messages** cover each requirement: excluded role, missing required role, account too new, joined too recently, level too low, another account already entered. Explain how to become eligible instead of refusing without a reason.
+
+:::tip[Variables insert with one click]
+Under each text field sits a row of variables: the prize, the number of winners, the entrants, the host, the server, the giveaway ID, the end date, the remaining time that updates on its own, the drawn winners, the description typed at launch, the RPG rewards block, the favoured roles block and the thresholds demanded. Hover one to see what it shows, click to insert it at the cursor. A variable with nothing to show disappears when the message is sent.
+:::
+
+### Configuration saves
+
+Every save keeps a **named copy** of these settings, and a button puts it back without retyping everything. The save dialog asks for the name, or the save to overwrite, and offers to **also create a template under this name**.
+
+:::caution[Applying a save changes published giveaways]
+The settings in place are replaced, and **giveaways already published take on that look**. If the current settings were not saved anywhere, Kotbo first sets them aside under their own name.
+:::
+
+A save can be **renamed** and **deleted**; deleting it leaves the configuration in place on the server untouched.
 
 ---
 
 ## Public page
 
-A public link shares the list of running giveaways with no sign-in and no dashboard access. Visitors see **Active** and **Ended** giveaways, the time remaining, the number of entries and the winners drawn.
+A public link shares the list of giveaways with no login and no dashboard access. Visitors see the **Active** and **Ended** giveaways, the time left, the entry count and the drawn winners. Every giveaway has its own detail page, with the host, the channel and a **View on Discord** link.
 
-Entering, however, always happens from the Discord message using the "Join" button.
+Entering, though, always happens from the Discord message with the "Join" button.
 
-:::tip[Bonus rewards]
-A giveaway can also hand out coins, RPG XP or an item from the [Economy & RPG](/en/dashboard/economie/economie/) module. Those show on the public page under **Bonus rewards**.
+:::tip[RPG module rewards]
+A giveaway can also hand out coins, RPG XP or an item from the [Economy & RPG](/en/dashboard/economie/economie/) module. Those rewards show on the public page under **On top of the prize**.
 :::

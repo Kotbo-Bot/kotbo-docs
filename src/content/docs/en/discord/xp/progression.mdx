@@ -1,0 +1,68 @@
+---
+title: Levels, leaderboards and reputation
+description: Read your progression, compare the leaderboards and thank other members from Discord.
+---
+
+import DiscordCommand from '../../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">XP is earned by talking and by spending time in voice. These commands are how you read that progression: yours, another member's, or the whole server's.</p>
+
+---
+
+## Your rank card
+
+<DiscordCommand
+  command="/rank"
+  botResponse="*The card is sent as an image: username, title, badges, level, XP bar and rank on the server.*"
+/>
+
+The card shows the level, the XP of the current tier, the rank on the server and, where set, the badges, title, frame and background you picked.
+
+:::tip[It is customised from the dashboard]
+Background, pattern, frame, XP bar, font, emojis and badges are set under **My profile**, in the *My rank card* section. The achievements that unlock titles and frames are detailed in the [Leveling & XP](/en/dashboard/xp/leveling/) guide. The card follows its owner from server to server, but the level and rank shown stay specific to the server you are on.
+:::
+
+`/profile` opens the community profile, with the [Daily Algo](/en/discord/communaute/daily-algo/) progression. `/profil` - no trailing "e" - opens the detailed staff profile: you must be listed in the [staff directory](/en/dashboard/staff/annuaire/) to use it, and so must the person you look up. Without the **utilisateur** option it opens your own file, and its reply is visible to you alone.
+
+---
+
+## Leaderboards
+
+* `/leaderboard`: Server activity: **Messages**, **Voice**, **Mixed** or **XP / Levels**.
+* `/top`: The game: **Money**, **RPG** (level and XP), **Items**, **Monsters** slain, **Fishing**.
+* `/prestige`: Prestige points, their tiers and the streaks in progress.
+* `/richest`: The richest members, a shortcut to the money ranking.
+
+`/leaderboard` takes three settings: the **type**, the **style** - *Image (Modern)* or *Text (V2)* - and the **period**, 7, 30 or 90 days. The period is ignored for the XP ranking, which is global. One more option refreshes the leaderboard **every hour** in the channel where it was posted.
+
+---
+
+## Reputation
+
+Reputation does not reward the amount of activity, but how useful others found someone.
+
+<DiscordCommand
+  command="/rep give membre:@Camille raison:Helped out in the support channel"
+  embedTitle="Reputation given"
+  embedDescription="Alex gave a +rep to Camille\n\nCamille total reputation: 47"
+/>
+
+* `/rep give`: Give a +rep to a member.
+* `/rep check`: View a member's reputation.
+* `/rep top`: The reputation leaderboard.
+
+:::caution[Three votes a day]
+The count is kept in the server's time zone. Past that, the vote is refused. Nobody can vote for themselves, nor for a bot.
+:::
+
+---
+
+## The profile widget
+
+`/widget` manages what Kotbo publishes about you on Discord's social layer: `activer` puts it on your profile for this server, `desactiver` removes it, and `refresh` updates its data by hand.
+
+---
+
+## Server quests
+
+`/quests` lists the open quests, your progress and each deadline. **Rewards pay out on their own** as soon as the target is reached: there is nothing to claim, and the XP earned goes through the leveling system, level-up and reward roles included.

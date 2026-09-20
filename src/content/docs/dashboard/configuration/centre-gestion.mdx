@@ -79,6 +79,14 @@ La **Matrice des Accès** définit, rôle staff par rôle staff, ce qui est ouve
 
 Seuls les **rôles staff déclarés** y figurent : rattachez d'abord un rôle Discord à un grade dans [Hiérarchie & rôles](/dashboard/staff/hierarchie/), sinon la matrice reste vide.
 
+La matrice liste désormais **tous les modules du catalogue**, rangés dans la même catégorie et le même ordre que lui, et chaque page tire ses droits **du module dont elle porte le nom**. Saisons, Réputation, Clans et Drops ne suivent donc plus les droits de Leveling, ni Marché et Quêtes ceux d'Économie : chacune se règle pour elle-même.
+
+:::note[Fermer une section ferme vraiment la donnée]
+Retirer **Voir** à un rôle ne retire pas seulement une entrée de la barre latérale : l'API refuse la lecture, y compris quand une autre page appelle la section au passage. Le dossier d'un membre ne s'ouvre plus depuis la liste des gagnants d'un concours, les rapports de sanction, les preuves et les transcriptions suivent le droit *Sanctions*, et les appels de bannissement leur propre droit.
+
+**Configurer** et **Supprimer** comptent de la même façon : une écriture n'exige plus d'être administrateur du dashboard, elle exige le droit correspondant sur la section visée. Cocher *Configurer* sur Giveaways pour un rôle lui ouvre donc réellement l'enregistrement de la configuration des concours - et une suppression demande *Supprimer*, jamais *Configurer*.
+:::
+
 ### Les quatre droits
 
 | Droit | Ce qu'il autorise |

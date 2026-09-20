@@ -1,14 +1,16 @@
 ---
 title: Giveaways
-description: Créez des tirages au sort avec participation par bouton, tirez les gagnants et contrôlez qui peut participer.
+description: Lancez des tirages au sort, filtrez qui peut participer, habillez l'annonce et réutilisez vos réglages d'un concours à l'autre.
 ---
 
-<p class="doc-lead">Le module <strong>Giveaways</strong> publie sur Discord un message de concours avec un bouton « Rejoindre ». Kotbo compte les participations, tire les gagnants et vous laisse relancer le tirage si besoin.</p>
+<p class="doc-lead">Le module <strong>Giveaways</strong> publie sur Discord un message de concours avec un bouton « Rejoindre ». Kotbo compte les participations, tire les gagnants, applique vos conditions d'entrée et vous laisse relancer le tirage si besoin.</p>
 
 :::note[Où la trouver]
 Section **Communauté → Giveaways** : [Ouvrir les giveaways ↗](https://dash.kotbo.fr/giveaways).
 Les administrateurs et les membres ayant **Gérer les messages** y ont accès par défaut.
 :::
+
+La page compte trois onglets : **Concours**, **Modèles** et **Configuration**.
 
 ---
 
@@ -17,47 +19,146 @@ Les administrateurs et les membres ayant **Gérer les messages** y ont accès pa
 ### Lancer un concours
 
 <div class="step-list">
-  <div class="step-item"><div><h3>Cliquez sur Lancer un Concours</h3><p>Le formulaire <strong>Lancer un Concours</strong> s'ouvre.</p></div></div>
+  <div class="step-item"><div><h3>Cliquez sur Lancer un Concours</h3><p>Le formulaire s'ouvre, avec un aperçu de l'annonce à côté des champs.</p></div></div>
+  <div class="step-item"><div><h3>Partez d'un modèle, ou non</h3><p><strong>Partir d'un modèle</strong>, en haut du formulaire, remplit tous les champs d'un coup. Rien n'est figé : corrigez ce que vous voulez avant de lancer.</p></div></div>
   <div class="step-item"><div><h3>Décrivez le lot</h3><p><strong>Lot / Prix</strong> est obligatoire ; la <strong>Description</strong> sert aux conditions ou détails supplémentaires.</p></div></div>
-  <div class="step-item"><div><h3>Réglez le tirage</h3><p><strong>Nb. Gagnants</strong> et <strong>Durée du concours</strong>, exprimée en minutes, heures ou jours. Des durées prédéfinies sont proposées.</p></div></div>
-  <div class="step-item"><div><h3>Choisissez le salon</h3><p>Puis cliquez sur <strong>Envoyer sur Discord</strong>.</p></div></div>
+  <div class="step-item"><div><h3>Réglez le tirage</h3><p><strong>Nb. Gagnants</strong>, puis la fin du concours : soit une <strong>Durée</strong> (minutes, heures ou jours, avec des durées prédéfinies), soit une <strong>Date de fin</strong> à venir, au plus tard dans un an.</p></div></div>
+  <div class="step-item"><div><h3>Choisissez le salon</h3><p>Le salon par défaut du serveur est proposé d'office. Cliquez ensuite sur <strong>Envoyer sur Discord</strong>.</p></div></div>
 </div>
+
+L'**aperçu de l'annonce** montre le message tel qu'il sortira : votre serveur et votre nom d'organisateur, un lot et des participants fictifs. Discord affiche la fin sous forme de compte à rebours qui se met à jour tout seul.
+
+### Les options supplémentaires
+
+Repliées sous **Options supplémentaires**, rarement nécessaires :
+
+* **Tirage strictement égalitaire** : ce concours ignore les rôles avantagés et le bonus de clan, sans rien changer aux réglages du serveur.
+* **Ce concours donne aussi des récompenses du module RPG** : pièces, XP RPG ou objet, en plus du lot. La plupart des concours mettent en jeu un lot remis à la main, sans rien toucher à l'économie du serveur.
+* **Exiger la validation du staff avant de remettre le gain**.
+* **Apparence de l'annonce** : voir ci-dessous.
+
+### L'apparence d'un concours
+
+Chaque concours choisit d'où vient son habillage :
+
+| Choix | Ce que ça donne |
+| --- | --- |
+| **Annonce simple** | L'annonce d'usine du bot. Rien de l'onglet Configuration ne s'y applique. |
+| **Apparence du serveur** | Ce que porte l'onglet Configuration. Le concours suit quand vous l'y changez. |
+| **Propre à ce concours** | Les champs saisis partent avec le concours et n'en bougent plus, images comprises. |
 
 ### Suivre et piloter
 
-Chaque concours de la liste affiche son statut (<span class="dash-badge active">En cours</span> ou <span class="dash-badge">Terminé</span>), son nombre de participants, son nombre de gagnants et sa date de fin.
+Chaque concours de la liste affiche son statut (<span class="dash-badge active">En cours</span> ou <span class="dash-badge">Terminé</span>), son nombre de participants, son nombre de gagnants et sa date de fin. Un concours au tirage égalitaire le signale par une étiquette.
 
 | Bouton | Effet |
 | --- | --- |
-| **Tirer Gagnant** | Force la fin du concours et lance le tirage immédiatement. |
-| **Reroll** | Effectue un nouveau tirage. |
-| **Supprimer** | Retire le concours du dashboard. |
+| **Tirer Gagnant** | *Clôturer ce concours maintenant ?* Les gagnants sont tirés et les lots remis dans la foulée. Le concours ne peut pas être rouvert. |
+| **Reroll** | *Tirer un nouveau gagnant ?* Un gagnant de plus est tiré parmi les participants qui n'ont pas encore gagné, et reçoit son lot. Les gagnants déjà désignés gardent le leur. |
+| **Supprimer le concours** | Le concours et son annonce sur Discord sont retirés définitivement. |
+
+:::danger[La suppression emporte les participations]
+Les participants et les gagnants déjà tirés sont perdus avec le concours.
+:::
 
 Les gagnants tirés apparaissent sous le concours. Quand une validation du staff est requise, ils sont listés sous **Gagnant(s) en attente de validation**. Un clic sur un nom ouvre la fiche du membre.
 
 ---
 
+## Onglet Modèles
+
+Un modèle est un lancement mis de côté : les mêmes champs, enregistrés sous un nom. On en écrit et on en corrige ici ; pour le réutiliser, ouvrez **Lancer un concours** et choisissez-le en haut du formulaire.
+
+Chaque carte affiche le lot, les gagnants, la durée, et des étiquettes quand il y a lieu : **Sans salon** (le modèle prendra celui du serveur au lancement), **Sans bonus**, **Apparence figée**, **Apparence du serveur**, **Vient d'une configuration**. Le bouton d'aperçu montre l'annonce telle qu'elle sortira.
+
+:::note[Modèle ou configuration ?]
+Un modèle porte ce qui change d'un concours à l'autre : lot, durée, gagnants, récompenses, et l'apparence qu'il fige. Les règles de participation, elles, valent pour tout le serveur et se règlent dans l'onglet **Configuration**.
+:::
+
+Supprimer un modèle ne touche pas aux concours déjà lancés depuis lui.
+
+---
+
 ## Onglet Configuration
+
+Les règles de participation valent pour **tous** les concours du serveur. L'apparence, elle, ne s'applique qu'aux concours lancés depuis Discord et à ceux qui la demandent dans leur formulaire.
 
 ### Rôles gestionnaires
 
 Définit qui peut lancer, clôturer, relancer et supprimer un concours. Ces rôles s'ajoutent aux administrateurs et aux membres ayant **Gérer les messages**, et obtiennent la commande `/giveaway` sur Discord.
+
+Elle porte trois sous-commandes : `/giveaway lancer`, qui accepte le lot, les gagnants, la durée, un modèle, la description, le salon, les récompenses RPG et la validation ; `/giveaway cloturer` et `/giveaway relancer`, qui réclament l'**id** du concours - celui que porte le pied de page de l'annonce.
+
+:::note[Discord traduit cette commande]
+`/giveaway` est l'une des rares commandes localisées : un client réglé en anglais affiche `start`, `end`, `reroll` et des options nommées `prize`, `winners`, `duration`… Les noms français ci-dessus sont ceux d'un client en français.
+:::
+
+### Salon par défaut
+
+Proposé d'office au lancement d'un concours. Il reste modifiable à chaque fois, et un modèle qui porte son propre salon passe devant.
 
 ### Participation
 
 * **Rôles requis** : laissez vide pour ouvrir les concours à tout le serveur.
 * **Rôles exclus** : prioritaires sur les rôles requis. Un membre exclu ne peut jamais participer.
 
-N'oubliez pas **Enregistrer la configuration**.
+### Conditions de participation
+
+Ancienneté et niveau exigés avant de pouvoir cliquer sur **Rejoindre**. `0` pour ne rien exiger.
+
+* **Âge du compte Discord (jours)** : écarte les comptes créés pour l'occasion.
+* **Ancienneté sur le serveur (jours)** : écarte les membres arrivés juste pour le concours.
+* **Niveau minimum** : utilise le niveau du module [Niveaux](/dashboard/xp/leveling/).
+* **Une personne, une entrée** : les comptes reconnus comme appartenant au même membre dans la section Modération ne participent qu'une fois, et ne comptent qu'une fois au tirage. Voir [Doubles comptes](/dashboard/moderation/double-comptes/).
+
+### Chances supplémentaires
+
+Des rôles dont les porteurs comptent plusieurs fois dans le tirage. Le rôle le plus avantageux s'applique : **les rôles ne se cumulent pas**.
+
+**Reprendre le bonus du clan vainqueur** ajoute par-dessus les chances du clan récompensé par la section [Clans](/dashboard/xp/clans/). Tous les clans à égalité en profitent, et rien n'est accordé tant qu'aucune saison n'a désigné de vainqueur. Décochée, l'option fait ignorer ce bonus aux concours, même s'il reste actif dans la section Clans.
+
+**Annoncer les rôles avantagés** ajoute la liste des rôles et de leurs chances dans l'annonce, à l'endroit de la variable prévue pour eux.
+
+### Apparence de l'annonce
+
+Quatre couleurs selon l'état du concours - **Concours en cours**, **En attente de validation**, **Concours terminé**, **Gagnants validés** - puis le **Titre**, le **Corps de l'annonce**, le **Pied de page** (qui porte l'identifiant du concours, celui que réclament les commandes de clôture et de relance), la **Vignette** et la **Grande image**.
+
+:::caution[Adresses d'images]
+HTTPS uniquement. Une adresse invalide est ignorée.
+:::
+
+### Bouton de participation
+
+**Libellé** (80 caractères au maximum), **Emoji** - choisi parmi ceux du serveur ou le catalogue Unicode, il apparaît aussi sur le bouton grisé du concours terminé - et **Couleur du bouton** : Bleu, Gris, Vert ou Rouge.
+
+### Messages du concours et messages de refus
+
+Ce que le bot répond aux participants et annonce à la clôture : **Annonce des gagnants**, **Annonce sans participant**, **Réponse à l'inscription** et **Réponse au retrait**, ces deux dernières vues du seul participant.
+
+Les **messages de refus** couvrent chaque condition : rôle exclu, rôle requis manquant, compte trop récent, arrivée trop récente, niveau insuffisant, autre compte déjà inscrit. Expliquez comment devenir éligible plutôt que de refuser sans raison.
+
+:::tip[Les variables s'insèrent d'un clic]
+Sous chaque champ de texte, une rangée de variables : le lot, le nombre de gagnants, les participants inscrits, l'organisateur, le serveur, l'identifiant du concours, la date de fin, le temps restant qui se met à jour tout seul, les gagnants tirés, la description saisie au lancement, le bloc des récompenses RPG, le bloc des rôles avantagés et les seuils exigés. Survolez-en une pour savoir ce qu'elle affiche, cliquez pour l'insérer au curseur. Une variable qui n'a rien à afficher disparaît à l'envoi.
+:::
+
+### Sauvegardes de configuration
+
+Chaque enregistrement garde une **copie nommée** de ces réglages, et un bouton la remet en place sans avoir à tout ressaisir. La fenêtre d'enregistrement demande le nom, ou la sauvegarde à réécrire, et propose de **créer aussi un modèle portant ce nom**.
+
+:::caution[Appliquer une sauvegarde change les concours publiés]
+Les réglages en place sont remplacés, et **les concours déjà publiés reprennent cette apparence**. Si les réglages en cours n'étaient enregistrés nulle part, Kotbo les met d'abord de côté sous leur propre nom.
+:::
+
+Une sauvegarde se **renomme** et se **supprime** ; la supprimer ne touche pas à la configuration en place sur le serveur.
 
 ---
 
 ## Page publique
 
-Un lien public partage la liste des concours en cours sans connexion ni accès au dashboard. Les visiteurs y voient les concours **En cours** et **Terminés**, le temps restant, le nombre de participations et les gagnants tirés.
+Un lien public partage la liste des concours sans connexion ni accès au dashboard. Les visiteurs y voient les concours **En cours** et **Terminés**, le temps restant, le nombre de participations et les gagnants tirés. Chaque concours a sa propre page de détail, avec l'organisateur, le salon et un lien **Voir sur Discord**.
 
 La participation, elle, se fait toujours depuis le message Discord avec le bouton « Rejoindre ».
 
-:::tip[Récompenses bonus]
-Un concours peut aussi distribuer des pièces, de l'XP RPG ou un objet du module [Économie & RPG](/dashboard/economie/economie/). Ces récompenses apparaissent sur la page publique sous **Récompenses bonus**.
+:::tip[Récompenses du module RPG]
+Un concours peut aussi distribuer des pièces, de l'XP RPG ou un objet du module [Économie & RPG](/dashboard/economie/economie/). Ces récompenses apparaissent sur la page publique sous **En plus du lot**.
 :::

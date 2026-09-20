@@ -35,6 +35,10 @@ Every feature described in this documentation stays the same: only the front cha
 
 ## Requesting activation
 
+:::caution[Reserved to the CUSTOM plan]
+The Custom Bot is only open to servers on the **CUSTOM plan**. A server on any other plan is refused when registering or starting a custom bot, including outside the dashboard. Only **stopping** stays available, so a server changing plan can shut down a bot already running.
+:::
+
 Until self-service configuration opens, setup goes through your Kotbo instance's administrator:
 
 <div class="step-list">
@@ -45,4 +49,8 @@ Until self-service configuration opens, setup goes through your Kotbo instance's
 
 :::danger[Never share your token]
 Your Discord application's token gives full control over the bot. Send it only through the channel the administrator indicates, and regenerate it at the slightest doubt.
+:::
+
+:::note[The OAuth secret is never shown again]
+The token and the OAuth secret are encrypted at rest. The secret field is not prefilled: left empty, it keeps the one already saved. If Kotbo reports an unreadable secret, type it in again.
 :::

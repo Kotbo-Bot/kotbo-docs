@@ -1,0 +1,68 @@
+---
+title: Niveaux, classements et réputation
+description: Voir sa progression, comparer les classements et remercier les autres membres depuis Discord.
+---
+
+import DiscordCommand from '../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">L'XP se gagne en parlant et en passant du temps en vocal. Ces commandes servent à lire cette progression : la vôtre, celle d'un autre membre, ou celle de tout le serveur.</p>
+
+---
+
+## Sa carte de niveau
+
+<DiscordCommand
+  command="/rank"
+  botResponse="*La carte est envoyée en image : pseudo, titre, badges, niveau, barre d'XP et rang sur le serveur.*"
+/>
+
+La carte affiche le niveau, l'XP du palier en cours, le rang sur le serveur et, s'il y en a, les badges, le titre, le cadre et le fond que vous avez choisis.
+
+:::tip[Elle se personnalise depuis le dashboard]
+Fond, motif, cadre, barre d'XP, police, emojis et badges se règlent dans **Mon Profil**, section *Ma carte de rang*. Les succès qui débloquent titres et cadres sont détaillés dans le guide [Leveling & XP](/dashboard/xp/leveling/). La carte suit son propriétaire de serveur en serveur, mais le niveau et le rang affichés restent propres au serveur consulté.
+:::
+
+`/profile` ouvre le profil communautaire, avec la progression du [Daily Algo](/discord/communaute/daily-algo/). `/profil` - sans « e » - ouvre le profil staff détaillé : il faut être inscrit dans l'[annuaire staff](/dashboard/staff/annuaire/) pour l'utiliser, et la personne consultée doit l'être aussi. Sans l'option **utilisateur**, il ouvre votre propre fiche, et sa réponse n'est visible que de vous.
+
+---
+
+## Les classements
+
+* `/leaderboard` : L'activité du serveur : **Messages**, **Vocal**, **Mixte** ou **XP / Niveaux**.
+* `/top` : Le jeu : **Argent**, **RPG** (niveau et XP), **Items**, **Monstres** tués, **Pêche**.
+* `/prestige` : Les points de prestige, leurs paliers et les séries en cours.
+* `/richest` : Les plus riches, raccourci vers le classement d'argent.
+
+`/leaderboard` accepte trois réglages : le **type**, le **style** - *Image (Modern)* ou *Texte (V2)* - et la **période**, 7, 30 ou 90 jours. La période est ignorée pour le classement d'XP, qui est global. Une option supplémentaire réactualise le classement **toutes les heures** dans le salon où il a été posté.
+
+---
+
+## La réputation
+
+La réputation ne récompense pas la quantité d'activité, mais l'utilité perçue par les autres.
+
+<DiscordCommand
+  command="/rep give membre:@Camille raison:Aide sur le salon support"
+  embedTitle="Réputation donnée"
+  embedDescription="Alex a donné un +rep à Camille\n\nRéputation totale de Camille : 47"
+/>
+
+* `/rep give` : Donner un +rep à un membre.
+* `/rep check` : Voir la réputation d'un membre.
+* `/rep top` : Le classement des réputations.
+
+:::caution[Trois votes par jour]
+Le compte est tenu dans le fuseau du serveur. Au-delà, le vote est refusé. On ne peut ni se voter soi-même, ni voter pour un bot.
+:::
+
+---
+
+## Le widget de profil
+
+`/widget` gère ce que Kotbo publie de vous sur la couche sociale de Discord : `activer` le pose sur votre profil pour ce serveur, `desactiver` le retire, et `refresh` en rafraîchit les données à la main.
+
+---
+
+## Quêtes de serveur
+
+`/quests` liste les quêtes ouvertes, votre progression et l'échéance de chacune. **Les récompenses se versent toutes seules** dès la cible atteinte : il n'y a rien à réclamer, et l'XP gagnée passe par le système de niveaux, montée de niveau et rôles de récompense compris.

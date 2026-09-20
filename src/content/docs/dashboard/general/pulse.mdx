@@ -36,6 +36,20 @@ L'**Évolution sur 30 jours** replace la journée dans sa tendance.
 
 ---
 
+## Le rappel de bump
+
+Le module **Rappel de bump** n'a ni page ni réglage : il se lit ici. Kotbo reconnaît les réponses publiques des bots de bump connus - **Disboard**, **Discadia**, **DiscordServers.com** et **Disforge** - et en déduit tout seul quand le serveur pourra bumper à nouveau.
+
+Le bandeau de l'onglet Aperçu affiche alors *Prochain bump sur … dans N min*, ou *Disponible maintenant sur …* dès que la fenêtre est ouverte. Au même moment, Kotbo poste un embed **Rappel de bump** dans le **salon où le dernier bump a eu lieu**, en rappelant qui l'avait fait, sans mentionner personne.
+
+:::note[Rien à configurer, mais il faut un premier bump]
+Le rappel n'apparaît qu'après un bump réussi observé par le bot : c'est lui qui désigne le service, le salon et l'échéance. Un `/bump` refusé pour cause de délai ne compte pas - le bot de bump répond alors en éphémère, que Kotbo ne voit jamais.
+
+Le module s'active dans [Configuration → Modules](/dashboard/configuration/modules/), catégorie *Intégrations*.
+:::
+
+---
+
 ## Alertes & recommandations
 
 Pulse commente le score plutôt que de le laisser brut. Quelques exemples de ce qu'il signale :

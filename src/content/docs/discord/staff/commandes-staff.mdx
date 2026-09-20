@@ -1,0 +1,72 @@
+---
+title: Commandes du staff et de l'administration
+description: Réunions, absences, évaluations et outils d'administration de Kotbo, depuis Discord.
+---
+
+import DiscordCommand from '../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">L'équipe n'a pas besoin d'ouvrir le dashboard pour les gestes courants : déclarer une absence, confirmer sa présence à une réunion ou consulter son évaluation se font depuis Discord.</p>
+
+:::tip[Côté dashboard]
+Le planning, les réunions, l'annuaire et les évaluations se pilotent depuis la section **Staff** du dashboard : [Planning](/dashboard/staff/planning/), [Réunions](/dashboard/staff/reunions/), [Annuaire staff](/dashboard/staff/annuaire/).
+:::
+
+---
+
+## Réunions
+
+* `/meeting create` : Planifie une réunion staff, avec son titre, sa date et sa description.
+* `/meeting list` : Les prochaines réunions.
+* `/meeting checkin` : Confirme manuellement votre présence à la réunion en cours.
+* `/meeting sync` : Force la synchronisation des absences déclarées pour la prochaine réunion.
+
+---
+
+## Absences et départs
+
+<DiscordCommand
+  command="/absent declarer type:Congés debut:12/07/2026 fin:19/07/2026 superieur:@Alex"
+  embedTitle="Absence déclarée"
+  embedDescription="Absence déclarée du **12/07/2026** au **19/07/2026**. Supérieur notifié : Alex. ID : `ABS-142`."
+/>
+
+`/absent declarer` ouvre la déclaration : le **type** d'absence, sa date de **début** et de **fin**, la **raison** et le **supérieur** à prévenir. `/absent terminer` la clôture avant l'heure.
+
+`/demission` soumet une demande de démission du staff, avec un motif. La demande part vers l'équipe : elle ne retire aucun rôle toute seule.
+
+---
+
+## Évaluations
+
+* `/evaluations me` : Votre propre évaluation.
+* `/evaluations check` : L'évaluation d'un membre du staff.
+* `/evaluations generate` : Génère une évaluation sur une **période** donnée.
+
+---
+
+## Entraîner ses modérateurs
+
+`/simulation` lance un **incident simulé** sur lequel l'équipe s'entraîne, en choisissant un scénario. Rien de ce qui s'y passe n'est réel : c'est l'outil à sortir avant de confier les vraies sanctions à un nouveau modérateur.
+
+---
+
+## Administration du serveur
+
+Ces commandes demandent la permission **Administrateur**.
+
+* `/setup` : L'assistant de configuration pas à pas du bot.
+* `/config` : Configure les fonctionnalités de Kotbo depuis Discord, sans passer par le dashboard.
+* `/audit` : Analyse la sécurité du serveur et propose des améliorations.
+* `/backup` : Sauvegarde le serveur - rôles, salons, permissions, émojis, stickers - et le restaure : `create`, `list`, `restore`, `delete`, `export`, `import`. Voir [Sauvegardes](/dashboard/configuration/sauvegardes/).
+* `/leveling` : Ajuste l'XP et les niveaux des membres.
+* `/prestige-admin` : Règle le classement de prestige.
+* `/link` : Relie des salons entre eux. Voir [Lier des salons](/discord/communaute/liens-salons/).
+* `/protection` : Captcha, mode raid, verrous et lockdown. Voir [Protection anti-raid](/dashboard/moderation/anti-raid/).
+* `/channelhealth` : Analyse et archivage des salons. Voir [Santé des salons](/dashboard/configuration/sante-salons/).
+* `/activate` : Active le bot sur le serveur avec un code d'activation.
+* `/staffserver` : Lie un serveur staff au serveur principal et pilote la synchronisation : `setup`, `mode`, `sync`, `mapping`, `unmap`, `remove`. Voir [Serveurs staff](/dashboard/cross-serveur/serveurs-staff/).
+* `/status` : Vérifie le statut HTTP d'une URL.
+
+:::note[Le dashboard reste la référence]
+Ces commandes dépannent quand personne n'a le dashboard sous la main. Pour tout ce qui se règle finement - permissions par rôle, échelles de sanctions, modules - le dashboard montre l'état complet, là où une commande ne montre qu'un champ à la fois.
+:::

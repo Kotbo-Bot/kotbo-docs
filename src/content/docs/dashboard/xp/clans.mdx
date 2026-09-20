@@ -40,16 +40,46 @@ Le tableau **Clans Configurés** affiche ensuite les colonnes **Clan**, **Rôle 
 
 ### Opérations de masse
 
-Trois actions s'exécutent progressivement en arrière-plan et demandent la saisie d'un mot de confirmation :
+Ces actions s'exécutent progressivement en arrière-plan et demandent la saisie d'un mot de confirmation :
 
 | Action | Mot à saisir | Effet |
 | --- | --- | --- |
 | **Distribuer** | `DISTRIBUER` | Attribue aléatoirement un clan aux membres qui n'en ont pas. |
-| **Nettoyer les doublons** | `NETTOYER` | Ne conserve qu'un clan aux membres qui en cumulent plusieurs. Le clan gardé est celui où le membre a le plus contribué cette saison, et ses points suivent. |
+| **Rééquilibrer** | `REEQUILIBRER` | Déplace des membres des clans les plus peuplés vers les clans à remplir. Voir ci-dessous. |
 | **Retirer à tous** | `RETIRER` | Retire leur clan à tous les membres. |
 
 :::warning[Le retrait recrée les rôles]
 Chaque rôle de clan est recréé à l'identique (autorisations de salon comprises), puis l'ancien est supprimé. **L'identifiant du rôle change** : un réglage extérieur qui le désigne sera à refaire.
+:::
+
+:::note[Les membres qui portent plusieurs clans]
+Le nettoyage de ces doublons n'est plus sur cette page : il se lance depuis Discord avec `/clan dedupe`, réservé aux administrateurs. Voir [Clans, saisons et paris](/discord/communaute/clans/).
+:::
+
+### Rééquilibrer vers les nouveaux clans
+
+C'est l'outil à utiliser après avoir créé un clan : sans lui, le nouveau reste vide pendant que les anciens débordent. **Rien n'est modifié avant la validation finale.**
+
+<div class="step-list">
+  <div class="step-item"><div><h3>Cochez les clans à remplir</h3><p>Les clans non cochés sont ceux qui donnent des membres.</p></div></div>
+  <div class="step-item"><div><h3>Réglez l'effectif visé</h3><p><strong>Effectif visé par clan à remplir</strong>, ou vide pour la moyenne de tous les clans.</p></div></div>
+  <div class="step-item"><div><h3>Choisissez qui part en premier</h3><p><em>Les moins actifs</em>, <em>Au hasard</em> ou <em>Les plus actifs</em>.</p></div></div>
+  <div class="step-item"><div><h3>Calculez l'aperçu</h3><p>Kotbo liste les transferts proposés, clan par clan, avec l'effectif avant et après.</p></div></div>
+  <div class="step-item"><div><h3>Lancez le rééquilibrage</h3><p>Saisissez <code>REEQUILIBRER</code>. Chaque transfert est revérifié au lancement, puis appliqué progressivement.</p></div></div>
+</div>
+
+**L'activité se mesure en points de la saison précédente rapportés aux jours de présence**, pour ne pas désavantager les membres arrivés en cours de saison. Ceux qui sont arrivés trop tard pour cette saison sont jugés sur la saison en cours. En mode *Au hasard*, l'activité affichée est indicative : elle ne décide de rien, et **Nouveau tirage** redonne une autre liste.
+
+Le champ **Ne jamais déplacer au-delà de** protège les piliers : un membre dont les points dépassent ce seuil reste dans son clan.
+
+:::caution[« Les plus actifs » coûte cher aux clans donneurs]
+Ce mode donne tout de suite une équipe solide aux nouveaux clans, mais les clans qui donnent perdent leurs meilleurs joueurs, ceux qui tiennent le plus à leur clan. Kotbo l'affiche en avertissement et renvoie vers le seuil de protection.
+:::
+
+Certains membres ne sont **jamais** déplacés, et l'aperçu les range par motif : **Chefs de clan**, **Pari en cours**, **Au-dessus du seuil**, **Comptes liés dans deux clans**, **Plusieurs clans**. Le bouton **Garder** en écarte d'autres à la main - le suivant sur la liste prend alors leur place.
+
+:::note[Ce que deviennent les points]
+Les points de la **saison en cours** suivent le membre dans son nouveau clan ; ceux de la **saison précédente** restent acquis à l'ancien.
 :::
 
 ---

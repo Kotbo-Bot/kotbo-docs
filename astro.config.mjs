@@ -100,6 +100,11 @@ export default defineConfig({
                   translations: { en: 'Analytics' },
                   slug: 'dashboard/general/analytics',
                 },
+                {
+                  label: 'Mon profil & préférences',
+                  translations: { en: 'My profile & preferences' },
+                  slug: 'dashboard/general/profil',
+                },
               ],
             },
             {
@@ -387,6 +392,11 @@ export default defineConfig({
                   translations: { en: 'Staff servers' },
                   slug: 'dashboard/cross-serveur/serveurs-staff',
                 },
+                {
+                  label: 'Partenariats',
+                  translations: { en: 'Partnerships' },
+                  slug: 'dashboard/cross-serveur/partenariats',
+                },
               ],
             },
             {
@@ -460,6 +470,11 @@ export default defineConfig({
                   translations: { en: 'Alt accounts' },
                   slug: 'discord/moderation/double-comptes',
                 },
+                {
+                  label: 'Sanctionner un membre',
+                  translations: { en: 'Sanctioning a member' },
+                  slug: 'discord/moderation/sanctions',
+                },
               ],
             },
             {
@@ -496,6 +511,49 @@ export default defineConfig({
                   translations: { en: 'Daily Algo' },
                   slug: 'discord/communaute/daily-algo',
                 },
+                {
+                  label: 'Clans, saisons et paris',
+                  translations: { en: 'Clans, seasons and bets' },
+                  slug: 'discord/communaute/clans',
+                },
+              ],
+            },
+            {
+              label: 'Économie & RPG',
+              translations: { en: 'Economy & RPG' },
+              items: [
+                {
+                  label: 'Jouer au RPG',
+                  translations: { en: 'Playing the RPG' },
+                  slug: 'discord/economie/rpg',
+                },
+                {
+                  label: 'Monnaie, boutique et jeux',
+                  translations: { en: 'Currency, shop and games' },
+                  slug: 'discord/economie/economie',
+                },
+              ],
+            },
+            {
+              label: "Système d'XP",
+              translations: { en: 'XP system' },
+              items: [
+                {
+                  label: 'Niveaux, classements et réputation',
+                  translations: { en: 'Levels, leaderboards and reputation' },
+                  slug: 'discord/xp/progression',
+                },
+              ],
+            },
+            {
+              label: 'Staff',
+              translations: { en: 'Staff' },
+              items: [
+                {
+                  label: 'Commandes du staff',
+                  translations: { en: 'Staff commands' },
+                  slug: 'discord/staff/commandes-staff',
+                },
               ],
             },
             {
@@ -520,6 +578,11 @@ export default defineConfig({
           label: 'Aide',
           translations: { en: 'Help' },
           items: [
+            {
+              label: 'Commandes utiles',
+              translations: { en: 'Everyday commands' },
+              slug: 'aide/commandes-utiles',
+            },
             {
               label: 'Questions fréquentes',
               translations: { en: 'Frequently asked questions' },

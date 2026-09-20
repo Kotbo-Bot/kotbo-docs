@@ -3,7 +3,7 @@ title: Reaction Roles
 description: Deploy messages with interactive buttons so your members can assign their own roles.
 ---
 
-<p class="doc-lead">The <strong>Reaction Roles</strong> module posts a message with buttons on Discord. One click grants the associated role, a second click removes it.</p>
+<p class="doc-lead">The <strong>Reaction Roles</strong> module posts a message with buttons on Discord. One click grants the associated role, and depending on the mode you choose, a second click removes it or not.</p>
 
 :::note[Where to find it]
 The **Community → Reaction Roles** section: [Open reaction roles ↗](https://dash.kotbo.fr/reaction-roles).
@@ -17,13 +17,33 @@ Kotbo needs the **Manage roles** permission, and its own role must sit **above**
 <div class="step-list">
   <div class="step-item"><div><h3>Click Deploy a Panel</h3><p>The form opens with a live Discord preview on the right.</p></div></div>
   <div class="step-item"><div><h3>Fill in the title and channel</h3><p><strong>Panel Title / Message</strong> (for example <em>Pick your notification roles</em>) and <strong>Destination Channel</strong>.</p></div></div>
-  <div class="step-item"><div><h3>Add your buttons</h3><p>For each button: an <strong>Emoji</strong> (optional), a <strong>Button Label</strong> and an <strong>Associated Role</strong>. The <strong>Add a button</strong> button creates more.</p></div></div>
+  <div class="step-item"><div><h3>Choose the button mode</h3><p><strong>Button mode</strong> applies to the whole panel, and each button may depart from it. See below.</p></div></div>
+  <div class="step-item"><div><h3>Add your buttons</h3><p>For each button: an <strong>Emoji</strong> (optional), a <strong>Button Label</strong>, an <strong>Associated Role</strong>, the <strong>Colour of this button</strong> and optionally a <strong>Mode of this button</strong>. The <strong>Add a button</strong> button creates more.</p></div></div>
   <div class="step-item"><div><h3>Deploy</h3><p>Click <strong>Deploy Panel</strong>. Kotbo posts the message on Discord.</p></div></div>
 </div>
 
 :::caution[Label and role are required]
 All buttons must have a label **and** a role, otherwise Kotbo refuses to deploy.
 :::
+
+---
+
+## Toggle or grant only
+
+| Mode | What a click does |
+| --- | --- |
+| **Toggle** | One click grants the role, a second one removes it. |
+| **Grant only** | The role is granted once: clicking again does not remove it. |
+
+The mode is first chosen for the **whole panel**. Each button then keeps **Panel mode** or sets its own, which lets you mix a notification role members can switch off with an access role they do not hand back.
+
+The text under the message title follows the mode in use: Kotbo states that the roles cannot be removed from there, or that some of them cannot be removed once granted.
+
+---
+
+## Button colours
+
+Every button carries its own Discord colour: **Grey**, **Blue**, **Green** or **Red**. It has no effect on the granting; it is there to tell families of roles apart in a panel that holds many.
 
 ---
 
@@ -37,11 +57,11 @@ The **Live Preview (Discord)** panel reproduces exactly how the message will loo
 
 The **Deployed Panels** list shows each menu with its channel and roles. Two actions are available:
 
-* **Edit**: reopens the form to change the title or the buttons.
-* **Delete from dashboard**: removes the panel from the list.
+* **Edit**: reopens the form on the existing panel. Title, buttons, roles, colours and modes can all be changed, and **the Discord message is updated as soon as you save** - there is nothing to republish.
+* **Delete**: *Delete this role menu?* The panel's Discord message is deleted as well.
 
-:::warning[Deleting does not remove the Discord message]
-The message posted on Discord is not deleted automatically. Its buttons stay visible but grant nothing: a member who clicks gets a private reply telling them the role panel has been deleted or is no longer active. Delete the message by hand to avoid the confusion.
+:::caution[Changing the channel republishes the panel]
+If you point a deployed panel at another channel, Kotbo posts a new message in the chosen channel and **deletes the old one**. Members lose the original message, its pins and any links pointing at it.
 :::
 
 If a channel or a role has been deleted from the server, Kotbo shows it as **Unknown channel** or **Unknown role** with its ID, which makes it easy to spot the panels that need fixing.

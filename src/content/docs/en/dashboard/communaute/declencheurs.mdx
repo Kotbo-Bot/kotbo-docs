@@ -1,5 +1,5 @@
 ---
-title: Triggers (Automations)
+title: Triggers
 description: Make the bot react on its own to joins, messages, sanctions or a fixed time, without writing a line of code.
 ---
 
@@ -47,22 +47,85 @@ Applying a template to an existing automation **replaces the whole current graph
 
 ## The triggers
 
-An automation has a single trigger.
+An automation has a single trigger. The palette holds forty-two of them, sorted by family.
+
+### Members
 
 | Trigger | When it fires |
 | --- | --- |
 | **Arrivée d'un membre** | A member joins the server. |
 | **Départ d'un membre** | A member leaves the server. |
-| **Rôle attribué** / **Rôle retiré** | A role is added to or removed from a member. |
-| **Message envoyé** | On every message posted by a human. |
-| **Réaction ajoutée** | A member reacts to a message. |
-| **Arrivée en vocal** / **Départ du vocal** | A member joins or leaves a voice channel. |
-| **Ticket créé** | A support ticket is opened. |
-| **Sanction appliquée** | A sanction is issued. |
+| **Rôle attribué** / **Rôle retiré** | A role is added to or removed from a member, once per role when several change at the same time. |
+| **Surnom modifié** | A member's nickname on the server changes, whether they did it themselves or not. A global Discord name change does not count. |
+| **Boost du serveur** | A member starts boosting. Discord does not report further boosts from a member who was already boosting. |
+| **Arrivée par invitation** | A member arrives through an invitation the bot could identify. |
 | **Passage de niveau** | A member gains a level. |
-| **Planification** | At a fixed time, on a recurring schedule. |
+
+:::caution["Arrivée par invitation" depends on Logs]
+This trigger needs the **Logs** module enabled - it is what spots the invitation used - and the Discord **Manage Server** permission. Arrivals through the vanity URL are never attributed. Kotbo shows the reminder right on the trigger card.
+:::
+
+### Messages and voice
+
+| Trigger | When it fires |
+| --- | --- |
+| **Message envoyé** | On every message posted by a human. |
+| **Message modifié** | A member edits the text of one of their messages. A link preview appearing, or a pin, does not count. |
+| **Message supprimé** | A member's message is deleted. Bot messages and bulk deletions do not count. |
+| **Réaction ajoutée** / **Réaction retirée** | A member adds or removes their reaction. Clearing all reactions of a message at once fires nothing. |
+| **Arrivée en vocal** / **Départ du vocal** | A member joins or leaves a voice channel. Leaving exposes the **duration in minutes**. |
+| **Changement de salon vocal** | A member moves from one voice channel to another without leaving voice. |
+| **Fil créé** | A member creates a thread or a forum post. Threads created by a bot do not count. |
+
+### Moderation
+
+| Trigger | When it fires |
+| --- | --- |
+| **AutoMod déclenché** | Kotbo's AutoMod sanctions a message: spam, invitation, caps, emojis, mentions, everyone. |
+| **Sanction appliquée** | A sanction is issued. |
+| **Sanction levée** | A member is unbanned, or their timeout is lifted before its term. |
+
+:::note[What is still usable afterwards]
+A kicked or banned member has already left the server: only their username remains usable, actions targeting them on the server fail, and a private message is ignored. The natural end of a timeout is not reported by Discord, and an unban less than a minute after the ban is taken for a softban and ignored.
+:::
+
+### Server structure
+
+**Salon créé**, **Salon supprimé**, **Rôle créé**, **Rôle supprimé**: these four also fire when the bot or an integration is the one acting. Threads do not count as channels. After a deletion the object no longer exists: only its name stays usable.
+
+### Tickets, forms and suggestions
+
+| Trigger | When it fires |
+| --- | --- |
+| **Ticket créé** | A support ticket is opened. |
+| **Ticket fermé** | A ticket is closed, from Discord, the dashboard or the AI assistant. Deleting a ticket without closing it does not count. |
+| **Avis sur un ticket** | The author of a closed ticket rates it from 1 to 5. Only the first rating counts, and the optional comment is not passed on. |
+| **Formulaire envoyé** | A custom form is submitted, from Discord or from its public page. The answers arrive grouped, one *Question: answer* line per filled field. |
+| **Suggestion publiée** | A member posts a suggestion. |
+| **Suggestion traitée** | The staff approves, rejects or marks a suggestion as implemented. |
+
+For a ticket handled in DMs or relayed to the staff server, the channel is empty: the channel filter then leaves the case out.
+
+### Engagement
+
+| Trigger | When it fires |
+| --- | --- |
+| **Participation à un concours** | A member joins a giveaway. |
+| **Gagnant d'un concours** | For each winner, once their prize is secured. A draw awaiting validation fires nothing until the staff validates it. |
+| **Fin d'un concours** | When a giveaway closes, whether it produced winners or not. |
+| **Victoire à un mini-jeu** | A member finds the mystery number or solves an emoji riddle. |
 | **Pari tranché** / **Pari annulé** | A referee names the winning side, or the stakes are returned. |
 | **Dette de clan creusée** / **soldée** | A member stakes points they do not hold, or finishes repaying. |
+
+:::caution["Victoire à un mini-jeu" needs the fun channels]
+Without the **Fun channels** module enabled and a channel set for the game, nobody can win and the automation will never fire. Kotbo says so on the card and offers the right link. A reset from the dashboard does not count as a win.
+:::
+
+### Partnerships
+
+**Partenariat : changement d'étape** fires when a partnership case moves to another stage, after the perks are applied - the partner role is already granted. **Partenariat : engagement non tenu** fires when a commitment is found unmet, and its *missed periods* field lets you react only from the second or the third time. **Partenariat : arrivée attribuée** only fires for arrivals actually credited to a partner's invitation.
+
+See [Partnerships](/en/dashboard/cross-serveur/partenariats/).
 
 ### Scheduling
 
@@ -72,22 +135,43 @@ The time is interpreted in the **server's time zone**, set from the [dashboard h
 
 ---
 
+## Narrowing the trigger
+
+Rather than filtering with a condition, several triggers can be narrowed on the *Quand* card itself:
+
+* **Seulement dans ces salons** (only in these channels): text channels, voice channels or whole categories. Available on messages, reactions, voice, threads, AutoMod and tickets. On *Changement de salon vocal* the filter applies to the destination channel; on *Fil créé*, to the parent channel or forum.
+* **Seulement pour ces rôles** (only for these roles): on *Rôle attribué* and *Rôle retiré*.
+* **Seulement sur ces messages** (only on these messages): on reactions, by pasting the message link (right click → **Copy Message Link**). If nothing typed there is recognised as a message, Kotbo warns that no reaction will get through.
+* **Seulement pour ces émojis** (only for these emojis): on reactions, by pasting the emojis or typing `:name:` for a server emoji.
+
+Left empty, these fields accept the whole server.
+
+:::tip[Capping a frequent trigger]
+Two conditions count one member's passes: *the member triggered this automation at most N times today* and *… this hour*, the current run included. This is the guard to place before **Donner des pièces** or **Donner de l'XP** on a trigger as frequent as *Message envoyé*. The **Fréquence du membre** block exposes both counters in the graph view, and doubles as a value to insert in a text (*"that's your 3rd win today"*). Day and hour are those of the server's time zone.
+:::
+
+---
+
 ## The steps
 
 Every trigger exposes values - the member, the message, the channel - that the following steps can use.
 
 ### Actions
 
-Posting: **Envoyer un message**, **Envoyer un embed**, **Envoyer un message privé** (no effect if the member's DMs are closed).
+Posting: **Envoyer un message**, **Envoyer un embed**, **Envoyer un message privé** (no effect if the member's DMs are closed), **Répondre à un message** (posted without a quote if the message was deleted meanwhile) and **Écrire dans les logs**, which fails as long as no log channel is configured.
 
-On a member: **Ajouter un rôle**, **Retirer un rôle**, **Changer le surnom**, **Exclure temporairement**, **Expulser**, **Bannir** (permanently or for a given duration).
+On a member: **Ajouter un rôle**, **Retirer un rôle**, **Donner un rôle temporaire**, **Changer le surnom**, **Exclure temporairement**, **Expulser**, **Bannir** (permanently or for a given duration).
 
 On a message: **Supprimer un message**, **Réagir à un message**, **Épingler un message**, **Ouvrir un fil**.
 
-Finally, **Ouvrir un ticket** opens a support ticket on a member's behalf.
+Rewarding and tracking: **Donner des pièces**, **Retirer des pièces** (never below zero), **Donner de l'XP** - with level-up and reward roles - and **Ajouter une note au membre**, which writes a dated line into their moderation note. Finally, **Ouvrir un ticket** opens a support ticket on a member's behalf.
+
+:::note[Actions that depend on a module]
+**Donner des pièces** and **Retirer des pièces** fail if the Economy module is disabled, **Donner de l'XP** if the Leveling module is, and **Ouvrir un ticket** if the Tickets module is. **Donner un rôle temporaire** only removes at expiry the role it granted itself: a member who already had it keeps it.
+:::
 
 :::note[Sanctions from an automation count]
-A timeout, kick or ban issued by an automation goes through the same service as manual sanctions: the member's record, the statistics, the staff alerts and the linked accounts all take it into account.
+A timeout, kick or ban issued by an automation goes through the same service as manual sanctions: the member's record, the statistics, the staff alerts and the linked accounts all take it into account. The **Sanctions** module must be enabled, otherwise the action fails.
 
 An identical sanction issued within thirty seconds is ignored. That is also what stops an automation wired to *Sanction appliquée* from looping on itself.
 :::
@@ -99,11 +183,13 @@ An identical sanction issued within thirty seconds is ignored. That is also what
 * **Pour chaque**: walks a list and runs the loop body for every element.
 * **Attendre**: suspends the run. It resumes even after a bot restart.
 
-The available tests cover **Possède le rôle**, **Salon est**, **Texte contient**, **Texte est égal à**, **Comparer** two numbers, **ET / OU**, **NON**, plus the length of a text or the size of a list.
+In the Steps view, conditions are offered as sentences, and only those the trigger can fill in appear: the role, the account age, the time spent on the server, the member's run frequency, the content or the length of the message, the channel, the emoji, the sanction type, the form and its answers, the fate of a suggestion, a ticket's rating and type, the invitation code, the mini-game won, or the server's member count.
+
+In the Graph view the same tests are assembled by hand: **Possède le rôle**, **Salon est**, **Texte contient**, **Texte est égal à**, **Comparer** two numbers, **Calcul**, **Concaténer**, **ET / OU**, **NON**, plus the length of a text or the size of a list.
 
 ### Values
 
-The data blocks provide a **Texte**, a **Nombre**, a **Booléen**, a **Texte composé** (in which context values are inserted), **Un rôle** or **Un salon** from the server, and the properties of the member, the message, the channel or the server.
+The data blocks provide a **Texte**, a **Nombre**, a **Booléen**, a **Texte composé** (in which context values are inserted), **Un rôle** or **Un salon** from the server, the **Fréquence du membre**, and the properties of the member, the message, the channel or the server.
 
 In the Steps view, channels, roles and texts are typed straight onto the card, without creating a data block.
 
@@ -125,7 +211,13 @@ The list filters by **All**, **Active** or **Paused**, and every card shows its 
 An enabled automation that has produced nothing for more than a day says so on its card: **Never started** - *Enabled but never ran: check the trigger and its conditions.*
 :::
 
-The **Runs** tab lists the passes with their status - *Running*, *Waiting*, *Completed*, *Failed*, *Cancelled* - and the number of blocks visited. Click a run to **replay it on the graph**: the path is replayed step by step, with the inputs and outputs recorded at each block.
+The **Runs** tab lists the passes with their status - *Running*, *Waiting*, *Completed*, *Failed*, *Cancelled* - and the number of blocks visited. Two menus filter the list **by status** and **by automation**, the **Show failures** button keeps only the misses, and **Load older runs** goes further back. A waiting run shows when it is due to resume, and a failed run names the step at fault.
+
+Click a run to **replay it on the graph**: the path is replayed step by step, with the inputs and outputs recorded at each block.
+
+:::note[The log does not grow forever]
+Every night Kotbo deletes completed runs older than **30 days**, then everything beyond the **1000 most recent runs** of each automation. Waiting and running executions are never touched, and the counters on the card do not move.
+:::
 
 ---
 

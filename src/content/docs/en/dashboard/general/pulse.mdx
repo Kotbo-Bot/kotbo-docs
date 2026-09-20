@@ -36,6 +36,20 @@ The **30-day trend** puts the day back in context.
 
 ---
 
+## The bump reminder
+
+The **Bump reminder** module has neither a page nor a setting: you read it here. Kotbo recognises the public replies of the known bump bots - **Disboard**, **Discadia**, **DiscordServers.com** and **Disforge** - and works out on its own when the server may bump again.
+
+The banner on the Overview tab then reads *Next bump on … in N min*, or *Ready to bump on …* as soon as the window opens. At the same moment, Kotbo posts a **Bump reminder** embed in the **channel where the last bump happened**, recalling who did it, without pinging anyone.
+
+:::note[Nothing to configure, but it needs a first bump]
+The reminder only appears after a successful bump the bot has seen: that is what sets the service, the channel and the due time. A `/bump` refused for cooldown does not count - the bump bot answers ephemerally then, which Kotbo never sees.
+
+The module is enabled in [Configuration → Modules](/en/dashboard/configuration/modules/), *Integrations* category.
+:::
+
+---
+
 ## Alerts & recommendations
 
 Pulse comments on the score rather than leaving it raw. Some of what it flags:

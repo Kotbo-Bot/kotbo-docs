@@ -16,6 +16,10 @@ The page is split into eight tabs: **Configuration**, **Shop Items**, **Recipes*
 Choosing an economy pace - daily rewards, cooldown, energy - has its own page: [Quick setup](/en/dashboard/economie/configuration-rapide/).
 :::
 
+:::tip[On the Discord side]
+What your members see of the game fits in two guides: [Playing the RPG](/en/discord/economie/rpg/) for the `/rpg` hub, and [Currency, shop and games](/en/discord/economie/economie/) for the currency, the auction house and the bets.
+:::
+
 A **Public page** button, visible from every tab, opens the public clan RPG board - running raid, quests and where each clan stands. It is covered on the [Clans](/en/dashboard/xp/clans/) page.
 
 ---
@@ -24,7 +28,7 @@ A **Public page** button, visible from every tab, opens the public clan RPG boar
 
 ### Module activation
 
-* **Enable RPG Adventures (RNG)**: unlocks the `/rpg-travel` command and random events.
+* **Enable RPG Adventures (RNG)**: unlocks travel and random events. Players set off on an adventure from the `/rpg` hub, not from a command of their own.
 * **Enable Item Shop**: allows buying gear, equipping weapons and using potions.
 * **Enable RPG Guild System**: allows founding alliances, cooperating and holding a guild vault.
 
@@ -41,7 +45,7 @@ Caps applied to gambling games and member-to-member transfers:
 
 * **Maximum bet per game**: applies to `/dice`, `/roulette` and `/rps`.
 * **Games per day and per member**.
-* **Maximum amount per transfer**: applies to `/rpg-pay`.
+* **Maximum amount per transfer**: applies to member-to-member payments, made from the `/rpg` hub. The field's hint still names the former `/rpg-pay` command, which no longer exists.
 * **Delay between two transfers (minutes)**.
 
 ### Reset
@@ -59,9 +63,30 @@ Every reset now asks you to type `RESET` to confirm. The operation permanently d
 The **Create item** button opens a form:
 
 * **Item name**, **Emoji**, **Description**, **Item type** and **Purchase price**.
-* **Statistics & Effects**: **Attack Bonus (ATK)**, **Defense Bonus (DEF)**, **Health Restore (HP)** and **Energy Restore**. Not every type needs attributes.
+* **Statistics & Effects**: the fields offered follow the type you pick.
+
+| Item type | What it asks for |
+| --- | --- |
+| **WEAPON (Arme)** | Attack Bonus (ATK). |
+| **ARMOR (Armure)** | Defense Bonus (DEF). |
+| **ACCESSORY (Accessoire)** | Attack (ATK), Defense (DEF) and Speed (SPD) bonuses. |
+| **POTION (Consommable)** | Health Restore (HP) and Energy Restore. |
+| **SCROLL (Parchemin d'enchantement)** | An enchantment and its tier, see below. |
+| **MATERIAL (Matériau d'artisanat)** | No attribute: it goes into crafting recipes. |
+| **QUEST (Quête)** | No mechanical effect: a narrative item, key or badge the server stages itself. |
 
 Items provided globally by Kotbo appear as **read-only** and cannot be edited from your server.
+
+### Enchantment scrolls
+
+An item of the **SCROLL (Parchemin d'enchantement)** type applies an enchantment to the player's gear. Two fields belong to it alone:
+
+* **Enchantment applied**: the form offers the game's enchantments, shows the description of the one you pick and the equipment slots it targets.
+* **Tier granted**: capped at the maximum tier of the chosen enchantment, recalled under the field. It stays inert until an enchantment is named.
+
+:::caution[A scroll without an enchantment is refused]
+*A scroll must name the enchantment it applies.* Otherwise the item would be bought and consumed without ever applying anything: Kotbo refuses to save it.
+:::
 
 ### Rewards granted by other modules
 
@@ -160,6 +185,10 @@ The raid needs one of the two: without a team module, it cannot be enabled.
 
 The **Launch a raid now** button opens the window right away. Save your settings first: the launch uses what is saved, not what is on screen.
 
+:::note[Changing the boss mid-week]
+The next raid's window is written ahead of time, with the boss drawn at that moment. Picking another boss and then **saving** takes over the pending window, so the current week. A fixed boss is named by its **name**: renaming or disabling its sheet in *Bosses & Monsters* makes it unreachable, and the selector says so - *… (unavailable: boss disabled)*.
+:::
+
 ### Balance and rewards
 
 * **HP per member**, with a **minimum HP** and a **maximum HP**. A preview announces what a team of 3 and a team of 20 face.
@@ -191,8 +220,13 @@ The window is clock-aligned: 24 h resets at midnight UTC, 6 h at 00, 06, 12 and 
 
 Two scopes:
 
-* **Personal**: each member has their own progress and claims their own reward once the target is reached.
+* **Personal**: each member has their own progress. The reward is paid automatically on the action that reaches the target, with nothing for the player to do.
 * **Team**: the whole team pushes the same counter. The reward is split in proportion - 30% evenly, the rest by what each member brought - and paid automatically on completion.
+
+The **Repeatable within the day** switch decides what happens once the quest has paid out:
+
+* **On**: the quest resets as soon as it pays, and the player can run it as many times as they like inside the window. Its card carries the **Repeatable** tag.
+* **Off**: the quest pays once every 24 h. Finished sooner, it waits out the delay before paying.
 
 A disabled quest is no longer offered and stops counting. Clan points are only paid while the RPG to clans bridge is open, in the *Bosses & Monsters* tab.
 

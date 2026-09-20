@@ -1,0 +1,146 @@
+---
+title: Jouer au RPG sur Discord
+description: Le hub /rpg, le personnage, les combats, l'équipement, la guilde et le raid hebdomadaire, vus du joueur.
+---
+
+import DiscordCommand from '../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">Tout le jeu tient dans une seule commande. <strong>/rpg</strong> ouvre un panneau de boutons : votre personnage, votre sac, la boutique, les combats, la guilde. Aucune autre commande à retenir.</p>
+
+<DiscordCommand
+  command="/rpg"
+  embedTitle="Hub RPG - Camille"
+  embedDescription="Niveau **12** · 340/500 XP · **85** énergie · **2 480** pièces\nClasse : **Rôdeur** · 3 point(s) de caractéristique à répartir"
+  buttons="Personnage, Inventaire, Boutique, Combat, Plus"
+/>
+
+L'option **membre** ouvre le hub sur le profil de quelqu'un d'autre, en lecture.
+
+:::tip[Côté dashboard]
+Les monstres, les objets, les recettes, le raid et les réglages d'économie se configurent depuis le dashboard : voir [Économie & RPG](/dashboard/economie/economie/).
+:::
+
+---
+
+## Les ressources du personnage
+
+* **Pièces** : Acheter, fabriquer, forger, enchanter, changer de classe.
+* **XP** : Monter de niveau. Chaque niveau rapporte **3 points de caractéristique** et **1 point de compétence**.
+* **PV** : Tomber à court de points de vie interdit le combat jusqu'au repos ou à une potion.
+* **Énergie** : Se régénère avec le temps. Un combat coûte **15** énergie, un duel d'arène **20**, une partie de pêche **5**.
+
+Le serveur règle lui-même l'énergie maximale, la vitesse de récupération et les gains : ces valeurs varient d'un serveur à l'autre.
+
+---
+
+## Personnage, classe et compétences
+
+L'onglet **Personnage** porte la fiche : statistiques de base (ATQ, DÉF, VIT, PV), passif de classe, compétences et points à répartir. Le bouton **+1** placé sous chaque caractéristique dépense un point.
+
+### Choisir sa classe
+
+La classe se choisit au **niveau 5** et décide des statistiques, du passif et des compétences de combat.
+
+* **Guerrier** : passif *Peau de fer*, qui réduit de 15 % tous les dégâts subis. Compétences : *Frappe Brutale*, un coup à 200 % de dégâts, et *Cri de Guerre*, qui double la défense pour un tour et rend 10 % des PV.
+* **Rôdeur** : passif *Œil de lynx*, qui ajoute 12 % de chances de coup critique. Compétences : *Tir Précis*, qui ignore la défense adverse, et *Esquive*, qui évite entièrement la prochaine attaque.
+* **Mage** : passif *Percée arcanique*, dont les attaques ignorent 30 % de la défense adverse. Compétences : *Boule de Feu*, à 230 % de dégâts, et *Drain de Vie*, à 150 % de dégâts dont la moitié revient en PV.
+
+:::caution[Changer de classe se paie]
+La reconversion coûte **2 500 pièces**, et l'arbre de compétences repart à zéro : les branches appartiennent à la classe. Les points investis vous sont rendus.
+:::
+
+### L'arbre de compétences
+
+Il s'ouvre en même temps que la classe et compte **trois branches** par classe - *Fureur*, *Rempart* et *Vétéran* pour le Guerrier, *Précision*, *Ombre* et *Traqueur* pour le Rôdeur, *Arcane*, *Sang* et *Protection* pour le Mage.
+
+Chaque nœud a un rang, un coût en points et parfois un prérequis. Kotbo affiche pourquoi un nœud reste fermé : *Niveau N requis*, *Demande : …*, *N point(s) requis*. **Tout réinitialiser** rend les points investis contre **1 500 pièces**.
+
+---
+
+## Combattre
+
+Le bouton **Combat** tire un monstre à votre portée, et le duel se joue au tour par tour avec quatre boutons : **Attaquer**, **Défendre**, **Potion** et **Fuir**. Les compétences de classe apparaissent en plus quand leur recharge est finie.
+
+Une victoire rapporte de l'XP, des pièces, parfois un butin, et fait progresser le **bestiaire**. Une défaite ne coûte que vos PV.
+
+:::note[Ce qui empêche de combattre]
+Moins de 15 énergie, des PV trop bas, ou le délai entre deux combats. Le bot le dit à chaque fois, avec le temps restant.
+:::
+
+Le bouton **Boss** vise une créature précise parmi celles que le serveur a marquées comme boss. Le **Bestiaire** tient le carnet de chasse : créatures découvertes sur le total, victoires, défaites, taux de réussite, et un filtre *Déjà affrontées* / *Jamais croisées*.
+
+### L'arène
+
+Duels entre joueurs, **asynchrones** : votre adversaire n'a pas besoin d'être connecté, c'est son personnage qui se défend seul.
+
+* Ouverte au **niveau 5**, **20 énergie** par duel, et cinq minutes entre deux entrées en lice.
+* Chacun démarre à **1 000 points** de classement Elo, et l'arène ne propose que des adversaires d'un niveau comparable.
+* La fiche affiche le palmarès, la série en cours, le classement du serveur et les **duels subis récemment** - vous voyez qui vous a attaqué, et ce que cela vous a coûté ou rapporté.
+
+---
+
+## Équipement et objets
+
+L'onglet **Inventaire** liste le sac et sert à **équiper** une arme, une armure, un accessoire, ou à **boire** une potion. Un objet équipé porte la mention *(Équipé)*.
+
+Les **accessoires** occupent trois emplacements, débloqués aux **niveaux 1, 12 et 24**.
+
+Le reste du matériel s'obtient et s'améliore dans les ateliers du hub :
+
+* **Boutique** : Achète ce que le serveur a mis en vente : armes, armures, potions, objets de quête.
+* **Artisanat** : Transforme les butins de combat en équipement, selon les recettes du serveur. Chaque recette demande un niveau et un coût.
+* **Forge** : Améliore l'équipement **porté** jusqu'à **+10**. Un échec ne détruit rien : seules les pièces sont perdues.
+* **Autel d'enchantement** : Pose un parchemin sur l'équipement porté. L'enchantement suit l'objet, et se retire contre **750 pièces**.
+* **Vendre** : Revend un objet du sac.
+* **Marché noir** : Une sélection personnelle, à prix cassés, ouverte par intermittence : *elle rouvrira sans prévenir, un jour, à une heure que personne ne connaît*.
+
+---
+
+## Gagner sans se battre
+
+* **Daily** : la récompense quotidienne en pièces, avec son propre délai.
+* **Pêche** : 5 énergie par lancer, une prise classée de *Commun* à *Légendaire*.
+* **Voyage** : partir vers une destination pendant plusieurs minutes et tomber sur des événements à choix. Le voyage doit être terminé avant d'en relancer un.
+* **Payer** : verser des pièces à un membre, choisi dans le sélecteur Discord. Ni vers soi-même, ni vers un bot, et le serveur plafonne le montant et le délai entre deux transferts.
+
+---
+
+## La campagne
+
+Une trame en **cinq chapitres**, chacun découpé en étapes, avec un niveau conseillé et des récompenses d'étape et de chapitre. Elle avance toute seule au fil de ce que vous faites : en ouvrant l'onglet, plusieurs étapes peuvent se valider d'un coup - *vous aviez déjà fait le nécessaire*.
+
+---
+
+## Guilde, village et guerre
+
+Une **guilde RPG** se crée pour **500 pièces** ou se rejoint par son nom. Elle porte un niveau, un trésor commun et une liste de membres ; y déposer des pièces la fait monter.
+
+Le **village de guilde** ouvre cinq bâtiments, à bâtir et à agrandir sur le trésor commun. Chacun a trois niveaux, qui demandent un niveau de guilde et un coût croissants :
+
+* **Échoppe** : Une remise sur la boutique, jusqu'à -18 %.
+* **Forge de guilde** : Des améliorations qui ratent moins, jusqu'à +12 % de réussite.
+* **Taverne** : De l'XP de combat en plus, jusqu'à +22 %.
+* **Caserne** : Des statistiques offertes à tous les membres, jusqu'à +14 ATQ, +14 DÉF et +80 PV.
+* **Chambre forte** : Des pièces de combat en plus, jusqu'à +25 %.
+
+Seul le chef de guilde bâtit, et chaque niveau annonce son effet et son coût avant d'être payé.
+
+L'onglet **Guerre de clans** classe les équipes selon ce que le jeu leur a rapporté, sur la **saison** ou sur **la semaine**, et nomme les meilleurs combattants. Il dépend de ce que le serveur a branché : sans module Clans, ou avec le pont RPG coupé, Kotbo le dit au lieu d'afficher un classement vide.
+
+---
+
+## Le raid hebdomadaire
+
+Une fois par semaine, un boss s'ouvre pendant quelques heures. **Chaque équipe affronte sa propre instance**, dont les points de vie suivent son effectif.
+
+* L'annonce porte le bouton **Assaut** et la barre de progression de chaque équipe.
+* Chaque membre dispose d'un nombre d'assauts limité, et chaque assaut coûte de l'énergie.
+* Les récompenses se partagent : **30 % à parts égales**, le reste au prorata des dégâts infligés.
+
+Le raid se clôt à l'heure prévue - ou plus tôt si la saison de clans se termine, pour que ses points comptent encore.
+
+---
+
+## Quêtes
+
+L'onglet **Quêtes** liste ce qui est ouvert sur le serveur, en indiquant la portée - **personnelle** ou **d'équipe** - et l'échéance. Les récompenses se versent toutes seules dès la cible atteinte : il n'y a rien à réclamer.

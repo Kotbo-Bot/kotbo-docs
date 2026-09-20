@@ -144,6 +144,24 @@ This module lets users create their own temporary voice channel and configure it
 * **Required role**: restricts temporary channel creation to holders of a specific role (leave empty to allow everyone).
 * **Additional generators**: you can configure several independent generators (each with its own trigger channel, target category, name template and required role).
 
+:::note[What the required role gates]
+It gates access to the **generator**, not the permissions inside the created channel.
+:::
+
+### Created channel permissions
+
+The **Created channel permissions** block decides what the bot applies to every temporary channel as soon as it is created.
+
+* **Default slots**: `0` for an unlimited channel. The owner can change it afterwards from the panel.
+* **Locking**: create the channel already locked. Only the owner and the auto-allowed roles can join and write in it.
+* **Channel text chat**: *Inherited* (the chat follows the category, the original behaviour), *Open* (anyone who can see the channel can write in it, without gaining voice access) or *Locked* (only the owner and the auto-allowed roles write in it).
+* **Auto-allowed roles**: these roles see and join the channel without the owner adding them, even when it is created locked.
+* **Owner powers**: what the creator receives **on their own channel only** - *Mute*, *Deafen*, *Move* (required for the panel's "Kick" button), *Manage channel* (rename and configure it straight from Discord, without the panel) and *Manage messages* (delete and pin in the channel text chat).
+
+:::caution[These settings never open a closed channel]
+The temporary channel stays aligned with its category: this block stacks on top. If the category denies access to your members, the created channel denies it too.
+:::
+
 ### Supervision from the dashboard
 At the bottom of the tab, the **Active temporary channels** section lists every channel currently open on the server. Administrators can:
 * See the channel name, its current owner and the number of members connected.

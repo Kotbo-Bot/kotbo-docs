@@ -79,6 +79,14 @@ The **Access Matrix** defines, staff role by staff role, what is open in the das
 
 Only **declared staff roles** appear there: link a Discord role to a rank under [Hierarchy & roles](/en/dashboard/staff/hierarchie/) first, or the matrix stays empty.
 
+The matrix now lists **every module of the catalogue**, in the same category and the same order as it, and each page draws its rights **from the module it is named after**. Seasons, Reputation, Clans and Drops therefore no longer follow Leveling's rights, nor Marketplace and Quests those of Economy: each is set on its own.
+
+:::note[Closing a section really closes the data]
+Taking **View** away from a role does not just remove a sidebar entry: the API refuses to read, including when another page calls the section along the way. A member's file no longer opens from a giveaway's winner list, sanction reports, evidence and transcripts follow the *Sanctions* right, and ban appeals their own.
+
+**Configure** and **Delete** count the same way: a write no longer requires being a dashboard administrator, it requires the matching right on the section targeted. Ticking *Configure* on Giveaways for a role therefore really does open saving the giveaway configuration to it - and a deletion asks for *Delete*, never for *Configure*.
+:::
+
 ### The four rights
 
 | Right | What it allows |

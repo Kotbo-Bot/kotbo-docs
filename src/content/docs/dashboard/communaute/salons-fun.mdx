@@ -28,6 +28,10 @@ Le jeu de comptage invite vos membres à compter le plus loin possible, dans l'o
    * **Dernier joueur** : L'identifiant (ID) du dernier utilisateur ayant validé un nombre.
 4. Si un membre fait une erreur ou que vous souhaitez remettre la partie à zéro, cliquez sur **Réinitialiser le comptage** (un message de confirmation s'affiche).
 
+:::note[Deux nombres envoyés en même temps]
+Un seul des deux compte : le message perdant est supprimé avec un avertissement, **sans casser la chaîne**. La même règle protège tous les salons de jeu, dont les messages sont traités dans l'ordre, salon par salon.
+:::
+
 ---
 
 ## One Word Story
@@ -60,6 +64,7 @@ Chaque mot doit commencer par la dernière lettre du précédent.
 1. Dans le bloc **Chaîne de mots**, sélectionnez le salon dédié dans le menu déroulant **Salon Discord**.
 2. Le bloc affiche le **Dernier mot** joué et le **Dernier joueur**.
 3. Le bouton **Réinitialiser la chaîne** repart de zéro, après confirmation.
+4. Les mots à ligature (`cœur`, `œuvre`) sont acceptés, et un mot ne peut pas se terminer par un tiret.
 
 ---
 
@@ -69,8 +74,24 @@ Les membres devinent l'expression cachée derrière une suite d'emojis.
 
 ### Configuration du salon
 1. Dans le bloc **Rébus Emoji**, sélectionnez le salon dédié.
-2. Le bloc affiche l'**Indice actuel**, visible du seul staff.
-3. Le bouton **Nouveau rébus** en génère un autre, après confirmation.
+2. Le bloc affiche l'**Indice actuel** : c'est la même suite d'emojis que le bot publie dans le salon, pas un secret.
+3. Le bouton **Nouveau rébus** en génère un autre, après confirmation. Kotbo l'annonce aussitôt dans le salon, comme après chaque bonne réponse.
+
+### Écrire ses propres rébus
+
+Sous le salon, la section **Rébus du serveur** tient votre propre liste : ils sont tirés au hasard dans le salon, au même titre que ceux fournis par Kotbo. Le compteur affiche votre total sur un maximum de **200**.
+
+<div class="step-list">
+  <div class="step-item"><div><h3>Composez les emojis</h3><p>Tapez-les ou choisissez-les dans le sélecteur d'emojis.</p></div></div>
+  <div class="step-item"><div><h3>Listez les réponses acceptées</h3><p>Une réponse par ligne, par exemple <em>le roi lion</em> puis <em>roi lion</em>. Les accents, les majuscules et la ponctuation sont ignorés à la comparaison.</p></div></div>
+  <div class="step-item"><div><h3>Ajoutez le rébus</h3><p>Il pourra sortir dès le prochain tirage. Chaque rébus se modifie et se supprime ensuite depuis sa carte.</p></div></div>
+</div>
+
+L'interrupteur **Inclure les rébus fournis** mélange vos rébus avec ceux de Kotbo. Désactivé, seuls les vôtres sortent - sauf si vous n'en avez aucun. Le lien **Voir les rébus fournis** déplie la liste livrée par défaut.
+
+:::tip[Plusieurs formulations valent mieux qu'une]
+Un rébus n'est validé que si la réponse tapée figure dans la liste. Prévoyez les variantes courantes (avec et sans article, singulier et pluriel) plutôt que de compter sur une seule tournure.
+:::
 
 ---
 
@@ -90,7 +111,7 @@ Seuls les emojis sont autorisés dans le salon.
 
 ### Configuration du salon
 1. Dans le bloc **Emoji Uniquement**, sélectionnez le salon dédié.
-2. Ce salon est régulé automatiquement : tout message contenant autre chose que des emojis est supprimé.
+2. Ce salon est régulé automatiquement : tout message contenant autre chose que des emojis est supprimé. Les emojis du serveur, les teintes de peau, les drapeaux et les touches numérotées passent sans encombre.
 
 ---
 

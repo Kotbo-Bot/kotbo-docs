@@ -50,15 +50,16 @@ This system lets your members create and manage their own voice channel independ
 ### Step 2: the interactive control embed
 At the same time, Kotbo posts an interactive management message (an embed) in the text chat attached to that temporary voice channel. The channel's creator (its owner) can control access with the buttons:
 
-* **Lock (🔒) / Unlock (🔓)**: makes the channel private. When locked, other members can no longer force their way in.
-* **Limit (👥)**: opens a Discord form for setting the allowed user limit.
-* **Rename (✏️)**: opens a form for changing the channel's name.
-* **Kick (👢)**: removes an unwanted user connected to the voice channel.
-* **Ban (🚫)**: kicks a member and permanently bars them from rejoining this channel.
-* **Add (➕)**: explicitly grants access to a specific member, even when the channel is locked.
-* **Transfer (👑)**: hands ownership of the channel to another member present in the voice channel.
-* **Claim (🙋)**: lets someone claim ownership of the channel if the original creator has left and the channel is orphaned.
-* **Reserve (🛡️)**: limits access to a specific Discord role picked from a dropdown.
+* **Lock / Unlock**: makes the channel private. When locked, other members can no longer force their way in.
+* **Limit**: opens a Discord form for setting the allowed user limit.
+* **Rename**: opens a form for changing the channel's name.
+* **Chat**: opens or closes the channel's text chat. Closed, only the owner and the allowed members write in it; reopened, the chat goes back to the access its category grants.
+* **Kick**: removes an unwanted user connected to the voice channel.
+* **Ban**: kicks a member and permanently bars them from rejoining this channel.
+* **Add**: explicitly grants access to a specific member, even when the channel is locked.
+* **Transfer**: hands ownership of the channel to another member present in the voice channel. The new owner receives the powers granted by the server configuration.
+* **Claim**: lets someone claim ownership of the channel if the original creator has left and the channel is orphaned.
+* **Reserve**: limits access to a specific Discord role picked from a dropdown.
 
 ### Step 3: automatic cleanup
 As soon as the last connected member leaves the temporary voice channel, Kotbo **automatically and permanently deletes** the channel and its attached chat.

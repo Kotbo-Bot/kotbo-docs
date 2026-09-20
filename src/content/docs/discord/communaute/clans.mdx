@@ -1,0 +1,63 @@
+---
+title: Clans, saisons et paris
+description: Suivre son clan, lire les classements de saison et lancer un pari en points de clan depuis Discord.
+---
+
+import DiscordCommand from '../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">Les <strong>clans</strong> répartissent les membres du serveur en équipes qui marquent des points ensemble, saison après saison. Tout se lit et se joue depuis Discord ; la configuration, elle, reste au dashboard.</p>
+
+:::tip[Côté dashboard]
+Créer les clans, régler les saisons, les points et les récompenses se fait depuis la page [Clans](/dashboard/xp/clans/).
+:::
+
+---
+
+## Suivre son clan
+
+* `/clan list` : Tous les clans configurés sur le serveur, avec leur effectif.
+* `/clan info` : La fiche d'un clan et le classement de ses membres.
+* `/clan leaderboard` : Le classement des clans pour la saison en cours.
+* `/clan historique` : Les saisons passées, avec l'option **saison** pour en viser une.
+* `/clan paris` : Vos paris en cours, votre dette et votre bilan.
+
+Du côté des saisons, `/seasons current` donne la saison en cours, `/seasons list` toutes les saisons, et `/seasons leaderboard` le classement d'une saison précise.
+
+---
+
+## Les paris en points de clan
+
+Un pari met en jeu des **points de clan**, pas des pièces. Un arbitre tranche ensuite pour désigner le camp gagnant.
+
+<DiscordCommand
+  command="/paris duel sujet:Premier au classement vendredi mise:250 adversaire:@Dominique"
+  embedTitle="Pari ouvert"
+  embedDescription="**Premier au classement vendredi**\nMise : **250** points de clan · Duel Alex contre Dominique\nUn arbitre devra désigner le camp gagnant."
+  buttons="Accepter le duel, Annuler"
+/>
+
+* `/paris duel` : Un face-à-face. L'option **adversaire** défie quelqu'un en particulier ; laissée vide, le défi est ouvert à tous.
+* `/paris pool` : Une cagnotte à plusieurs, avec un nombre de **places** à pourvoir.
+* `/paris equipes` : Des camps nommés, séparés par des virgules, et leurs places après deux-points : `Rouge:1, Bleu:3`.
+
+Chaque pari porte un **sujet** et une **mise** en points de clan.
+
+:::caution[Miser des points qu'on n'a pas]
+Le pari reste possible : la mise manquante devient une **dette**, que `/clan paris` affiche et qui se rembourse sur vos gains suivants. Une dette qui se creuse et une dette soldée peuvent déclencher une [automatisation](/dashboard/communaute/declencheurs/).
+:::
+
+Quand l'arbitre annule un pari plutôt que de le trancher, les mises sont rendues à tout le monde.
+
+---
+
+## Réservé aux administrateurs
+
+Trois sous-commandes agissent sur tout le serveur et demandent la permission Administrateur :
+
+* `/clan distribute` répartit aléatoirement les membres qui n'ont pas de clan.
+* `/clan dedupe` corrige les membres qui portent plusieurs clans à la fois.
+* `/clan clear` retire tous les rôles de clan du serveur.
+
+:::note[Le rééquilibrage est au dashboard]
+Pour remplir un clan qui vient d'être créé sans vider les autres, passez par le bouton **Rééquilibrer** de la page [Clans](/dashboard/xp/clans/) : il montre un aperçu des transferts avant d'appliquer quoi que ce soit.
+:::

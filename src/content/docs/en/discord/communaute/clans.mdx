@@ -1,0 +1,63 @@
+---
+title: Clans, seasons and bets
+description: Follow your clan, read the season leaderboards and start a clan-point bet from Discord.
+---
+
+import DiscordCommand from '../../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead"><strong>Clans</strong> split the server's members into teams that score together, season after season. Everything is read and played from Discord; the configuration stays on the dashboard.</p>
+
+:::tip[On the dashboard]
+Creating the clans, setting the seasons, the points and the rewards happens on the [Clans](/en/dashboard/xp/clans/) page.
+:::
+
+---
+
+## Following your clan
+
+* `/clan list`: Every clan configured on the server, with its head count.
+* `/clan info`: A clan's file and the ranking of its members.
+* `/clan leaderboard`: The clan leaderboard for the active season.
+* `/clan historique`: Past seasons, with the **saison** option to target one.
+* `/clan paris`: Your open bets, your debt and your record.
+
+On the season side, `/seasons current` gives the running season, `/seasons list` every season, and `/seasons leaderboard` the ranking of a specific one.
+
+---
+
+## Clan-point bets
+
+A bet stakes **clan points**, not coins. A referee then settles it by naming the winning side.
+
+<DiscordCommand
+  command="/paris duel sujet:Top of the leaderboard on Friday mise:250 adversaire:@Dominique"
+  embedTitle="Bet opened"
+  embedDescription="**Top of the leaderboard on Friday**\nStake: **250** clan points · Duel between Alex and Dominique\nA referee will name the winning side."
+  buttons="Accept the duel, Cancel"
+/>
+
+* `/paris duel`: A head-to-head. The **adversaire** option challenges someone in particular; left empty, the challenge is open to all.
+* `/paris pool`: A pot between several players, with a number of **places** to fill.
+* `/paris equipes`: Named sides, separated by commas, with their seats after a colon: `Red:1, Blue:3`.
+
+Every bet carries a **sujet** (subject) and a **mise** (stake) in clan points.
+
+:::caution[Staking points you do not have]
+The bet still goes through: the missing stake becomes a **debt**, which `/clan paris` shows and which is repaid out of your next winnings. A debt opening and a debt cleared can both fire an [automation](/en/dashboard/communaute/declencheurs/).
+:::
+
+When the referee voids a bet instead of settling it, every stake is returned.
+
+---
+
+## Administrators only
+
+Three subcommands act on the whole server and require the Administrator permission:
+
+* `/clan distribute` randomly assigns members who have no clan.
+* `/clan dedupe` fixes members holding several clans at once.
+* `/clan clear` removes every clan role from the server.
+
+:::note[Rebalancing lives on the dashboard]
+To fill a freshly created clan without emptying the others, use the **Rebalance** button on the [Clans](/en/dashboard/xp/clans/) page: it previews the transfers before anything is applied.
+:::

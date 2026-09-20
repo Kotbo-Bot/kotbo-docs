@@ -3,6 +3,8 @@ title: Anti-raid protection
 description: Detect join waves, trigger emergency locks, require a captcha at the door and control invites from the dashboard.
 ---
 
+import DiscordCommand from '../../../../../components/DiscordCommand.astro';
+
 <p class="doc-lead">The <strong>Security → Anti-raid</strong> page gathers everything that protects the door of your server: join-wave detection, instant emergency locks, new-member captcha, scam filter and invite control.</p>
 
 :::note[Where to find it]
@@ -31,6 +33,28 @@ Below the toggles, three counters recall the number of **pending reports**, **in
 
 ---
 
+## Silencing channels: the lockdown
+
+Channel lockdown is run from Discord, not from the dashboard. It denies `@everyone` the right to write, to open threads and to react in text channels, and to connect and speak in voice channels.
+
+<DiscordCommand
+  command="/protection lockdown on portee:Tout le serveur"
+  embedTitle="Lockdown activé"
+  embedDescription="**12** salon(s) verrouillé(s) dans tout le serveur.\n2 l'étaient déjà.\nLes membres administrateurs, ou autorisés explicitement dans un salon, peuvent toujours y écrire."
+/>
+
+* **portee** (scope): *Le salon* - the channel, the default - *Sa catégorie entière* - its whole category - or *Tout le serveur* - the whole server.
+* **salon**: the channel or category targeted, the current channel by default.
+* **raison**: shown in the channel and in the audit log.
+
+`/protection lockdown off` reopens with the **same scope**, and gives every permission it touched its original state back - a channel that already denied `@everyone` the right to write still denies it afterwards. `/protection status` reports how many channels are currently locked.
+
+:::note[The staff keeps its voice]
+On a category or on the whole server, only **public channels** are locked: channels already closed to `@everyone`, where the staff coordinates, stay open. The command requires the **Administrator** permission.
+:::
+
+---
+
 ## Detection & locks tab
 
 ### Raid detection
@@ -46,6 +70,35 @@ Kotbo watches the pace of arrivals over a sliding window and switches the server
   * *Automatically kick arrivals*: the harshest option, it also rejects legitimate arrivals for the whole duration of raid mode.
 * **Alert channel**: without one, raid mode turns on without anyone being told.
 * **Automatic lift (minutes)**: how long automatically triggered raid mode lasts (1 to 1440).
+
+### Accounts that are too new
+
+Kotbo compares every arrival to the creation date of the Discord account and handles those below the required age at the door. Bots are never affected.
+
+* **Minimum account age**: the switch for this guard.
+* **Minimum age** and **Unit**: a threshold in *Days* or *Months*. Past a year, Kotbo warns that a large share of legitimate arrivals will be caught.
+* **Action**: *Alert only*, *Kick* or *Ban*.
+* **Alert channel**: every account turned away or flagged is posted there.
+* **DM message**: sent before the kick or the ban.
+* **Exempt members (IDs)**: one ID per line, to let a legitimate new account in.
+
+:::caution[A ban is permanent]
+An account banned for its age can never come back, even once it is old enough, short of a manual unban followed by an exemption. The sanction is recorded in the member's file, but it is neither synced to linked accounts nor propagated to other servers: a main account linked in good faith is not banned along with it.
+:::
+
+### Roles given back on return
+
+A member who leaves and comes back gets the roles they had when they left.
+
+* **Persistent roles**: roles are remembered on departure and given back on arrival, after the captcha if it is enabled.
+* **Roles concerned**: *All but the selected ones* or *Only the selected ones*. The role list that follows flips meaning with that choice.
+* **Retention (days)**: 1 to 365. Past that, the member comes back without their roles.
+
+:::caution[What is never given back]
+Moderation and administration roles, roles managed by an integration, roles placed above the bot, and the captcha or verification roles. Leaving and returning is therefore no way to recover powers that were taken away.
+
+In *Only the selected ones* mode with no role ticked, nobody gets any role back on return: Kotbo shows a warning.
+:::
 
 ### Join lock
 

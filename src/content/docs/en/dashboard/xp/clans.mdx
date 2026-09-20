@@ -40,16 +40,46 @@ The **Configured clans** table then shows the **Clan**, **Discord Role**, **Clan
 
 ### Bulk operations
 
-Three actions run progressively in the background and require typing a confirmation word:
+These actions run progressively in the background and require typing a confirmation word:
 
 | Action | Word to type | Effect |
 | --- | --- | --- |
 | **Distribute** | `DISTRIBUTE` | Randomly assigns a clan to members who have none. |
-| **Clean up duplicates** | `CLEAN` | Keeps a single clan for members holding several. The clan kept is the one they contributed most to this season, and their points follow. |
+| **Rebalance** | `REBALANCE` | Moves members of the most crowded clans into the clans to fill. See below. |
 | **Remove from all** | `REMOVE` | Removes their clan from every member. |
 
 :::warning[Removal recreates the roles]
 Each clan role is recreated identically (channel permissions included), then the old one is deleted. **The role ID changes**: any external setting pointing at it has to be redone.
+:::
+
+:::note[Members holding several clans]
+Cleaning those duplicates is no longer on this page: it runs from Discord with `/clan dedupe`, administrators only. See [Clans, seasons and bets](/en/discord/communaute/clans/).
+:::
+
+### Rebalancing into the new clans
+
+This is the tool to use after creating a clan: without it, the new one stays empty while the old ones overflow. **Nothing changes before the final confirmation.**
+
+<div class="step-list">
+  <div class="step-item"><div><h3>Tick the clans to fill</h3><p>Unchecked clans are the ones giving members away.</p></div></div>
+  <div class="step-item"><div><h3>Set the target size</h3><p><strong>Target size per clan to fill</strong>, or leave it empty for the average of all clans.</p></div></div>
+  <div class="step-item"><div><h3>Choose who leaves first</h3><p><em>Least active</em>, <em>Random</em> or <em>Most active</em>.</p></div></div>
+  <div class="step-item"><div><h3>Compute the preview</h3><p>Kotbo lists the proposed transfers, clan by clan, with the head count before and after.</p></div></div>
+  <div class="step-item"><div><h3>Start the rebalancing</h3><p>Type <code>REBALANCE</code>. Every transfer is checked again at launch, then applied progressively.</p></div></div>
+</div>
+
+**Activity is measured as previous-season points per day of presence**, so members who joined mid-season are not penalised. Those who joined too late for that season are judged on the current one. In *Random* mode the activity shown is for information only: it decides nothing, and **New draw** gives another list.
+
+The **Never move above** field protects the pillars: a member whose points exceed that threshold stays in their clan.
+
+:::caution["Most active" costs the giving clans dearly]
+This mode gives the new clans a strong team right away, but the giving clans lose their best players, the ones most attached to their clan. Kotbo shows a warning and points to the protection threshold.
+:::
+
+Some members are **never** moved, and the preview groups them by reason: **Clan leaders**, **Ongoing bet**, **Above threshold**, **Linked accounts in two clans**, **Several clans**. The **Keep** button sets others aside by hand - the next one on the list then takes their place.
+
+:::note[What happens to the points]
+**Current-season** points follow the member into their new clan; **previous-season** points stay with the former one.
 :::
 
 ---

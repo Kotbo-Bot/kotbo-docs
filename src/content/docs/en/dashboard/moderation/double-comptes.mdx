@@ -65,6 +65,10 @@ A graph of linked accounts. Drag the nodes to rearrange the view, and hover a li
 ### 4. Verification
 This tab shows the user journey imposed on members blocked or flagged by the bot. From the dashboard you can review the state of that journey and the access statistics.
 
+:::note[The switch drives the module]
+**Security verification** - *Verifies the identity through Discord OAuth* - drives the module of the same name in the [catalogue](/en/dashboard/configuration/modules/): saving it on enables the module, saving it off shuts it down. The tab's settings only appear while it is on.
+:::
+
 Verification is not triggered by the join score alone: accumulated warnings can trigger it too.
 
 * **Threshold**: the number of warnings above which verification is imposed. With no threshold set, this trigger stays inactive.

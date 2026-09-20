@@ -3,7 +3,7 @@ title: Reaction Roles
 description: Déployez des messages avec boutons interactifs pour que vos membres s'attribuent eux-mêmes leurs rôles.
 ---
 
-<p class="doc-lead">Le module <strong>Reaction Roles</strong> publie sur Discord un message contenant des boutons. Un clic attribue le rôle associé, un second clic le retire.</p>
+<p class="doc-lead">Le module <strong>Reaction Roles</strong> publie sur Discord un message contenant des boutons. Un clic attribue le rôle associé, et selon le mode choisi, un second clic le retire ou non.</p>
 
 :::note[Où la trouver]
 Section **Communauté → Reaction Roles** : [Ouvrir les reaction roles ↗](https://dash.kotbo.fr/reaction-roles).
@@ -17,13 +17,33 @@ Kotbo doit disposer de la permission **Gérer les rôles**, et son rôle doit ê
 <div class="step-list">
   <div class="step-item"><div><h3>Cliquez sur Déployer un Panel</h3><p>Le formulaire s'ouvre avec un aperçu Discord en direct sur la droite.</p></div></div>
   <div class="step-item"><div><h3>Renseignez le titre et le salon</h3><p><strong>Titre du Panel / Message</strong> (par exemple <em>Sélectionnez vos rôles de notification</em>) et <strong>Salon de destination</strong>.</p></div></div>
-  <div class="step-item"><div><h3>Ajoutez vos boutons</h3><p>Pour chaque bouton : un <strong>Émoji</strong> (optionnel), un <strong>Libellé bouton</strong> et un <strong>Rôle associé</strong>. Le bouton <strong>Ajouter un bouton</strong> en crée d'autres.</p></div></div>
+  <div class="step-item"><div><h3>Choisissez le mode des boutons</h3><p><strong>Mode des boutons</strong> s'applique à tout le panneau, et chaque bouton peut s'en écarter. Voir ci-dessous.</p></div></div>
+  <div class="step-item"><div><h3>Ajoutez vos boutons</h3><p>Pour chaque bouton : un <strong>Émoji</strong> (optionnel), un <strong>Libellé bouton</strong>, un <strong>Rôle associé</strong>, la <strong>Couleur de ce bouton</strong> et éventuellement un <strong>Mode de ce bouton</strong>. Le bouton <strong>Ajouter un bouton</strong> en crée d'autres.</p></div></div>
   <div class="step-item"><div><h3>Déployez</h3><p>Cliquez sur <strong>Déployer le Panel</strong>. Kotbo publie le message sur Discord.</p></div></div>
 </div>
 
 :::caution[Libellé et rôle obligatoires]
 Tous les boutons doivent avoir un libellé **et** un rôle, sinon Kotbo refuse le déploiement.
 :::
+
+---
+
+## Bascule ou attribution définitive
+
+| Mode | Ce que fait un clic |
+| --- | --- |
+| **Bascule** | Un clic attribue le rôle, un second le retire. |
+| **Attribution définitive** | Le rôle est attribué une seule fois : recliquer ne le retire pas. |
+
+Le mode se choisit d'abord pour **tout le panneau**. Chaque bouton garde ensuite **Mode du panneau** ou impose le sien, ce qui permet de mélanger un rôle de notification qu'on peut couper et un rôle d'accès qu'on ne rend pas.
+
+Le texte sous le titre du message suit le mode retenu : Kotbo annonce que les rôles ne se retirent pas d'ici, ou que certains d'entre eux ne se retirent plus une fois obtenus.
+
+---
+
+## La couleur des boutons
+
+Chaque bouton porte sa propre couleur Discord : **Gris**, **Bleu**, **Vert** ou **Rouge**. Elle n'a aucun effet sur l'attribution ; elle sert à distinguer des familles de rôles dans un panneau qui en compte beaucoup.
 
 ---
 
@@ -37,11 +57,11 @@ Le panneau **Aperçu Live (Discord)** reproduit le rendu exact du message avant 
 
 La liste **Panels Déployés** affiche chaque menu avec son salon et ses rôles. Deux actions sont disponibles :
 
-* **Modifier** : rouvre le formulaire pour changer le titre ou les boutons.
-* **Supprimer du dashboard** : retire le panel de la liste.
+* **Modifier** : rouvre le formulaire sur le panneau existant. Titre, boutons, rôles, couleurs et modes se changent, et **le message Discord est mis à jour dès l'enregistrement** - il n'y a rien à republier.
+* **Supprimer** : *Supprimer ce menu de rôles ?* Le message Discord du panneau est supprimé lui aussi.
 
-:::warning[La suppression ne retire pas le message Discord]
-Le message publié sur Discord n'est pas supprimé automatiquement. Ses boutons restent visibles, mais ils n'attribuent plus rien : un membre qui clique reçoit un message privé lui indiquant que le panneau de rôles a été supprimé ou n'est plus actif. Supprimez le message à la main pour éviter la confusion.
+:::caution[Changer de salon republie le panneau]
+Si vous désignez un autre salon en modifiant un panneau déployé, Kotbo publie un nouveau message dans le salon choisi et **supprime l'ancien**. Les membres perdent le message d'origine, ses épingles et les liens qui pointaient dessus.
 :::
 
 Si un salon ou un rôle a disparu du serveur, Kotbo l'affiche comme **Salon inconnu** ou **Rôle inconnu** avec son identifiant, ce qui permet de repérer les panels à corriger.

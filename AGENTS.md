@@ -11,7 +11,7 @@ The dashboard source used as the product reference is located at `../Kotbo/apps/
 ## Project structure
 
 - `src/content/docs/`: pages de documentation écrites en Markdown ou MDX.
-- `src/components/`: composants Astro réutilisables pour les pages de documentation (ex: `DashboardScreenshot.astro`, `DiscordCommand.astro`). `LanguageSelect.astro` surcharge le sélecteur de langue de Starlight (bouton drapeau + menu déroulant).
+- `src/components/`: composants Astro réutilisables pour les pages de documentation (ex: `DashboardScreenshot.astro`, `DiscordCommand.astro`). `LanguageSelect.astro` surcharge le sélecteur de langue de Starlight (bouton FR/EN + menu déroulant).
 - `src/styles/`: feuilles de style modulaires :
   - `css.rooting.css` : Feuille de style principale important les autres fichiers.
   - `variables.css` : Variables de thèmes, couleurs, polices.
@@ -35,7 +35,8 @@ The dashboard source used as the product reference is located at `../Kotbo/apps/
 - Both locales must keep the exact same file tree and the same frontmatter keys, including `sidebar.order`. Starlight maps a page to its translation by identical path, so `en/` reuses the French path segments (`en/premiers-pas/connexion.mdx`).
 - Any page added, renamed, or removed must be applied to both locales in the same change, along with its `translations` entry in the `sidebar` of `astro.config.mjs`.
 - Absolute links inside English pages must be prefixed with `/en/`; relative links work unchanged in both locales.
-- Discord slash commands are registered with French names and option names and are not localized, so command syntax stays verbatim in the English pages.
+- Most Discord slash commands are registered with French names and option names and are not localized, so command syntax stays verbatim in the English pages.
+- A few commands are localized by Discord and do change name per client language: `/partenariat` (`/partnership`), `/giveaway` (subcommands and options), `/aide` (`/help`), `/langue` (`/language`), the `Sanctionner` context menu, and the `membre` option of `/rpg`. Check `../Kotbo/apps/bot/messages/{fr,en}.json` for the `*_name` keys before quoting a command in the English pages.
 - When translating dashboard labels, use the wording from `../Kotbo/apps/dashboard/messages/en.json` rather than inventing a translation.
 - Never expose tokens, IDs, private server data, member data, or production configuration.
 

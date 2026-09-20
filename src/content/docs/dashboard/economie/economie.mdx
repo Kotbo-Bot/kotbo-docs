@@ -16,6 +16,10 @@ La page se découpe en huit onglets : **Configuration**, **Objets Boutique**, **
 Le choix d'un rythme d'économie - gains du daily, délai, énergie - a sa propre page : [Configuration rapide](/dashboard/economie/configuration-rapide/).
 :::
 
+:::tip[Côté Discord]
+Ce que vos membres voient du jeu tient dans deux guides : [Jouer au RPG](/discord/economie/rpg/) pour le hub `/rpg`, et [Monnaie, boutique et jeux](/discord/economie/economie/) pour la monnaie, l'hôtel des ventes et les paris.
+:::
+
 Un bouton **Page publique**, visible depuis tous les onglets, ouvre le tableau public du RPG de clan - raid en cours, quêtes et avancement de chaque clan. Il est détaillé sur la page [Clans](/dashboard/xp/clans/).
 
 ---
@@ -24,7 +28,7 @@ Un bouton **Page publique**, visible depuis tous les onglets, ouvre le tableau p
 
 ### Activation des modules
 
-* **Activer les Aventures RPG (RNG)** : déverrouille la commande `/rpg-travel` et les événements aléatoires.
+* **Activer les Aventures RPG (RNG)** : déverrouille les voyages et les événements aléatoires. Les joueurs partent en aventure depuis le hub `/rpg`, et non par une commande à eux.
 * **Activer la Boutique d'Objets** : permet d'acheter du matériel, d'équiper des armes et d'utiliser des potions.
 * **Activer le Système de Guildes RPG** : permet de fonder des alliances, de coopérer et d'avoir un coffre de guilde.
 
@@ -41,7 +45,7 @@ Plafonds appliqués aux jeux d'argent et aux transferts entre membres :
 
 * **Mise maximale par partie** : s'applique à `/dice`, `/roulette` et `/rps`.
 * **Parties par jour et par membre**.
-* **Montant maximal par transfert** : s'applique à `/rpg-pay`.
+* **Montant maximal par transfert** : s'applique aux paiements entre membres, faits depuis le hub `/rpg`. L'aide du champ nomme encore l'ancienne commande `/rpg-pay`, qui n'existe plus.
 * **Délai entre deux transferts (minutes)**.
 
 ### Réinitialisation
@@ -59,9 +63,30 @@ Chaque réinitialisation demande désormais de saisir `RESET` pour confirmer. L'
 Le bouton **Créer un objet** ouvre un formulaire :
 
 * **Nom de l'objet**, **Emoji**, **Description**, **Type d'objet** et **Prix d'achat**.
-* **Statistiques & Effets** : **Bonus d'Attaque (ATK)**, **Bonus de Défense (DEF)**, **Soin Points de Vie (HP)** et **Soin Énergie**. Tous les types n'ont pas besoin d'attributs.
+* **Statistiques & Effets** : les champs proposés suivent le type choisi.
+
+| Type d'objet | Ce qu'il demande |
+| --- | --- |
+| **WEAPON (Arme)** | Bonus d'Attaque (ATK). |
+| **ARMOR (Armure)** | Bonus de Défense (DEF). |
+| **ACCESSORY (Accessoire)** | Bonus d'Attaque (ATK), de Défense (DEF) et de Vitesse (SPD). |
+| **POTION (Consommable)** | Soin Points de Vie (HP) et Soin Énergie. |
+| **SCROLL (Parchemin d'enchantement)** | Un enchantement et son palier, voir ci-dessous. |
+| **MATERIAL (Matériau d'artisanat)** | Aucun attribut : il entre dans les recettes d'artisanat. |
+| **QUEST (Quête)** | Aucun effet mécanique : objet narratif, clé ou badge que le serveur met en scène. |
 
 Les objets fournis globalement par Kotbo apparaissent en **lecture seule** et ne peuvent pas être modifiés depuis votre serveur.
+
+### Les parchemins d'enchantement
+
+Un objet de type **SCROLL (Parchemin d'enchantement)** pose un enchantement sur l'équipement du joueur. Deux champs lui sont propres :
+
+* **Enchantement posé** : le formulaire propose les enchantements du jeu, affiche la description de celui que vous choisissez et les emplacements d'équipement visés.
+* **Palier accordé** : borné au palier maximum de l'enchantement retenu, rappelé sous le champ. Il reste inerte tant qu'aucun enchantement n'est désigné.
+
+:::caution[Un parchemin sans enchantement est refusé]
+*Un parchemin doit désigner l'enchantement qu'il pose.* Sans cela, l'objet serait acheté et consommé sans jamais rien poser : Kotbo refuse l'enregistrement.
+:::
 
 ### Récompenses versées par d'autres modules
 
@@ -160,6 +185,10 @@ Le raid demande l'un des deux : sans module d'équipe, il ne peut pas s'activer.
 
 Le bouton **Lancer un raid maintenant** ouvre la fenêtre sur-le-champ. Enregistrez vos réglages d'abord : le lancement part sur ce qui est enregistré, pas sur ce qui est à l'écran.
 
+:::note[Changer de boss en cours de semaine]
+La fenêtre du prochain raid est écrite d'avance, avec le boss tiré à ce moment-là. Choisir un autre boss puis **enregistrer** reprend la fenêtre en attente, donc la semaine en cours. Le boss fixe est désigné par son **nom** : renommer ou désactiver sa fiche dans *Boss & Monstres* le rend introuvable, et le sélecteur l'annonce - *… (indisponible : fiche désactivée)*.
+:::
+
 ### Équilibrage et récompenses
 
 * **PV par membre**, avec un **PV minimum** et un **PV maximum**. Un aperçu annonce ce qu'affrontent une équipe de 3 et une équipe de 20.
@@ -191,8 +220,13 @@ La fenêtre est alignée sur l'heure : 24 h se remet à zéro à minuit UTC, 6 h
 
 Deux portées :
 
-* **Personnelle** : chaque membre a sa progression et réclame sa récompense une fois la cible atteinte.
+* **Personnelle** : chaque membre a sa progression. La récompense se verse toute seule sur l'action qui atteint la cible, sans geste du joueur.
 * **Équipe** : toute l'équipe pousse le même compteur. La récompense se partage au prorata - 30 % à parts égales, le reste selon ce que chacun a apporté - et se verse toute seule à la complétion.
+
+L'interrupteur **Répétable dans la journée** décide de ce qui se passe une fois la quête payée :
+
+* **Activé** : la quête repart à zéro dès qu'elle est payée, et le joueur peut la refaire autant de fois qu'il veut dans la fenêtre. Sa carte porte l'étiquette **Répétable**.
+* **Désactivé** : la quête ne rapporte qu'une fois par 24 h. Terminée plus tôt, elle attend la fin du délai pour se payer.
 
 Une quête inactive n'est plus proposée et cesse de compter. Les points de clan ne partent que si le pont RPG vers les clans est ouvert, dans l'onglet *Boss & Monstres*.
 

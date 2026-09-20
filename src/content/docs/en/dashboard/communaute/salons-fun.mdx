@@ -28,6 +28,10 @@ The counting game invites your members to count as high as they can, in ascendin
    * **Last player**: the ID of the last user who posted a valid number.
 4. If a member makes a mistake or you want to reset the game, click **Reset the count** (a confirmation message appears).
 
+:::note[Two numbers posted at once]
+Only one of them counts: the losing message is deleted with a warning, **without breaking the chain**. The same rule protects every game channel, whose messages are handled in order, channel by channel.
+:::
+
 ---
 
 ## One Word Story
@@ -60,6 +64,7 @@ Each word must start with the previous word's last letter.
 1. In the **Word Chain** block, pick the dedicated channel from the **Discord Channel** dropdown.
 2. The block shows the **Last word** played and the **Last player**.
 3. The **Reset the chain** button starts over, after confirmation.
+4. Words with ligatures (`cœur`, `œuvre`) are accepted, and a word cannot end with a hyphen.
 
 ---
 
@@ -69,8 +74,24 @@ Members guess the phrase hidden behind a string of emojis.
 
 ### Setting up the channel
 1. In the **Emoji Riddle** block, pick the dedicated channel.
-2. The block shows the **Current clue**, visible to the staff only.
-3. The **New riddle** button generates another one, after confirmation.
+2. The block shows the **Current clue**: it is the same string of emojis the bot posts in the channel, not a secret.
+3. The **New riddle** button generates another one, after confirmation. Kotbo announces it in the channel right away, as it does after every correct answer.
+
+### Writing your own riddles
+
+Below the channel, the **Server riddles** section holds your own list: they are drawn at random in the channel, just like the ones Kotbo ships. The counter shows your total out of a maximum of **200**.
+
+<div class="step-list">
+  <div class="step-item"><div><h3>Compose the emojis</h3><p>Type them or pick them from the emoji picker.</p></div></div>
+  <div class="step-item"><div><h3>List the accepted answers</h3><p>One answer per line, for example <em>the lion king</em> then <em>lion king</em>. Accents, case and punctuation are ignored when comparing.</p></div></div>
+  <div class="step-item"><div><h3>Add the riddle</h3><p>It can come up from the very next draw. Each riddle can then be edited and deleted from its card.</p></div></div>
+</div>
+
+The **Include built-in riddles** switch mixes yours with Kotbo's. Turned off, only yours are drawn - unless you have none. The **Show built-in riddles** link unfolds the default list.
+
+:::tip[Several wordings beat one]
+A riddle only counts as solved if the typed answer is in the list. Plan for the common variants (with and without the article, singular and plural) instead of relying on a single phrasing.
+:::
 
 ---
 
@@ -90,7 +111,7 @@ Only emojis are allowed in the channel.
 
 ### Setting up the channel
 1. In the **Emoji Only** block, pick the dedicated channel.
-2. The channel is moderated automatically: any message containing anything but emojis is deleted.
+2. The channel is moderated automatically: any message containing anything but emojis is deleted. Server emojis, skin tones, flags and keycap digits all get through.
 
 ---
 

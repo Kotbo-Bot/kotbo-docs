@@ -154,8 +154,11 @@ const t = isEnglish
           <div class="discord-buttons">
             {buttons.split(',').map((btnLabel, idx) => {
               const label = btnLabel.trim();
-              const isPrimary = idx === 0 && !label.includes('👎');
-              const isSuccess = label.includes('👍') || label.includes('accept') || label.includes('oui') || label.includes('Approuver') || label.includes('Approve');
+              const lowered = label.toLowerCase();
+              const isDownvote = lowered.includes('downvote');
+              const isPrimary = idx === 0 && !isDownvote;
+              const isSuccess = ['upvote', 'accept', 'oui', 'approuver', 'approve', 'valider', 'validate']
+                .some((word) => lowered.includes(word));
               return (
                 <button class={`discord-btn ${isPrimary ? 'discord-btn-primary' : ''} ${isSuccess ? 'discord-btn-success' : ''}`}>
                   {label}

@@ -33,6 +33,12 @@ Reconnectez-vous après une modification de rôle afin de rafraîchir votre sess
 
 Assurez-vous d’avoir cliqué sur **Enregistrer** dans la barre située en bas de l’écran. Si une erreur apparaît, ne rechargez pas immédiatement la page : lisez le message, corrigez le champ indiqué puis réessayez.
 
+## Un bandeau « Serveur injoignable » s’affiche en haut du dashboard
+
+Kotbo a perdu le contact avec son service : soit votre navigateur n’a plus de connexion internet, soit le serveur ne répond plus, soit la base de données ou le bot sont injoignables. Le bandeau précise lequel des trois.
+
+Dans tous les cas, **les données affichées peuvent être obsolètes et les modifications sont bloquées** : c’est volontaire, pour qu’un enregistrement ne parte pas dans le vide. Le bouton **Réessayer** relance la connexion, et le bandeau disparaît dès que le service répond de nouveau.
+
 ## Pourquoi un salon ou un rôle est absent d’une liste ?
 
 Le dashboard reflète les éléments accessibles au bot. Vérifiez dans Discord que le rôle Kotbo est suffisamment haut dans la hiérarchie et qu’il peut voir le salon concerné.

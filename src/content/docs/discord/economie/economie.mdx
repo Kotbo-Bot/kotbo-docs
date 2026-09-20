@@ -1,0 +1,65 @@
+---
+title: Monnaie, boutique et jeux
+description: Gagner, dépenser et miser des pièces sur Discord, de la récompense quotidienne à l'hôtel des ventes.
+---
+
+import DiscordCommand from '../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">La monnaie du serveur porte le nom et l'emoji que le staff lui a donnés. Elle se gagne en parlant, en travaillant, en combattant, et se dépense en objets, en améliorations et en paris.</p>
+
+:::tip[Côté dashboard]
+Les montants, les délais et les plafonds se règlent depuis le dashboard : voir [Économie & RPG](/dashboard/economie/economie/). Le jeu de rôle lui-même est détaillé dans [Jouer au RPG](/discord/economie/rpg/).
+:::
+
+---
+
+## Gagner des pièces
+
+* `/daily` : La récompense quotidienne. Le montant est tiré au hasard entre le minimum et le maximum réglés par le serveur ; le délai avant la suivante est fixé par lui aussi.
+* `/work` : Un petit travail qui rapporte des pièces **et de l'XP**, avec sa propre attente entre deux services.
+* `/coins` : Le solde d'un membre, le vôtre par défaut.
+* `/richest` : Le classement des plus riches du serveur.
+
+Les combats, la pêche, les quêtes et les drops rapportent également : tout cela passe par le hub `/rpg`.
+
+---
+
+## Dépenser et échanger
+
+* `/items` liste les objets déjà achetés.
+* La **boutique** du serveur, l'**artisanat**, la **forge** et l'**autel d'enchantement** vivent dans le hub `/rpg`.
+* Les paiements entre membres se font depuis le hub, bouton **Payer** : le destinataire se choisit dans le sélecteur Discord, jamais un bot ni vous-même.
+
+### L'hôtel des ventes
+
+`/market` est la place de marché entre joueurs, indépendante de la boutique du serveur.
+
+* `/market sell` : Met un objet en vente : prix, quantité, type de vente et durée, jusqu'à 168 heures.
+* `/market buy` : Achète une annonce à prix fixe.
+* `/market bid` : Enchérit sur une annonce aux enchères.
+* `/market list` : Parcourt les annonces ouvertes.
+* `/market my` : Vos annonces en cours.
+* `/market cancel` : Retire une annonce.
+
+---
+
+## Les jeux d'argent
+
+Chaque partie se mise en pièces, et le serveur plafonne à la fois la **mise maximale** et le **nombre de parties par jour et par membre**.
+
+<DiscordCommand
+  command="/dice mise:100"
+  embedTitle="Lancer de Dés"
+  embedDescription="Vous misez **100** KotboCoins.\n\n**Résultat :** 4 5 *(somme: 9)*\n\n**Victoire ! Somme des dés = 9 (>= 8). Vous gagnez 1.5x votre mise.**\n\n**Gain net :** **50** KotboCoins"
+/>
+
+* `/dice` : Deux dés. Double six : **3x** la mise. Un autre double : **2x**. Somme de 8 ou plus : **1,5x**. Somme de 7 : mise remboursée. 6 ou moins : mise perdue.
+* `/rps` : Pierre, feuille, ciseaux contre le bot. Une victoire double la mise, une égalité la rend.
+* `/roulette` : Roulette russe, une chance sur six de perdre. Survivre rapporte **1,2x** la mise ; le mauvais numéro coûte la mise **et 50 PV**.
+* `/guess` : Deviner un nombre entre 1 et 100 en **sept essais**, avec un indice à chaque tentative. La récompense part de 200 pièces et baisse de 25 à chaque essai, sans jamais descendre sous 20.
+
+:::caution[La roulette touche vos points de vie]
+À 0 PV, le bot refuse la partie : *Vous n'avez plus aucun point de vie. Soignez-vous avec des potions avant de retenter votre chance.* Les PV se remontent avec une potion ou avec le temps.
+:::
+
+Deux commandes d'information complètent l'ensemble : `/games` détaille les règles et les gains de chaque jeu, `/economy-info` résume l'économie du serveur - nom de la monnaie, gains, délais et plafonds en vigueur.

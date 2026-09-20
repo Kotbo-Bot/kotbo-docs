@@ -144,6 +144,24 @@ Ce module permet aux utilisateurs de créer leur propre salon vocal temporaire e
 * **Rôle requis** : Restreint la possibilité de créer des salons temporaires aux seuls possesseurs d'un rôle spécifique (laisser vide pour ouvrir à tous).
 * **Générateurs additionnels** : Vous pouvez configurer plusieurs générateurs indépendants (chacun avec son salon déclencheur, sa catégorie cible, son modèle de nom et son rôle requis).
 
+:::note[Ce que le rôle requis contrôle]
+Il conditionne l'accès au **générateur**, pas les permissions dans le salon créé.
+:::
+
+### Permissions des salons créés
+
+Le bloc **Permissions des salons créés** décide de ce que le bot applique à chaque salon temporaire dès sa création.
+
+* **Places par défaut** : `0` pour un salon sans limite. Le propriétaire peut la modifier ensuite depuis le panneau.
+* **Verrouillage** : créer le salon déjà verrouillé. Seuls le propriétaire et les rôles autorisés d'office peuvent le rejoindre et y écrire.
+* **Chat textuel du salon** : *Hérité* (le chat suit la catégorie, comportement d'origine), *Ouvert* (tous ceux qui voient le salon peuvent y écrire, sans pour autant accéder au vocal) ou *Fermé* (seuls le propriétaire et les rôles autorisés d'office y écrivent).
+* **Rôles autorisés d'office** : ces rôles voient et rejoignent le salon sans que le propriétaire ait à les ajouter, même s'il est créé verrouillé.
+* **Pouvoirs du propriétaire** : ce que le créateur reçoit **sur son seul salon** - *Rendre muet*, *Rendre sourd*, *Déplacer* (nécessaire au bouton « Expulser » du panneau), *Gérer le salon* (renommer et régler depuis Discord, sans passer par le panneau) et *Gérer les messages* (supprimer et épingler dans le chat du salon).
+
+:::caution[Ces réglages n'ouvrent jamais un salon fermé]
+Le salon temporaire reste aligné sur sa catégorie : ce bloc s'ajoute par-dessus. Si la catégorie interdit l'accès à vos membres, le salon créé l'interdira aussi.
+:::
+
 ### Supervision depuis le Dashboard
 En bas de l'onglet, la section **Salons Temporaires Actifs** liste tous les salons actuellement ouverts sur le serveur. Les administrateurs peuvent :
 * Visualiser le nom du salon, son créateur actuel et le nombre de membres connectés.

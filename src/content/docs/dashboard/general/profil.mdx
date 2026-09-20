@@ -1,0 +1,71 @@
+---
+title: Mon profil et mes préférences
+description: Votre espace personnel dans le dashboard : fiche staff, carte de rang, clés API et réglages d'affichage.
+---
+
+<p class="doc-lead">Deux pages, en bas de la barre latérale, ne concernent que vous : <strong>Mon Profil</strong> rassemble ce que le serveur sait de vous, <strong>Paramètres Utilisateur</strong> règle la façon dont le dashboard s'affiche.</p>
+
+:::note[Où les trouver]
+Sous les groupes de navigation, au-dessus de la déconnexion : [Mon Profil ↗](https://dash.kotbo.fr/profile) et [Paramètres Utilisateur ↗](https://dash.kotbo.fr/userSettings).
+:::
+
+---
+
+## Mon Profil
+
+Les onglets affichés dépendent de qui vous êtes sur ce serveur.
+
+| Onglet | Qui le voit |
+| --- | --- |
+| **Espace Staff** et **Activité Staff** | Les membres inscrits dans l'[annuaire staff](/dashboard/staff/annuaire/) : grade, prise de poste, tickets traités, sanctions prononcées, activité récente. |
+| **Vue Communautaire** | Quiconque a un profil public sur le serveur : niveau, réputation, progression. |
+| **Ma carte de rang** | Vous seul, sur votre propre profil. |
+| **Clés API & Sécurité** | Vous seul, si vous êtes staff et que le serveur ouvre cet accès. |
+
+La page sert aussi à écrire une **note** sur soi et, pour un membre du staff, à **soumettre une démission** - la demande part vers l'équipe, elle n'est pas appliquée sur-le-champ.
+
+### Ma carte de rang
+
+C'est ici que se règle la carte affichée par `/rank` sur Discord : fond, motif, cadre de l'avatar, barre d'XP, police du pseudo, jusqu'à trois emojis et trois badges. Les succès et ce qu'ils débloquent sont détaillés sur la page [Leveling & XP](/dashboard/xp/leveling/).
+
+### Clés API & Sécurité
+
+Une clé API vous permet de brancher un outil externe sur le serveur, avec la liste de permissions que vous cochez à la création.
+
+:::danger[La clé ne s'affiche qu'une fois]
+Copiez-la au moment de sa création : elle n'est plus jamais montrée en clair. Une clé se **révoque** depuis la même page, et une clé révoquée cesse immédiatement de répondre.
+:::
+
+---
+
+## Paramètres Utilisateur
+
+Deux onglets : **Préférences** et **Widget profil**. Tout s'enregistre **automatiquement**, sans barre de sauvegarde.
+
+### Apparence
+
+* **Thème**, dont un **thème personnalisé** où vous réglez vous-même le fond, la surface, le texte et les panneaux, en mode clair ou sombre.
+* **Couleur d'accentuation** : violet, bleu, vert, rose, orange ou cyan.
+* **Mode compact**, qui réduit marges et espacements, et **Animations de l'interface**, qu'on peut couper.
+
+### Langue et région
+
+* **Langue de l'interface**.
+* **Format des dates** : *Relative* (il y a 3 jours), *Absolue* (28 mai 2026) ou *Les deux*.
+* **Fuseau horaire des statistiques** : les heures des graphiques et des heatmaps s'affichent dans ce fuseau. *Automatique* suit celui de votre navigateur.
+
+### Navigation
+
+**Comportement de la sidebar** : *Automatique* (repliée sur les petits écrans), *Toujours ouvert* ou *Toujours replié*.
+
+### Notifications et confidentialité
+
+* **Sons de notification** et **Notifications Bureau** - ces dernières demandent l'autorisation du navigateur, et le bouton **Tester les notifications** vérifie que tout passe.
+* **Afficher mon statut en ligne**, visible des autres membres du staff.
+* Trois liens complètent le bloc : la **politique de confidentialité**, le détail des **cookies et du stockage local**, et **Exercer mes droits** - accès, rectification, opposition, limitation ou effacement.
+
+:::caution[Zone de réinitialisation]
+**Réinitialiser les préférences** remet tous ces réglages à leur valeur d'origine. Cela ne touche ni votre carte de rang, ni vos données de serveur.
+:::
+
+Vos préférences peuvent aussi s'**exporter** en JSON et se **réimporter**, par exemple pour retrouver le même dashboard sur une autre machine.

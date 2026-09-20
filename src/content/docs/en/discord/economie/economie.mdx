@@ -1,0 +1,69 @@
+---
+title: Currency, shop and games
+description: Earning, spending and betting coins on Discord, from the daily reward to the auction house.
+---
+
+import DiscordCommand from '../../../../../components/DiscordCommand.astro';
+
+<p class="doc-lead">The server's currency carries the name and the emoji the staff gave it. You earn it by talking, working and fighting, and spend it on items, upgrades and bets.</p>
+
+:::tip[On the dashboard]
+Amounts, cooldowns and caps are set from the dashboard: see [Economy & RPG](/en/dashboard/economie/economie/). The role-playing game itself is covered in [Playing the RPG](/en/discord/economie/rpg/).
+:::
+
+---
+
+## Earning coins
+
+* `/daily`: The daily reward. The amount is drawn at random between the minimum and the maximum the server set; the wait before the next one is fixed by the server too.
+* `/work`: A small job that pays coins **and XP**, with its own wait between two shifts.
+* `/coins`: A member's balance, yours by default.
+* `/richest`: The server's richest members.
+
+Fights, fishing, quests and drops pay as well: all of that lives in the `/rpg` hub.
+
+---
+
+## Spending and trading
+
+* `/items` lists the items you already bought.
+* The server **shop**, the **crafting workshop**, the **forge** and the **enchanting altar** live in the `/rpg` hub.
+* Member-to-member payments happen in the hub, **Pay** button: the recipient is picked from the Discord selector, never a bot and never yourself.
+
+### The auction house
+
+`/market` is the player marketplace, separate from the server shop.
+
+* `/market sell`: Puts an item up for sale: price, quantity, sale type and duration, up to 168 hours.
+* `/market buy`: Buys a fixed-price listing.
+* `/market bid`: Bids on an auction listing.
+* `/market list`: Browses the open listings.
+* `/market my`: Your own listings.
+* `/market cancel`: Pulls a listing.
+
+---
+
+## Betting games
+
+Every round is staked in coins, and the server caps both the **maximum bet** and the **number of rounds per day and per member**.
+
+<DiscordCommand
+  command="/dice mise:100"
+  embedTitle="Dice roll"
+  embedDescription="You bet **100** KotboCoins.\n\n**Result:** 4 5 *(sum: 9)*\n\n**Win! Dice sum = 9 (>= 8). You win 1.5x your bet.**\n\n**Net gain:** **50** KotboCoins"
+/>
+
+* `/dice`: Two dice. Double six: **3x** the bet. Any other double: **2x**. A sum of 8 or more: **1.5x**. A sum of 7: bet refunded. 6 or less: bet lost.
+* `/rps`: Rock, paper, scissors against the bot. A win doubles the bet, a draw gives it back.
+* `/roulette`: Russian roulette, a one-in-six chance of losing. Surviving pays **1.2x** the bet; the wrong chamber costs the bet **and 50 HP**.
+* `/guess`: Guess a number between 1 and 100 in **seven tries**, with a hint after each attempt. The reward starts at 200 coins and drops by 25 per attempt, never below 20.
+
+:::caution[Roulette eats into your health]
+At 0 HP the bot refuses to play: *you have no health left, heal with potions before trying your luck again*. HP come back with a potion or with time.
+:::
+
+Two information commands round it off: `/games` details the rules and payouts of each game, and `/economy-info` sums up the server's economy - currency name, payouts, cooldowns and caps in force.
+
+:::note[The bet option keeps its French name]
+On both languages the option is typed `mise:`.
+:::

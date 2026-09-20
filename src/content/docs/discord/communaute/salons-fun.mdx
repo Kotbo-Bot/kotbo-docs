@@ -54,3 +54,53 @@ Kotbo génère un nombre secret en arrière-plan, et les joueurs doivent le devi
 4. Dès qu'un membre trouve le nombre exact :
    * Le bot annonce la victoire en mentionnant le gagnant.
    * La partie prend fin, et un nouveau nombre mystère est généré automatiquement (ou manuellement par le staff depuis le dashboard).
+
+---
+
+## 4. Rébus Emoji (Emoji Riddle)
+
+Kotbo poste une suite d'emojis dans le salon, et les membres devinent l'expression qu'elle cache.
+
+### Déroulement de la partie
+1. Le bot publie le rébus dans le salon : *Nouveau rébus ! Quelle expression se cache derrière …* Il le republie à la première configuration du salon, à chaque changement de salon, après une remise à zéro depuis le dashboard, et après chaque bonne réponse.
+2. Les joueurs proposent leur réponse en écrivant simplement dans le salon.
+3. Une proposition fausse ne coûte rien : aucun message n'est supprimé, le salon devine librement.
+4. La bonne réponse déclenche la réaction du bot, la mention du gagnant, la solution attendue, puis le rébus suivant dans la foulée.
+
+:::note[Les réponses sont comparées souplement]
+Les accents, les majuscules et la ponctuation sont ignorés. Le staff peut déclarer plusieurs formulations acceptées pour un même rébus, et écrire ses propres rébus depuis le dashboard - voir [Salons Fun](/dashboard/communaute/salons-fun/).
+:::
+
+---
+
+## 5. Chaîne de mots (Word Chain)
+
+Chaque mot doit commencer par la **dernière lettre** du mot précédent.
+
+### Règles d'écriture
+1. Un seul mot par message, et rien d'autre : ponctuation, chiffres ou phrases entières sont ignorés par le jeu.
+2. Le même membre ne peut pas jouer deux fois de suite.
+3. Les accents ne comptent pas dans la comparaison, les mots à ligature (`cœur`, `œuvre`) sont acceptés, et un mot ne peut pas se terminer par un tiret.
+
+### Réaction de Kotbo
+* Mauvaise lettre ou deuxième tour d'affilée : le bot le dit et, si le **mode punitif** est actif, la chaîne repart de zéro. Sinon, le message fautif est écarté sans casser la progression.
+
+---
+
+## 6. Ni Oui Ni Non (Never Say Yes/No)
+
+Le salon interdit deux mots, et rien d'autre.
+
+### Règles d'écriture
+1. Tout message contenant « oui » ou « non » est supprimé sur-le-champ.
+2. Le bot rappelle la règle à l'auteur, puis efface son propre avertissement quelques secondes plus tard pour ne pas encombrer le salon.
+
+---
+
+## 7. Emoji Uniquement (Emoji Only)
+
+Seuls les emojis sont admis dans le salon.
+
+### Règles d'écriture
+1. Tout message contenant autre chose que des emojis est supprimé.
+2. Les emojis du serveur, les teintes de peau, les drapeaux et les touches numérotées sont acceptés sans réserve.

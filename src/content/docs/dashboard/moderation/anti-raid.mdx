@@ -3,6 +3,8 @@ title: Protection anti-raid
 description: Détectez les vagues d'arrivées, activez les verrous d'urgence, imposez un captcha à l'entrée et contrôlez les invitations depuis le dashboard.
 ---
 
+import DiscordCommand from '../../../../components/DiscordCommand.astro';
+
 <p class="doc-lead">La page <strong>Sécurité → Anti-raid</strong> réunit tout ce qui protège l'entrée du serveur : détection des vagues d'arrivées, verrous d'urgence immédiats, captcha des nouveaux membres, filtre anti-arnaque et contrôle des invitations.</p>
 
 :::note[Où la trouver]
@@ -31,6 +33,28 @@ Sous les bascules, trois compteurs rappellent le nombre de **signalements en att
 
 ---
 
+## Faire taire des salons : le lockdown
+
+Le verrouillage de salons se commande depuis Discord, et non depuis le dashboard. Il refuse à `@everyone` l'écriture, les fils et les réactions dans les salons textuels, la connexion et la parole dans les vocaux.
+
+<DiscordCommand
+  command="/protection lockdown on portee:Tout le serveur"
+  embedTitle="Lockdown activé"
+  embedDescription="**12** salon(s) verrouillé(s) dans tout le serveur.\n2 l'étaient déjà.\nLes membres administrateurs, ou autorisés explicitement dans un salon, peuvent toujours y écrire."
+/>
+
+* **portee** : *Le salon* (par défaut), *Sa catégorie entière* ou *Tout le serveur*.
+* **salon** : le salon ou la catégorie visé, le salon actuel par défaut.
+* **raison** : affichée dans le salon et dans le journal d'audit.
+
+`/protection lockdown off` rouvre avec la **même portée**, et rend à chaque permission touchée son état d'origine - un salon qui refusait déjà l'écriture à `@everyone` le refuse toujours après coup. `/protection status` indique le nombre de salons actuellement verrouillés.
+
+:::note[Le staff garde la parole]
+Sur une catégorie ou sur tout le serveur, seuls les **salons publics** sont verrouillés : les salons déjà fermés à `@everyone`, où le staff se coordonne, restent ouverts. La commande demande la permission **Administrateur**.
+:::
+
+---
+
 ## Onglet Détection & verrous
 
 ### Détection de raid
@@ -46,6 +70,35 @@ Kotbo surveille le rythme des arrivées sur une fenêtre glissante et bascule le
   * *Expulser automatiquement les arrivants* : la plus brutale, elle rejette aussi les arrivées légitimes pendant toute la durée du mode raid.
 * **Salon d'alerte** : sans salon d'alerte, le mode raid s'active sans que personne ne soit prévenu.
 * **Levée automatique (minutes)** : durée du mode raid déclenché automatiquement (de 1 à 1440).
+
+### Comptes trop récents
+
+Kotbo compare chaque arrivée à la date de création du compte Discord et traite à l'entrée ceux qui n'ont pas l'âge exigé. Les bots ne sont jamais concernés.
+
+* **Ancienneté minimale du compte** : interrupteur de la garde.
+* **Ancienneté minimale** et **Unité** : un seuil en *Jours* ou en *Mois*. Au-delà d'un an, Kotbo prévient qu'une grande partie des arrivées légitimes sera concernée.
+* **Action** : *Signaler uniquement*, *Expulser* ou *Bannir*.
+* **Salon d'alerte** : chaque compte refoulé ou signalé y est publié.
+* **Message envoyé en MP** : envoyé avant l'expulsion ou le bannissement.
+* **Membres exemptés (identifiants)** : un identifiant par ligne, pour laisser entrer un compte récent légitime.
+
+:::caution[Le bannissement est définitif]
+Un compte banni pour son âge ne pourra plus revenir, même une fois assez ancien, sauf déban manuel suivi d'une exemption. La sanction est enregistrée dans le casier, mais n'est ni synchronisée vers les comptes liés ni propagée aux autres serveurs : un compte principal lié de bonne foi n'est pas banni au passage.
+:::
+
+### Rôles rendus au retour
+
+Un membre qui quitte puis revient retrouve les rôles qu'il avait au départ.
+
+* **Rôles persistants** : les rôles sont mémorisés au départ et rendus à l'arrivée, après le captcha s'il est actif.
+* **Rôles concernés** : *Tous, sauf ceux sélectionnés* ou *Seulement ceux sélectionnés*. La liste de rôles qui suit change de sens selon ce choix.
+* **Durée de conservation (jours)** : de 1 à 365. Au-delà, le membre revient sans ses rôles.
+
+:::caution[Ce qui n'est jamais rendu]
+Les rôles de modération ou d'administration, ceux gérés par une intégration, ceux placés au-dessus du bot, et ceux du captcha ou de la vérification. Un retour ne peut donc pas servir à récupérer des pouvoirs retirés.
+
+En mode *Seulement ceux sélectionnés* sans aucun rôle coché, personne ne retrouvera de rôle à son retour : Kotbo l'affiche en avertissement.
+:::
 
 ### Verrou des arrivées
 
